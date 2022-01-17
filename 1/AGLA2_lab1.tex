@@ -1,0 +1,182 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme[faculty=phil]{fibeamer}
+\usepackage{polyglossia}
+\setmainlanguage{english} %% main locale instead of `english`, you
+%% can typeset the presentation in either Czech or Slovak,
+%% respectively.
+\setotherlanguages{russian} %% The additional keys allow
+%%
+%%   \begin{otherlanguage}{czech}   ... \end{otherlanguage}
+%%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
+%%
+%% These macros specify information about the presentation
+\title{Linear algebra and analytical geometry II, Lab 1} %% that will be typeset on the
+\subtitle{The geometry of linear equation\\
+          Gaussian elimination\\
+          Matrix notation and matrix multiplication} %% title page.
+\author{Oleg Bulichev}
+%% These additional packages are used within the document:
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+% \usepackage{subfigure}
+\usepackage{floatrow}
+\usepackage{subcaption}
+\usepackage{todonotes}
+\usepackage{fontspec}
+\usepackage{multicol}
+\graphicspath{{resources/}}
+\frenchspacing
+
+\setbeamertemplate{caption}[numbered]
+\usetikzlibrary{graphs}
+
+% \usepackage[backend=biber,style=ieee,autocite=footnote]{biblatex}
+% \addbibresource{biblio.bib}
+% \DefineBibliographyStrings{english}{%
+%   bibliography = {References},}
+
+\newcommand{\oleg}[2][] {\todo[color=red, #1] {OLEG:\\ #2}}
+\newcommand{\fbckg}[1]{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{#1}}}%frame background
+
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\dbox}[1]{
+\begin{mdframed}[roundcorner=3pt, backgroundcolor=yellow, linewidth=0]
+\vspace{1mm}
+{#1}
+\vspace{1mm}
+\end{mdframed}
+}
+
+\begin{document}
+\fbckg{fibeamer/figs/title_page.png}
+\frame[c]{\setcounter{framenumber}{0}
+    \usebeamerfont{title}%
+    \usebeamercolor[fg]{title}%
+    \begin{minipage}[b][6\baselineskip][b]{\textwidth}%
+        \textcolor{black}{\raggedright\inserttitle}
+    \end{minipage}
+    \vskip-.5\baselineskip
+}
+%   \frame[c]{\maketitle}
+
+\fbckg{fibeamer/figs/common.png}
+
+
+% \section{Introduction}
+% \begin{frame}[t]{\insertsectionhead}
+
+\begin{frame}[c]{Introduction}
+% \framesubtitle{Global Goal}
+\begin{Large}
+    \begin{block}{\Large Global Goal}
+        \centering To make a force sensor, which can work in subterranean areas.
+    \end{block}
+\end{Large}
+\end{frame}
+
+\begin{frame}[t]{Task 1}
+\framesubtitle{Warm up}
+Rewrite the following system in the matrix form:
+\begin{Large}
+\begin{equation*}
+    \left\{\begin{matrix}
+       3x + 4y -2z = 1 \\ 
+       3y -2z +x = -2 \\ 
+       5x - 7z -2y = 3 
+       \end{matrix}\right.
+\end{equation*}
+\end{Large}
+\end{frame}
+
+\begin{frame}[t]{Task 2}
+\framesubtitle{}
+    Describe geometricaly (line, plane, or whole space) all linear combinations of:
+        \begin{enumerate}
+            \item $\begin{bmatrix}1 \\ 2 \\3 \end{bmatrix}$ and $\begin{bmatrix}3 \\ 6 \\9 \end{bmatrix}$
+            \item $\begin{bmatrix}1 \\ 0 \\0 \end{bmatrix}$ and $\begin{bmatrix}0 \\ 2 \\3 \end{bmatrix}$
+            \item $\begin{bmatrix}2 \\ 0 \\0 \end{bmatrix}$, $\begin{bmatrix}0 \\ 2 \\2 \end{bmatrix}$ and $\begin{bmatrix}2 \\ 2 \\3 \end{bmatrix}$
+        \end{enumerate}
+\end{frame}
+
+\begin{frame}[c]{Task 3}
+\framesubtitle{}
+    Draw $v = \begin{bmatrix}4 \\1 \end{bmatrix}$ and $w = \begin{bmatrix}-2 \\ 2 \end{bmatrix}$ and $ v + w $, $v-w$ in a single $xy$ plane
+\end{frame}
+
+\begin{frame}[t, label=task4]{Task 4}
+\framesubtitle{}
+    Explain, why the system
+    \begin{equation*}
+    \left\{\begin{matrix}
+        u + v + w = 2 \\ 
+        u + 2v + 3w = 1 \\ 
+        v + 2w = 0 
+        \end{matrix}\right.
+    \end{equation*}
+    is singular?
+
+    What value should replace that last zero on the right side, to allow the equations to have solutions, and what is one of the solutions?
+\end{frame}
+
+\begin{frame}[t]{What does it mean, singular?}
+\framesubtitle{Lec 1, page 11}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{1.png}
+        % \caption{caption_name}
+        \label{fig:1.png}
+    \end{figure}
+\end{frame}
+
+\againframe{task4}
+
+\begin{frame}[t]{Task 5}
+\framesubtitle{}
+    \begin{enumerate}
+        \item Choose a coefficient $b$ that makes this system singluar.
+        \item Then choose a right-hand side $g$ that makes it solvable.
+        \item Find two solutions in that singular case.
+    \end{enumerate}
+    \begin{equation*}
+        \left\{\begin{matrix}
+            2x + by = 16 \\ 
+            4x + 8y = g \\ 
+            \end{matrix}\right.
+        \end{equation*}
+\end{frame}
+
+\begin{frame}[t]{Task 6}
+\framesubtitle{}
+    Give 3x3 examples (not just the zero matrix):
+    \begin{enumerate}
+        \item a diagonal matrix: $a_{ij}=0$, if $i \neq j$;
+        \item a symmetric matrix: $a_{ij} = a_{ji}$ for all $i$ and $j$;
+        \item an upper trianglular matrix: $a_{ij}=0$, if $i>j$ ;
+        \item a skew-symmetric matrix: $a_{ij} = -a_{ji}$ for all $i$ and $j$.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{Task 7}
+\framesubtitle{}
+    Make a rref of
+    \begin{equation*}
+        \left\{\begin{matrix}
+            2u + 3v + 0w = 0 \\ 
+            4u + 5v + w = 3 \\ 
+            2u - 1v - 3w = 5 
+            \end{matrix}\right.
+        \end{equation*}
+\end{frame}
+
+\begin{frame}[t]{Reference material}
+\framesubtitle{}
+    \begin{itemize}
+        \item \href{https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/}{Lectures 1 -- 3}
+    \end{itemize}
+\end{frame}
+\end{document}
