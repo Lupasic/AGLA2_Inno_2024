@@ -139,7 +139,7 @@ Rewrite the following system in the matrix form:
     \end{definition}
 \end{frame}
 
-\againframe{task4}
+\againframe[t]{task4}
 
 \begin{frame}[t]{Task 5}
 \framesubtitle{}
@@ -153,7 +153,7 @@ Rewrite the following system in the matrix form:
             2x + by = 16 \\ 
             4x + 8y = g \\ 
             \end{matrix}\right.
-        \end{equation*}
+    \end{equation*}    
 \end{frame}
 
 \begin{frame}[t]{Task 6}
@@ -167,7 +167,7 @@ Rewrite the following system in the matrix form:
     \end{enumerate}
 \end{frame}
 
-\begin{frame}[t]{Task 7}
+\begin{frame}<1>[t, label=task7]{Task 7}
 \framesubtitle{}
     Obtain a Reduced Row Echelon Form (rref) of
     \begin{equation*}
@@ -177,7 +177,32 @@ Rewrite the following system in the matrix form:
             2u - 1v - 3w = 5 
             \end{matrix}\right.
         \end{equation*}
+        \uncover<2>{\centering\alert{\textit{Ans}: $\left[\begin{array}{ccc|c}1 & 0 & 0 & 3 \\ 0 & 1 & 0 & -2 \\ 0 & 0 & 1 & 1\end{array}\right]$}}
+
 \end{frame}
+
+\begin{frame}[t]{The difference between REF and RREF}
+\framesubtitle{}
+\begin{block}{Gaussian elimination vs Gauss-Jordan elimination}
+    \textbf{Gaussian elimination} refers to the process until it has reached its upper triangular.
+
+    \textbf{Gauss-Jordan elimination} is the algorithm for converting a matrix into RREF.
+\end{block}
+The \textbf{Row Echelon Form} is \textit{not unique}
+\vspace{-7pt}
+    \begin{equation*}
+        \begin{bmatrix} 1 & 3 & -1 \\ 0 & 1 & 7 \\ \end{bmatrix} 
+        \xrightarrow{\text{add row 2 to row 1}}
+        \begin{bmatrix} 1 & 4 & 6 \\ 0 & 1 & 7 \\ \end{bmatrix}. 
+    \end{equation*}
+   Every matrix has a \textit{ unique} \textbf{Reduced Row Echelon Form}
+\vspace{-7pt} 
+   \begin{equation*}
+        {\displaystyle {\begin{bmatrix}1&3&-1\\0&1&7\\\end{bmatrix}}{\xrightarrow {\text{subtract 3 × (row 2) from row 1}}}{\begin{bmatrix}1&0&-22\\0&1&7\\\end{bmatrix}}.}
+    \end{equation*}
+\end{frame}
+
+\againframe<2>[t]{task7}
 
 \begin{frame}[t]{Reference material}
 \framesubtitle{}
@@ -186,5 +211,9 @@ Rewrite the following system in the matrix form:
         \item \href{https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/}{Lectures 1 -- 3}
     \end{itemize}
 \end{frame}
+
+
+\fbckg{fibeamer/figs/last_page.png}
+\frame[plain]{}
 
 \end{document}
