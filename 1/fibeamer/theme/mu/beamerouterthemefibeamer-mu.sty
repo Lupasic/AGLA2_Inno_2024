@@ -120,6 +120,17 @@
           \usebeamerfont{framenumber}%
           \textcolor{white}{\large\insertauthor}};
     \end{tikzpicture}
+
+    \begin{tikzpicture}[overlay]
+      \node[anchor=south,
+        yshift=\fibeamer@lengths@footerpad-0.5em,
+        xshift=\fibeamer@lengths@footerpad+0.3em] at
+        (current page.south) {
+          \usebeamercolor[fg]{framenumber}%
+          \usebeamerfont{framenumber}%
+          \textcolor{white}{\large\insertshorttitle}};
+    \end{tikzpicture}
+
       \begin{tikzpicture}[overlay]
         \node[anchor=south east,
           yshift=\fibeamer@lengths@footerpad-0.5em,

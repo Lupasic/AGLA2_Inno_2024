@@ -10,7 +10,7 @@
 %%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
 %%
 %% These macros specify information about the presentation
-\title{Linear algebra and analytical geometry II, Lab 1} %% that will be typeset on the
+\title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 1} %% that will be typeset on the
 \subtitle{The geometry of linear equation\\
           Gaussian elimination\\
           Matrix notation and matrix multiplication} %% title page.
@@ -58,10 +58,18 @@
 \frame[c]{\setcounter{framenumber}{0}
     \usebeamerfont{title}%
     \usebeamercolor[fg]{title}%
-    \begin{minipage}[b][6\baselineskip][b]{\textwidth}%
+    \begin{minipage}[b][6.5\baselineskip][b]{\textwidth}%
         \textcolor{black}{\raggedright\inserttitle}
     \end{minipage}
-    \vskip-.5\baselineskip
+    % \vskip-1.5\baselineskip
+
+    \usebeamerfont{subtitle}%
+    \usebeamercolor[fg]{framesubtitle}%
+    \begin{minipage}[b][3\baselineskip][b]{\textwidth}
+      \raggedright%
+      \insertsubtitle%
+    \end{minipage}
+    \vskip.25\baselineskip
 }
 %   \frame[c]{\maketitle}
 
@@ -89,20 +97,20 @@ Rewrite the following system in the matrix form:
 \framesubtitle{}
     Describe geometricaly (line, plane, or whole space) all linear combinations of:
         \begin{enumerate}
-            \item $\begin{bmatrix}1 \\ 2 \\3 \end{bmatrix}$ and $\begin{bmatrix}3 \\ 6 \\9 \end{bmatrix}$
-            \item $\begin{bmatrix}1 \\ 0 \\0 \end{bmatrix}$ and $\begin{bmatrix}0 \\ 2 \\3 \end{bmatrix}$
-            \item $\begin{bmatrix}2 \\ 0 \\0 \end{bmatrix}$, $\begin{bmatrix}0 \\ 2 \\2 \end{bmatrix}$ and $\begin{bmatrix}2 \\ 2 \\3 \end{bmatrix}$
+            \item $\begin{bmatrix}1 \\ 2 \\3 \end{bmatrix}$ and $\begin{bmatrix}3 \\ 6 \\9 \end{bmatrix}$ \uncover<2-> {\alert{\textit{Ans}: line}}
+            \item $\begin{bmatrix}1 \\ 0 \\0 \end{bmatrix}$ and $\begin{bmatrix}0 \\ 2 \\3 \end{bmatrix}$ \uncover<3-> {\alert{\textit{Ans}: plane}}
+            \item $\begin{bmatrix}2 \\ 0 \\0 \end{bmatrix}$, $\begin{bmatrix}0 \\ 2 \\2 \end{bmatrix}$ and $\begin{bmatrix}2 \\ 2 \\3 \end{bmatrix}$ \uncover<4-> {\alert{\textit{Ans}: whole space}}
         \end{enumerate}
 \end{frame}
 
 \begin{frame}[c]{Task 3}
-\framesubtitle{}
+\framesubtitle{}\centering\large
     Draw $v = \begin{bmatrix}4 \\1 \end{bmatrix}$ and $w = \begin{bmatrix}-2 \\ 2 \end{bmatrix}$ and $ v + w $, $v-w$ in a single $xy$ plane
 \end{frame}
 
 \begin{frame}[t, label=task4]{Task 4}
 \framesubtitle{}
-    Explain, why the system
+    Explain, why the system is singular?
     \begin{equation*}
     \left\{\begin{matrix}
         u + v + w = 2 \\ 
@@ -110,7 +118,6 @@ Rewrite the following system in the matrix form:
         v + 2w = 0 
         \end{matrix}\right.
     \end{equation*}
-    is singular?
 
     What value should replace that last zero on the right side, to allow the equations to have solutions, and what is one of the solutions?
 \end{frame}
@@ -122,6 +129,14 @@ Rewrite the following system in the matrix form:
         % \caption{caption_name}
         \label{fig:1.png}
     \end{figure}
+\end{frame}
+
+\begin{frame}[t]{What does it mean, pivot point?}
+\framesubtitle{}
+    \Large
+    \begin{definition}
+        \textbf{The pivot or pivot element} is the element of a matrix, or an array, which is selected first on a particular step by an algorithm (e.g. Gaussian elimination, simplex algorithm, etc.), to do certain calculations.
+    \end{definition}
 \end{frame}
 
 \againframe{task4}
@@ -154,7 +169,7 @@ Rewrite the following system in the matrix form:
 
 \begin{frame}[t]{Task 7}
 \framesubtitle{}
-    Make a rref of
+    Obtain a Reduced Row Echelon Form (rref) of
     \begin{equation*}
         \left\{\begin{matrix}
             2u + 3v + 0w = 0 \\ 
@@ -166,8 +181,10 @@ Rewrite the following system in the matrix form:
 
 \begin{frame}[t]{Reference material}
 \framesubtitle{}
+\Large
     \begin{itemize}
         \item \href{https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/}{Lectures 1 -- 3}
     \end{itemize}
 \end{frame}
+
 \end{document}
