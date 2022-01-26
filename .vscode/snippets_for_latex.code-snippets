@@ -175,7 +175,7 @@
 		"scope": "latex",
 		"prefix": "\\ucom",
 		"body": [
-		  "\\underbrace{$1}_{$2}"
+		  "\\underbrace{$1}_{${2}}"
 		],
 		"description": "Under comment"
 	  },
