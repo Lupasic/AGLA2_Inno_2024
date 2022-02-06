@@ -11,7 +11,7 @@
 %%
 %% These macros specify information about the presentation
 \title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 3} %% that will be typeset on the
-\subtitle{Null space \\ \ \\ \ 
+\subtitle{Quiz \\ Four Fundametal Subspaces \\ \ 
          } %% title page.
 \author{Oleg Bulichev}
 %% These additional packages are used within the document:
@@ -75,89 +75,55 @@
 
 \fbckg{fibeamer/figs/common.png}
 
-
-% \section{Introduction}
-% \begin{frame}[t]{\insertsectionhead}
-
-\begin{frame}[c]{Disclaimer regarded to online classes}
+\begin{frame}[t]{Quiz}
     \framesubtitle{}
-
-    \Large
-    \begin{block}{How to work with slides}
-        \centering I am giving the lecture-like class and answer on questions. All tasks you have to solve by your own at home.
-    \end{block}
-
-\end{frame}
-
-\begin{frame}[t]{How to study Null Space}
-    \framesubtitle{Step-by-step guide}
-    \vspace{-0.65cm}
-    \small
-    \begin{enumerate}
-        \item \href{https://youtu.be/8o5Cmfpeo6g}{Lecture 6, Gilbert Strang} \\ \textbf{Goal} is to understand the basics of spaces and how Null Space appeared.
-        \item \href{https://www.youtube.com/watch?v=_uTAdf_AsfQ}{Khan Academy: Null space} \\ It contains a good case study how to calculate Null space.
-        \item \href{https://www.youtube.com/watch?v=C8zOd07U3l8}{Matrix Algebra for Engineers: Null Space} \\ Another nice example how to find $N(A)$.
-        \item \textit{"Linear Algebra and Applications", pdf pages 96--106 } \\ What does partial and full solutions means
-        \item \href{https://www.youtube.com/watch?v=ggWYkes-n6E}{The Big Picture of Linear Algebra} \\ \textit{Extra for now} If you want to get the global view of four subspaces
-        \item Understand the application from next few slides and make HW tasks!
-    \end{enumerate}
-\end{frame}
-
-\begin{frame}[t]{Null Space: Application from robotics}
-    \framesubtitle{Video}
-    \vspace{-0.6cm}
-    \begin{figure}[H]
-        \href{https://youtu.be/sZYBC8Lrmdo}{
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{kuka.jpg}}
-        % \caption{Click on a picture for a video}
-        \label{fig:kuka.jpg}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[t]{Null Space: Application from robotics}
-\framesubtitle{Theory (1)}
+    \vspace{-0.3cm}
+    1) Obtain $P$, $L$, $U$ matrices from $A$, using $PA=LU$ factorization.
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            \begin{equation}
+                A = \begin{bmatrix}
+                    1 & 2  & 3  & 4  \\
+                    5 & 6  & 7  & 8  \\
+                    9 & 10 & 11 & 12
+                \end{bmatrix}
+            \end{equation}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \begin{equation}
+                A = \begin{bmatrix}
+                    1 & 4  & 0 & 0 \\
+                    3 & 12 & 1 & 5 \\
+                    2 & 8  & 1 & 5 \\
+                    0 & 2  & 2 & 3
+                \end{bmatrix}
+            \end{equation}
+        \end{column}
+    \end{columns}
+    \vspace{0.1cm}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.46\textwidth}
-\begin{figure}[H]
-    \href{https://colab.research.google.com/drive/1VJGLiDYiWY2EeecCETGjEkZpjaqL8v5e?usp=sharing}{\centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{jacobian_mapping.PNG}}
-    \caption{Click for google collab}
-    \label{fig:jacobian_mapping.PNG}
-\end{figure}
-\end{column}
-\begin{column}{0.54\textwidth}
-    Let us consider differential kinematic relationship:
-    \begin{equation}
-        \dot{\boldsymbol{x}} = \mathbf{J}(\mathbf{q})\dot{\mathbf{q}}
-    \end{equation}
-    where
-    \begin{itemize}
-        \item   $\boldsymbol{x} \in \mathbb{R}^m$ task space variables (for instance Cartesian coordinates)
-        \item   $\mathbf{q} \in \mathbb{R}^n$ joint space variables (positions of joints)
-        \item   $\mathbf{J} \in \mathbb{R}^{m\times n}$ mainpulator Jacobian
-    \end{itemize}
-\end{column}
+    \begin{column}{0.3\textwidth}
+        2) For $\begin{bmatrix}
+            1 & 2 & 3 & 5  \\
+            2 & 4 & 8 & 12 \\
+            3 & 6 & 7 & 13
+        \end{bmatrix} x = \begin{bmatrix}b_1\\b_2\\b_3\end{bmatrix}$ \\
+        for 5th point $Ax=[0,\ 6,\ -6]$
+    \end{column}
+    \begin{column}{0.7\textwidth}
+        \begin{enumerate}
+            \item Reduce $[A\ b]$ to $[U\ c]$, to reach a triangular system.
+            \item Find the condition on $b_1$, $b_2$, $b_3$ to have a soultion.
+            \item Describe the column space of $A$. Find the basis of the column space.
+            \item Describe the nullspace of $A$. Declare free variables.
+            \item Find a particular solution and the complete solution $x_p + x_n$
+        \end{enumerate}
+    \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Null Space: Application from robotics}
-    \framesubtitle{Theory (2)}
-    \vspace{-0.6cm}
-    \begin{figure}[H]
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{rob_app_general_idea.png}
-        % \caption{caption_name}
-        \label{fig:rob_app_general_idea.png}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[t]{Null Space: Application from robotics}
-    \framesubtitle{Theory (3)}
-    \vspace{-0.6cm}
-    \begin{figure}[H]
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{rob_app_geometry.png}
-        % \caption{caption_name}
-        \label{fig:rob_app_geometry.png}
-    \end{figure}
-\end{frame}
+% \section{Introduction}
+% \begin{frame}[t]{\insertsectionhead}
 
 
 
@@ -216,8 +182,10 @@
     \framesubtitle{}
     \Large
     \begin{itemize}
-        \item \href{http://diag.uniroma1.it/~deluca/rob2_en.php}{Robotics 2 course from Sapienza}
-        \item Gilbert Strang Book 2.1-2.2
+        \item \href{https://www.youtube.com/watch?v=yjBerM5jWsc&list=PL49CF3715CB9EF31D&index=9}{Lecture 9 and 10}
+        \item \textit{"Linear Algebra and Applications", pdf pages 139--149 }\\ The application of four fundamental subspaces in CS
+        \item \href{https://youtu.be/yfj8uMwAgrI}{Matrix Transpose and the Four Fundamental Subspaces}\\ Video is about how $A$ transpose appeared
+        \item \href{https://matworld.ru/calculator/matrix-calculator-1.php}{Matrix online calculator in russian}
     \end{itemize}
 \end{frame}
 
