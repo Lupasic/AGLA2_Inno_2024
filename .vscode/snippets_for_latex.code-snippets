@@ -135,7 +135,31 @@
 			],
 		"description": "Inline TODO"
 	},
-
+	"Matix4x3": {
+		"scope": "latex",
+		"prefix": "\\m43",
+		"body": [
+		  "\\begin{bmatrix}",
+		  "$1 & $2 & $3 & $4\\\\\\",
+		  "$5 & $6 & $7 & $8 \\\\\\ ",
+		  "$9 & $10  & $11 & $12 \\\\\\",
+		  "\\end{bmatrix}"
+		],
+		"description": "Matix4x3"
+	  },
+	  "Matix4x4": {
+		"scope": "latex",
+		"prefix": "\\m44",
+		"body": [
+		  "\\begin{bmatrix}",
+		  "$1 & $2 & $3 & $4\\\\\\",
+		  "$5 & $6 & $7 & $8 \\\\\\ ",
+		  "$9 & $10  & $11 & $12 \\\\\\",
+		  "$13 & $14  & $15 & $16 ",
+		  "\\end{bmatrix}"
+		],
+		"description": "Matix4x3"
+	  },
 	"Matix3x3": {
 		"scope": "latex",
 		"prefix": "\\m33",
@@ -147,6 +171,52 @@
 		  "\\end{bmatrix}"
 		],
 		"description": "Matix3x3"
+	  },
+	  "Matix3x2": {
+		"scope": "latex",
+		"prefix": "\\m32",
+		"body": [
+		  "\\begin{bmatrix}",
+		  "$1 & $2 & $3 \\\\\\",
+		  "$4 & $5 & $6 ",
+		  "\\end{bmatrix}"
+		],
+		"description": "Matix3x2"
+	  },
+	  "Matix2x3": {
+		"scope": "latex",
+		"prefix": "\\m32",
+		"body": [
+		  "\\begin{bmatrix}",
+		  "$1 & $2 \\\\\\",
+		  "$3 & $4 \\\\\\ ",
+		  "$5 & $6 ",
+		  "\\end{bmatrix}"
+		],
+		"description": "Matix2x3"
+	  },
+	  "Vector3": {
+		"scope": "latex",
+		"prefix": "\\v3",
+		"body": [
+		  "\\begin{bmatrix}",
+		  "$1\\\\\\",
+		  "$2\\\\\\ ",
+		  "$3",
+		  "\\end{bmatrix}"
+		],
+		"description": "Vector3"
+	  },
+	  "Vector2": {
+		"scope": "latex",
+		"prefix": "\\v2",
+		"body": [
+		  "\\begin{bmatrix}",
+		  "$1\\\\\\",
+		  "$2",
+		  "\\end{bmatrix}"
+		],
+		"description": "Vector2"
 	  },
 	  "Matix2x2": {
 		"scope": "latex",
@@ -180,11 +250,56 @@
 		"description": "Under comment"
 	  },
 	  "Hyper Link": {
+		"scope": "latex",
 		"prefix": "\\hrf",
 		"body": [
 		  "\\href{${1:link}}{${2:text}}"
 		],
 		"description": "Hyper Link"
+	  },
+	  "Task frame": {
+		"scope": "latex",
+		"prefix": "\\ntaskframe",
+		"body": [
+		  "\\begin{frame}[t]{Task ${1:1}}",
+		  "    \\framesubtitle{}",
+		  "    \\begin{figure}[H]",
+		  "        \\centering\\includegraphics[height=3cm,width=1\\textwidth,keepaspectratio]{${1:1}.png}",
+		  "        % \\caption{caption_name}",
+		  "        \\label{fig:${1:1}.png}",
+		  "    \\end{figure}",
+		  "    \\uncover<2->{",
+		  "        \\alert{\\Large Answer}",
+		  "        \\begin{figure}[H]",
+		  "            \\centering\\includegraphics[height=3cm,width=1\\textwidth,keepaspectratio]{${1:1}ans.png}",
+		  "            % \\caption{caption_name}",
+		  "            \\label{fig:${1:1}ans.png}",
+		  "        \\end{figure}",
+		  "    }",
+		  "\\end{frame}"
+		],
+		"description": "Task frame"
+	  },
+
+	  "Horizontal gray line": {
+		"scope": "latex",
+		"prefix": "\\hgrayline",
+		"body": [
+		  "\\textcolor[RGB]{200,200,200}{\\noindent\\rule{\\linewidth}{0.2pt}}"
+		],
+		"description": "Horizontal gray line"
+	  },
+	  "Multicols with itemize": {
+		"scope": "latex",
+		"prefix": "\\multcols",
+		"body": [
+		  "\\begin{multicols}{{${1:2}}",
+		  "\t\\begin{itemize}",
+		  "\t\t\\item $0",
+		  "\t\\end{itemize}",
+		  "\\end{multicols}"
+		],
+		"description": "Multicols with itemize"
 	  }
 }
 

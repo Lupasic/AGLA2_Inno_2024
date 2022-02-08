@@ -80,7 +80,7 @@
     \framesubtitle{}
     \vspace{-0.3cm}
     1) Obtain $P$, $L$, $U$ matrices from $A$, using $PA=LU$ factorization.
-    \begin{columns}[T,onlytextwidth]
+    \begin{columns}[c,onlytextwidth]
         \begin{column}{0.49\textwidth}
             \begin{equation}
                 A = \begin{bmatrix}
@@ -101,7 +101,9 @@
             \end{equation}
         \end{column}
     \end{columns}
-    \vspace{0.1cm}
+    % \vspace{0.1cm}
+    \textcolor[RGB]{200,200,200}{\noindent\rule{\linewidth}{0.2pt}}
+     \vspace{-0.8cm}
 \begin{columns}[T,onlytextwidth]
     \begin{column}{0.3\textwidth}
         2) For $\begin{bmatrix}
@@ -113,7 +115,7 @@
     \end{column}
     \begin{column}{0.7\textwidth}
         \begin{enumerate}
-            \item Reduce $[A\ b]$ to $[U\ c]$, to reach a triangular system.
+            \item Reduce $Ax=b$ to $Ux=c$, to reach a triangular system.
             \item Find the condition on $b_1$, $b_2$, $b_3$ to have a soultion.
             \item Describe the column space of $A$. Find the basis of the column space.
             \item Describe the nullspace of $A$. Declare free variables.
@@ -132,9 +134,9 @@
     0 & 1 & 0 \\ 
     0 & 0  & 1 
     \end{bmatrix}\ A=\begin{bmatrix}
-        1 & 2 & 3 & 5  \\
-        2 & 4 & 8 & 12 \\
-        3 & 6 & 7 & 13
+        1 & 2  & 3  & 4  \\
+        5 & 6  & 7  & 8  \\
+        9 & 10 & 11 & 12
     \end{bmatrix}\ L=\begin{bmatrix}
     1 & 0 & 0 \\
     5 & 1 & 0 \\ 
@@ -190,62 +192,6 @@
     \end{figure}
 \end{frame}
 
-% \section{Introduction}
-% \begin{frame}[t]{\insertsectionhead}
-
-
-
-% \begin{frame}[t]{Task 1}
-%     \framesubtitle{}
-%     \begin{figure}[H]
-%         \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{1.png}
-%         % \caption{caption_name}
-%         \label{fig:1.png}
-%     \end{figure}
-%     \uncover<2->{
-%         \alert{\Large Answer}
-%         \begin{figure}[H]
-%             \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{1ans.png}
-%             % \caption{caption_name}
-%             \label{fig:1ans.png}
-%         \end{figure}
-%     }
-% \end{frame}
-
-% \begin{frame}[t]{Task 2}
-%     \framesubtitle{}
-%     \begin{figure}[H]
-%         \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{2.png}
-%         % \caption{caption_name}
-%         \label{fig:2.png}
-%     \end{figure}
-%     \uncover<2->{
-%         \alert{\Large Answer}
-%         \begin{figure}[H]
-%             \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{2ans.png}
-%             % \caption{caption_name}
-%             \label{fig:2ans.png}
-%         \end{figure}
-%     }
-% \end{frame}
-
-% \begin{frame}[t]{Task 3}
-%     \framesubtitle{}
-%     \begin{figure}[H]
-%         \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{3.png}
-%         % \caption{caption_name}
-%         \label{fig:3.png}
-%     \end{figure}
-%     \uncover<2->{
-%         \alert{\Large Answer}
-%         \begin{figure}[H]
-%             \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{3ans.png}
-%             % \caption{caption_name}
-%             \label{fig:3ans.png}
-%         \end{figure}
-%     }
-% \end{frame}
-
 \begin{frame}[t]{Reference material}
     \framesubtitle{}
     \Large
@@ -259,7 +205,7 @@
 
 \usebackgroundtemplate{}
 \setbeamercolor{background canvas}{bg=}
-\includepdf[pages=-]{class_5.pdf}
+\includepdf[pages={2-7,10-11,18-20,23-27,29-34}]{class_5.pdf}
 
 \fbckg{fibeamer/figs/last_page.png}
 \frame[plain]{}
