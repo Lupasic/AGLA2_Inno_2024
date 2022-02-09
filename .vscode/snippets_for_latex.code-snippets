@@ -293,7 +293,7 @@
 		"scope": "latex",
 		"prefix": "\\multcols",
 		"body": [
-		  "\\begin{multicols}{{${1:2}}",
+		  "\\begin{multicols}{${1:2}}",
 		  "\t\\begin{itemize}",
 		  "\t\t\\item $0",
 		  "\t\\end{itemize}",
