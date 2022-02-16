@@ -32,6 +32,7 @@
 \usepackage{multicol}
 \usepackage{pdfpages}
 \usepackage{wrapfig}
+\usepackage{animate}
 
 \graphicspath{{resources/}}
 \frenchspacing
@@ -108,24 +109,24 @@
     \vspace{-0.4cm}
     \renewcommand{\baselinestretch}{0.1}
 
-\begin{columns}[T,onlytextwidth]
-    \begin{column}{0.49\textwidth}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
             \begin{minipage}{0.58\textwidth}
                 \begin{tikzpicture}
                     \draw[thick, ->, red] (0,0) -- (3,0);
                     \draw[thick, ->, red] (0,0) -- (1,2.5);
                     \draw[ultra thick, ->, blue] (0,0) -- (3,2.5);
                     \draw[dashed] (3,0) -- (3,2.5) -- (1,2.5);
-                    \end{tikzpicture}
+                \end{tikzpicture}
             \end{minipage}\hfill
             \begin{minipage}{0.40\textwidth}
                 \centering\textbf{Common}
-        \begin{align*}
-            a \cdot b \neq 0 \\
-            b \cdot c \neq 0 \\
-            a \cdot c \neq 0 \\
-            \|a\|,\ \|b\|,\ |c\| \neq 1 
-        \end{align*}
+                \begin{align*}
+                    a \cdot b \neq 0 \\
+                    b \cdot c \neq 0 \\
+                    a \cdot c \neq 0 \\
+                    \|a\|,\ \|b\|,\ |c\| \neq 1
+                \end{align*}
             \end{minipage}
 
             \begin{minipage}{0.58\textwidth}
@@ -134,7 +135,7 @@
                     \draw[thick, ->, red] (0,0) -- (0,1);
                     \draw[ultra thick, ->, blue] (0,0) -- (3,2.5);
                     \draw[dashed] (3,0) -- (3,2.5) -- (0,2.5) -- (0,1);
-                    \end{tikzpicture}
+                \end{tikzpicture}
             \end{minipage}\hfill
             \begin{minipage}{0.40\textwidth}
                 \centering\textbf{Orthogonal}
@@ -142,56 +143,63 @@
                     a \cdot b = 0 \\
                     b \cdot c = 0 \\
                     a \cdot c = 0 \\
-                    \|a\|,\ \|b\|,\ |c\| \neq 1 
+                    \|a\|,\ \|b\|,\ |c\| \neq 1
                 \end{align*}
             \end{minipage}
-    \end{column}
-    \begin{column}{0.49\textwidth}
-        \begin{minipage}{0.58\textwidth}
-            \begin{tikzpicture}
-                \draw[thick, ->, red] (0,0) -- (1,0);
-                \draw[thick, ->, red] (0,0) -- (0,1);
-                \draw[ultra thick, ->, blue] (0,0) -- (3,2.5);
-                \draw[dashed] (1,0) -- (3,0) -- (3,2.5) -- (0,2.5) -- (0,1);
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \begin{minipage}{0.58\textwidth}
+                \begin{tikzpicture}
+                    \draw[thick, ->, red] (0,0) -- (1,0);
+                    \draw[thick, ->, red] (0,0) -- (0,1);
+                    \draw[ultra thick, ->, blue] (0,0) -- (3,2.5);
+                    \draw[dashed] (1,0) -- (3,0) -- (3,2.5) -- (0,2.5) -- (0,1);
                 \end{tikzpicture}
-        \end{minipage}\hfill
-        \begin{minipage}{0.40\textwidth}
-            \centering\textbf{OrthoNormal}
+            \end{minipage}\hfill
+            \begin{minipage}{0.40\textwidth}
+                \centering\textbf{OrthoNormal}
+                \begin{align*}
+                    a \cdot b = 0            \\
+                    b \cdot c = 0            \\
+                    a \cdot c = 0            \\
+                    \|a\|,\ \|b\|,\ |c\| = 1 \\
+                    det= \pm 1
+                \end{align*}
+            \end{minipage}
+            \centering \textbf{Properties of orthogonal matrices} \\ {\centering (if they are square)}
             \begin{align*}
-                a \cdot b = 0 \\
-                b \cdot c = 0 \\
-                a \cdot c = 0 \\
-                \|a\|,\ \|b\|,\ |c\| = 1 \\
-                det= \pm 1
+                Q^T=Q^{-1},\ \text{case study} \rightarrow \text{rotation matrix} \\
+                P = Q(Q^TQ)^{-1}Q^T=1
             \end{align*}
-        \end{minipage}
-        \centering \textbf{Properties of orthogonal matrices} \\ {\centering (if they are square)}
-        \begin{align*}
-            Q^T=Q^{-1},\ \text{case study} \rightarrow \text{rotation matrix} \\
-            P = Q(Q^TQ)^{-1}Q^T=1
-        \end{align*}
-    \end{column}
-\end{columns}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}[t]{Special orthogonal group (SO(n)) group}
-\framesubtitle{}
-\begin{figure}[H]
-    \href{https://disk.yandex.ru/i/XD6o-ZIGS4yLvA}{\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{course_modern.png}}
-    \caption*{Modern robotics course, 1 lec (math background, LA + phys + advanced stuff for self education)}
-    \label{fig:course_modern.png}
-\end{figure}
+    \framesubtitle{}
+    \begin{figure}[H]
+        \href{https://disk.yandex.ru/i/XD6o-ZIGS4yLvA}{\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{course_modern.png}}
+        \caption*{Modern robotics course, 1 lec (math background, LA + phys + advanced stuff for self education)}
+        \label{fig:course_modern.png}
+    \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Gram-Schmidt}
-\framesubtitle{Summary}
+    \framesubtitle{Summary}
     \Large
-    This approach provides to \textbf{change} our \alert{common basis} to \alert{orthonormal basis} (our basis will have another vectors, but it represents the same (sub)space). 
+    This approach provides to \textbf{change} our \alert{common basis} to \alert{orthonormal basis} (our basis will have another vectors, but it represents the same (sub)space).
 
-If we \textbf{had vectors in old basis before}, we should find the linear combination values again \textbf{by solving system of linear equations}.
+    If we \textbf{had vectors in old basis before}, we should find the linear combination values again \textbf{by solving system of linear equations}.
 
 \end{frame}
 
+\begin{frame}[t]{Gram-Schmidt}
+    \framesubtitle{Algorithm}
+    \vspace{-0.5cm}
+    \centering
+    \animategraphics[height=6.5cm,autoplay]{10}{gram_schmidt_animation/gram_}{1}{153}
+    % ,controls
+\end{frame}
 
 
 \usebackgroundtemplate{}
@@ -203,83 +211,83 @@ If we \textbf{had vectors in old basis before}, we should find the linear combin
 \begin{frame}[t]{Gram-Schmidt}
     \framesubtitle{Task 1}
     \only<1>{Consider a subspace of all four-by-one column vectors with the following basis:
-    \begin{equation*}W = 
-        \begin{bmatrix}
-            1 & 0 & 0 \\ 
-            1 & 1 & 0 \\ 
-            1 & 1 & 1 \\
-        1 & 1 & 1 \\
-        \end{bmatrix}
-    \end{equation*}
-    \vspace{-0.3cm}
-    \begin{enumerate}
-        \item Use the Gram-Schmidt process to construct an orthonormal basis for this subspace.
-        \item We had a vector $\vec{x}=\begin{bmatrix}
-        2\\
-        3\\ 
-        1 \\
-        1
-        \end{bmatrix}
-        $ in old basis. Find the scalar values witch provide us the same vector in new basis.
-    \end{enumerate}
+        \begin{equation*}W =
+            \begin{bmatrix}
+                1 & 0 & 0 \\
+                1 & 1 & 0 \\
+                1 & 1 & 1 \\
+                1 & 1 & 1 \\
+            \end{bmatrix}
+        \end{equation*}
+        \vspace{-0.3cm}
+        \begin{enumerate}
+            \item Use the Gram-Schmidt process to construct an orthonormal basis for this subspace.
+            \item We had a vector $\vec{x}=\begin{bmatrix}
+                          2 \\
+                          3 \\
+                          1 \\
+                          1
+                      \end{bmatrix}
+                  $ in old basis. Find the scalar values witch provide us the same vector in new basis.
+        \end{enumerate}
     }
     \only<2>{\alert{\Large Answers}
-    \begin{enumerate}
-        \item $W_{new} = \begin{bmatrix}
-        1 & -\frac{3}{4} & 0 \\ 
-        1 & \frac{1}{4} & -\frac{2}{3} \\ 
-        1 & \frac{1}{4} & \frac{1}{3} \\
-        1 & \frac{1}{4} & \frac{1}{3}\\
-        \end{bmatrix}$ - \alert{Not normalized!!}
-        \item Linear combination is $\begin{bmatrix}
-        \frac{7}{4}\\
-        -\frac{1}{3}\\ 
-        -2
-        \end{bmatrix}$
-    \end{enumerate}
+        \begin{enumerate}
+            \item $W_{new} = \begin{bmatrix}
+                          1 & -\frac{3}{4} & 0            \\
+                          1 & \frac{1}{4}  & -\frac{2}{3} \\
+                          1 & \frac{1}{4}  & \frac{1}{3}  \\
+                          1 & \frac{1}{4}  & \frac{1}{3}  \\
+                      \end{bmatrix}$ - \alert{Not normalized!!}
+            \item Linear combination is $\begin{bmatrix}
+                          \frac{7}{4}  \\
+                          -\frac{1}{3} \\
+                          -2
+                      \end{bmatrix}$
+        \end{enumerate}
 
     }
 \end{frame}
 
 \begin{frame}[t]{Quiz}
-\framesubtitle{}
-\only<1>{
-    \textbf{\Large Tasks:}
-    \begin{enumerate}
-        \item \textit{Least Squares}. There are several points 
-            $A = \begin{bmatrix}-1\\2\end{bmatrix};\ 
-            B = \begin{bmatrix}1\\0\end{bmatrix};\
-            A = \begin{bmatrix}-1\\0\end{bmatrix};\ 
-            C = \begin{bmatrix}2\\1\end{bmatrix};\ 
-            D = \begin{bmatrix}0\\-1\end{bmatrix};\ 
-            F = \begin{bmatrix}1\\2\end{bmatrix}.
-            $
-            \begin{enumerate}
-                \item What curve type is the best for fitting these points? (no more than 2nd order polynomial eq.)
-                \item Find the parameters of the curve, find summary error (SE).
-            \end{enumerate}
-        \item \textit{Gram-Schmidt}. There is a basis $\begin{bmatrix}
-        14 & 3 & -1 & -1\\
-        21 & 0 & 0 & 2 \\ 
-        14 & 0  & 2 & -1 \\
-        -14 & 3  & 1 & 1 
-        \end{bmatrix}$. Make this basis orthogonal.
-    \end{enumerate}
-        }
+    \framesubtitle{}
+    \only<1>{
+        \textbf{\Large Tasks:}
+        \begin{enumerate}
+            \item \textit{Least Squares}. There are several points
+                  $A = \begin{bmatrix}-1\\2\end{bmatrix};\
+                      B = \begin{bmatrix}1\\0\end{bmatrix};\
+                      A = \begin{bmatrix}-1\\0\end{bmatrix};\
+                      C = \begin{bmatrix}2\\1\end{bmatrix};\
+                      D = \begin{bmatrix}0\\-1\end{bmatrix};\
+                      F = \begin{bmatrix}1\\2\end{bmatrix}.
+                  $
+                  \begin{enumerate}
+                      \item What curve type is the best for fitting these points? (no more than 2nd order polynomial eq.)
+                      \item Find the parameters of the curve, find summary error (SE).
+                  \end{enumerate}
+            \item \textit{Gram-Schmidt}. There is a basis $\begin{bmatrix}
+                          14  & 3 & -1 & -1 \\
+                          21  & 0 & 0  & 2  \\
+                          14  & 0 & 2  & -1 \\
+                          -14 & 3 & 1  & 1
+                      \end{bmatrix}$. Make this basis orthogonal.
+        \end{enumerate}
+    }
     \only<2>{
         \alert{\Large Answers}
         \begin{columns}[T,onlytextwidth]
             \begin{column}{0.49\textwidth}
                 \begin{enumerate}
                     \item \textit{Least Squares}
-                        \begin{enumerate}
-                            \item Parabola (or any 2nd order polynomial curve)
-                            \item $a = 0.4,\ b=-0.2,\ c = 0.2;\ SE = 6.4$
-                        \end{enumerate}
+                          \begin{enumerate}
+                              \item Parabola (or any 2nd order polynomial curve)
+                              \item $a = 0.4,\ b=-0.2,\ c = 0.2;\ SE = 6.4$
+                          \end{enumerate}
                     \item \textit{Gram-Schmidt}
-                    \begin{enumerate}
-                        \item The same. It is already orthogonal \heartsuit 
-                    \end{enumerate}
+                          \begin{enumerate}
+                              \item The same. It is already orthogonal \heartsuit
+                          \end{enumerate}
                 \end{enumerate}
             \end{column}
             \begin{column}{0.49\textwidth}
@@ -298,8 +306,8 @@ If we \textbf{had vectors in old basis before}, we should find the linear combin
     \framesubtitle{Midterm Preparation}
     \textbf{Task:} find $v$, where $v$ is intersection of $
         \left\{\begin{matrix*}[l]
-        S_1 = x+7y-3z=13\\ 
-        S_2=x+y+0z=5
+            S_1 = x+7y-3z=13\\
+            S_2=x+y+0z=5
         \end{matrix*}\right.
     $
 
@@ -315,7 +323,7 @@ If we \textbf{had vectors in old basis before}, we should find the linear combin
 \begin{frame}[t]{Task 2}
     \framesubtitle{Midterm Preparation}
     \textbf{Task:} Find a vector $v$ that is orthogonal to $S$, if subspace $S$ of $R^3$ is formed by linear combination of vectors $v_1 = \begin{bmatrix}1\\2\\1\end{bmatrix}$ and $v_2 = \begin{bmatrix}2\\4\\2\end{bmatrix}$
-    
+
     \uncover<2->{
         \alert{\Large Answer}
         \begin{enumerate}
@@ -328,26 +336,26 @@ If we \textbf{had vectors in old basis before}, we should find the linear combin
 \begin{frame}[t]{Task 3}
     \framesubtitle{Midterm Preparation}
     \only<1>{
-    \textbf{Task:} 
-    \begin{enumerate}
-        \item For each real parameter $\lambda$ construct a linear independent system that contains the maximum number of the following vectors.
-        \item Find the dimensions of the four fundamental subspaces associated with result of "1", depending on the parameter $\lambda$.
-    \end{enumerate}
-    \begin{equation*}
-        a=\begin{bmatrix}-\lambda\\1\\2\\3\end{bmatrix};\ b=\begin{bmatrix}1\\-\lambda\\3\\2\end{bmatrix};\ c=\begin{bmatrix}2\\3\\-\lambda\\1\end{bmatrix};\ d=\begin{bmatrix}3\\2\\1\\-\lambda\end{bmatrix};\ e=\begin{bmatrix}1\\1\\1\\1\end{bmatrix}.
-    \end{equation*}
+        \textbf{Task:}
+        \begin{enumerate}
+            \item For each real parameter $\lambda$ construct a linear independent system that contains the maximum number of the following vectors.
+            \item Find the dimensions of the four fundamental subspaces associated with result of "1", depending on the parameter $\lambda$.
+        \end{enumerate}
+        \begin{equation*}
+            a=\begin{bmatrix}-\lambda\\1\\2\\3\end{bmatrix};\ b=\begin{bmatrix}1\\-\lambda\\3\\2\end{bmatrix};\ c=\begin{bmatrix}2\\3\\-\lambda\\1\end{bmatrix};\ d=\begin{bmatrix}3\\2\\1\\-\lambda\end{bmatrix};\ e=\begin{bmatrix}1\\1\\1\\1\end{bmatrix}.
+        \end{equation*}
     }
     \only<2>{
         \begin{columns}[T,onlytextwidth]
             \begin{column}{0.64\textwidth}
                 \alert{\Large Answer:} $\vec{a}$, $\vec{b}$, $\vec{c}$, $\vec{d}$, when $\lambda \neq 6$.
-\begin{enumerate}
-    \item Using \textbf{rref} we can easily find max possible max rank, hence choose our basis. 
-    
-    \textit{Hint}: It can be solved, if you sum all vectors to the first column (all rows will be the same).
-    \item Using knowledge from previous lab (AGLA2, lab 4)
-\end{enumerate}
-        
+                \begin{enumerate}
+                    \item Using \textbf{rref} we can easily find max possible max rank, hence choose our basis.
+
+                          \textit{Hint}: It can be solved, if you sum all vectors to the first column (all rows will be the same).
+                    \item Using knowledge from previous lab (AGLA2, lab 4)
+                \end{enumerate}
+
             \end{column}
             \begin{column}{0.35\textwidth}
                 \vspace{-0.3cm}
@@ -358,7 +366,7 @@ If we \textbf{had vectors in old basis before}, we should find the linear combin
                 \end{figure}
             \end{column}
         \end{columns}
-        
+
     }
 \end{frame}
 
