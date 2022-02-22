@@ -103,6 +103,20 @@
 %     \end{figure}
 % \end{frame}
 
+\begin{frame}[t]{Naming problem}
+\framesubtitle{}
+\begin{block}{Problem statement}
+    \textit{Orthogonality} and \textit{OrthoNormality} are vague term. 
+\end{block}    
+\begin{enumerate}
+    \item In \href{https://en.wikipedia.org/wiki/Orthogonal_matrix}{Wiki} they have the same meaning.
+    \item According to Kholodov, OrthoNormal -- rectangular orthogonal matrix with normalized vectors. Orthogonal -- squared normalized matrix.
+    \item According to \href{https://se.mathworks.com/help/symbolic/orth.html}{Matlab documentation} (skipnormalization param.) and \href{https://www.quora.com/Does-orthogonal-and-orthonormal-mean-the-same-If-not-what-is-the-difference}{Quora} -- orthogonal -- rectangular matrix without normalized vectors, orthoNormal -- with them.
+\end{enumerate}
+
+I decide to follow \textit{\textbf{3rd notation}}.
+
+\end{frame}
 
 \begin{frame}[t]{Orthogonality + OrthoNormality}
     \framesubtitle{}
@@ -166,10 +180,10 @@
                     det= \pm 1
                 \end{align*}
             \end{minipage}
-            \centering \textbf{Properties of orthogonal matrices} \\ {\centering (if they are square)}
+            \centering \textbf{Properties of orthonormal matrices} \\ {\centering (if they are square)}
             \begin{align*}
                 Q^T=Q^{-1},\ \text{case study} \rightarrow \text{rotation matrix} \\
-                \text{Orthogonal matrix }\rightarrow \ Q^TQ = I \\
+                \text{Orthonormal matrix }\rightarrow \ Q^TQ = I \\
                 \text{Not normalized } Q \rightarrow \ N^TN = Diag
             \end{align*}
         \end{column}
@@ -186,11 +200,16 @@
 \end{frame}
 
 \begin{frame}[t]{Gram-Schmidt}
-    \framesubtitle{Summary}
+    % \framesubtitle{Summary}
+    \vspace{-0.5cm}
     \Large
     This approach provides to \textbf{change} our \alert{common basis} to \alert{orthonormal basis} (our basis will have another vectors, but it represents the same (sub)space).
 
     If we \textbf{had vectors in old basis before}, we should find the linear combination values again \textbf{by solving system of linear equations}.
+
+    \textbf{Application}: $A=QR$ Factorization. The factorization simplifies least squares solution.
+
+    \textbf{Concept}: The concept of orthogonalization uses \href{https://en.wikipedia.org/wiki/Principal_component_analysis}{Principle Component Analysis} (PCA) algorithm. 
 
 \end{frame}
 
