@@ -294,6 +294,23 @@
 		],
 		"description": "Task frame"
 	  },
+	  "Video frame": {
+		"scope": "latex",
+		"prefix": "\\nvideoframe",
+		"body": [
+		  "\\begin{frame}[t]{$1}",
+		  "    \\framesubtitle{Video}",
+		  "    \\vspace{-0.6cm}",
+		  "    \\begin{figure}[H]",
+		  "        \\href{$2}{",
+		  "            \\centering\\includegraphics[height=6cm,width=1\\textwidth,keepaspectratio]{${3:file_name}}}",
+		  "        % \\caption{Click on a picture for a video}",
+		  "        \\label{fig:${3:file_name}}",
+		  "    \\end{figure}",
+		  "\\end{frame}"
+		],
+		"description": "Video frame"
+	  },
 
 	  "Horizontal gray line": {
 		"scope": "latex",
