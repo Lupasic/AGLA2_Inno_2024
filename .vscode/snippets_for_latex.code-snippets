@@ -199,7 +199,7 @@
 	  },
 	  "Matix2x3": {
 		"scope": "latex",
-		"prefix": "\\m32",
+		"prefix": "\\m23",
 		"body": [
 		  "\\begin{bmatrix}",
 		  "$1 & $2 \\\\\\",
@@ -314,6 +314,19 @@
 		  "\\end{multicols}"
 		],
 		"description": "Multicols with itemize"
+	  },
+
+	  "Change font size for itemize/enumerate": {
+		"scope": "latex",
+		"prefix": "\\changefontitems",
+		"body": [
+		  "\\setbeamertemplate{itemize/enumerate body begin}{${1:\\large}}",
+		  "\\setbeamertemplate{itemize/enumerate subbody begin}{${1:\\large}}",
+		  "",
+		  "%\\setbeamertemplate{itemize/enumerate body begin}{\\normalsize}",
+		  "%\\setbeamertemplate{itemize/enumerate subbody begin}{\\normalsize}"
+		],
+		"description": "Change font size for itemize/enumerate"
 	  }
 }
 
