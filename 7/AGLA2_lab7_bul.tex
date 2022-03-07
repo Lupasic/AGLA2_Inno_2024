@@ -104,7 +104,7 @@
             $Re(z)=x$ -- real part, $Im(z)=y$ -- imaginary part \\
             \textit{Example:} $z=5 + i6$ \\
             \textbf{Polar form:} $z=r\ cos(\phi]) + i\ r\ sin(\phi) $, where \\
-            $\theta = atan2(Im(z),Re(z))$; \\
+            $\phi = atan2(Im(z),Re(z))$; \\
             $r = |z|=\sqrt{x^2+y^2}$ -- magnitude \\
             \textit{Example:} $z=8\ cos(24)+i\ sin(24))$ \\
             \textbf{Exponential form:} $z=re^{i \phi}$ \\
@@ -138,8 +138,8 @@
     \textbf{General Idea}: you should work with $Im$ and $Re$ part separately (you cannot sum or multiply them) \\
     \begin{itemize}
         \item \textit{Summarization and Substraction} -- $(x_1 \pm iy_1) + (x_2 \pm iy_2) = (x_1 \pm x_2) + i(y_1\pm y_2)$
-        \item \textit{Multiplication} -- $(x_1 + iy_1)(x_2 + iy_2) = (x_1x_2 - y_1y_2) + i(x_1x_2 + y_1y_2)$
-        \item \textit{Division} -- $\dfrac{(x_1 + iy_1)}{(x_2 + iy_2)} = \dfrac{(x_1x_2 + y_1y_2)}{x_2^2 + y_2^2} + i\dfrac{(y_1y_2 - x_1x_2)}{x_2^2 + y_2^2} $
+        \item \textit{Multiplication} -- $(x_1 + iy_1)(x_2 + iy_2) = (x_1x_2 - y_1y_2) + i(x_1y_2 + y_1x_2)$
+        \item \textit{Division} -- $\dfrac{(x_2 + iy_2)}{(x_1 + iy_1)} = \dfrac{(x_1x_2 + y_1y_2)}{x_2^2 + y_2^2} + i\dfrac{(y_1x_2 - x_1y_2)}{x_2^2 + y_2^2} $
     \end{itemize}
 \end{frame}
 
@@ -156,9 +156,9 @@
             $z\bar{z} = x^2 + y^2 = |z|^2$ -- absolute square \\
             \textbf{Operations}
             \begin{itemize}
-                \item  \textit{Summarization and Substraction} -- ${\overline {z\pm w}}={\overline {z}}\pm {\overline {w}}$
-                \item \textit{Multiplication} -- ${\overline {z\cdot w}}={\overline {z}}\cdot {\overline {w}}$
-                \item \textit{Division} -- ${\overline {z/w}}={\overline {z}}/{\overline {w}}$
+                \item  \textit{Summarization and Substraction} -- ${\overline {z\pm w}}={\bar {z}}\pm {\bar {w}}$
+                \item \textit{Multiplication} -- ${\overline {z\cdot w}}={\bar {z}}\cdot {\bar {w}}$
+                \item \textit{Division} -- ${\overline {z/w}}={\bar {z}}/{\bar {w}}$
             \end{itemize}
 
         \end{column}
@@ -204,11 +204,27 @@
                 \end{itemize}}
         \end{enumerate}
     \end{multicols}
-    \only<2-5>{\alert{\Large Answer} \\ \todo[inline]{Fix Using matlab}}
-    \only<2>{\href{https://www.kontrolnaya-rabota.ru/s/equal-one/any-uravnenie/expr/d2ceda2e3e26d3d04083ac82a3b37db3/}{Solution (rus)}}
-    \only<3>{}
-    \only<4>{}
-    \only<5>{}
+    \only<2-5>{\alert{\Large Answer}\\}
+    \only<2>{\begin{itemize}
+        \item $z^2=i$
+        \item $r=1$
+        \item $\phi=45^\circ$
+        \item $z=1e^{i \frac{\pi}{4}}$
+    \end{itemize}}
+    \only<3>{\href{https://www.kontrolnaya-rabota.ru/s/equal-one/any-uravnenie/expr/d2ceda2e3e26d3d04083ac82a3b37db3/}{Solution (rus)}:
+    $\pm1;\ \pm i;\ \frac{\sqrt{2}}{2}\pm i \frac{\sqrt{2}}{2};\ -\frac{\sqrt{2}}{2}\pm i \frac{\sqrt{2}}{2};$}
+    \only<4>{\begin{itemize}
+        \item $\bar{z}=-1-i\frac{1}{2}$
+        \item $z\bar{z}=1.25$
+        \item $z+\bar{z}=-2$
+    \end{itemize}}
+    \only<5>{\begin{itemize}
+        \item $e^{i\frac{\pi}{2}}=i$
+        \item $e^{i\pi}=-1$
+        \item $i^i=e^{ln(i^i)}=e^{i\ ln(i)};\ \left\{\begin{matrix*}[l]
+            i=e^{i\frac{\pi}{2}} \text{-- \small \textit{from 1-st bullet}}\\ln(i)=ln(e^{i\frac{\pi}{2})}
+        \end{matrix*}\right. \rightarrow i\frac{\pi}{2}=ln(i);\ e^{i\ ln(i)}=e^{-\frac{\pi}{2}}=0.208$ 
+    \end{itemize}}
 
     \setbeamertemplate{itemize/enumerate body begin}{\normalsize}
     \setbeamertemplate{itemize/enumerate subbody begin}{\normalsize}
@@ -247,6 +263,7 @@
         \label{fig:2.png}
     \end{figure}
     \uncover<2->{
+        \vspace{-0.3cm}
         \alert{\Large Answer}
         \begin{figure}[H]
             \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{2ans.png}
@@ -297,6 +314,7 @@
         \item \href{https://www.youtube.com/watch?v=Y_Ac6KiQ1t0&list=PL49CF3715CB9EF31D&index=27}{Lecture 26}
         \item \textit{"Linear Algebra and Applications", pdf pages 322--335 }\\ Complex numbers and matrices
         \item \textit{"Introduction to Linear Algebra", pdf pages 504--519 }\\ Complex numbers and matrices
+        \item \href{https://programforyou.ru/calculators/complex-calculator}{Complex Numbers calculator}
     \end{itemize}
 \end{frame}
 
