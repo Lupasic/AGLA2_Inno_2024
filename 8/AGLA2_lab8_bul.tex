@@ -109,6 +109,7 @@
     \end{figure}
 \end{frame}
 
+
 \begin{frame}[t]{Gilbert Strang's Goal VS My Goal}
 \framesubtitle{}
 \Large
@@ -124,18 +125,18 @@
     \end{columns}
 \end{frame}
 
+
 \begin{frame}[t]{Outline}
 \framesubtitle{}
     \Large
     \begin{enumerate}
         \item Fourier Series, intuition
-        \item Fourier Series, math
-        \item Discrete Fourier Transform
-        \item Fast Fourier Transform
+        \item From Fourier Series to DFT
+        \item Fast Fourier Transform algorithm
     \end{enumerate}
 \end{frame}
 
-\begin{frame}[t]{Why do we need Fourier Transform}
+\begin{frame}[t]{How to imagine Fourier Transform}
     \framesubtitle{Video (rus)}
     \vspace{-0.6cm}
     \begin{figure}[H]
@@ -157,7 +158,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{How to draw pictures using Furier Transform}
+\begin{frame}[t]{Draw pictures using Fourier Transform}
     \framesubtitle{Video}
     \vspace{-0.6cm}
     \begin{figure}[H]
@@ -168,24 +169,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Some Math words}
-\framesubtitle{}
-\Large
-On a whiteboard
-\end{frame}
-
-\begin{frame}[t]{FFT in Sound (rus)}
-    \framesubtitle{Video}
-    \vspace{-0.6cm}
-    \begin{figure}[H]
-        \href{https://youtu.be/T0xlzPBdx6s?t=237}{
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{fft_sound.jpg}}
-        % \caption{Click on a picture for a video}
-        \label{fig:fft_sound.jpg}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[t]{Fourier Transform in sound (watch at home)}
+\begin{frame}[t]{DFT: explanation using sound domain (watch at home)}
     \framesubtitle{Video}
     \vspace{-0.6cm}
     \begin{figure}[H]
@@ -196,8 +180,44 @@ On a whiteboard
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Fourier Transform Application}
-\framesubtitle{Terrain Classification: Feature Extraction step}
+\begin{frame}[t]{From Fourier Series to DFT}
+\framesubtitle{}
+\vspace{-0.75cm}
+\begin{figure}[H]
+    \centering\includegraphics[height=7cm,width=1\textwidth,keepaspectratio]{AGLA2_for_slides_9.png}
+    % \caption{caption_name}
+    \label{fig:AGLA2_for_slides_9.png}
+\end{figure}
+\end{frame}
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-,fitpaper]{lab8.pdf}
+\fbckg{fibeamer/figs/common.png}
+
+\begin{frame}[t]{From Fourier Series to DFT}
+    \framesubtitle{Properties}
+    \vspace{-1.2cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6.8cm,width=1\textwidth,keepaspectratio]{DFT.png}
+        % \caption{caption_name}
+        \label{fig:DFT.png}
+    \end{figure}
+    \end{frame}
+
+\begin{frame}[t]{DFT application: Sound (rus)}
+    \framesubtitle{Video}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        \href{https://youtu.be/T0xlzPBdx6s?t=237}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{fft_sound.jpg}}
+        % \caption{Click on a picture for a video}
+        \label{fig:fft_sound.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{DFT application: Terrain Classification}
+\framesubtitle{Feature Extraction step}
 \vspace{-0.6cm}
 \begin{columns}[T,onlytextwidth]
     \begin{column}{0.59\textwidth}
@@ -222,25 +242,59 @@ On a whiteboard
 \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Math words again}
-\framesubtitle{}
+\begin{frame}[t]{Fast Fourier Transform}
+\framesubtitle{Problem Statement}
 \Large
-    On a whiteboard
+    Direct matrix multiplication of $\mathbf{c}$ by $F_N$ needs $\mathbf{N^2}$ multiplications. \\
+    FFT factorization -- $\mathbf{\frac{1}{2}N\ log_2 N}$ multiplications. \\
+    \textit{Benefit}: $N=2^{10}=1024$, $N^2 = 1$ million, FFT -- 5000 \\
+    \textit{Constraint of FFT}: $N$ should be equal to $2^n$ \\
+\end{frame}
+
+\begin{frame}[t]{Fast Fourier Transform}
+\framesubtitle{Algorithm}
+\large
+\vspace{-0.3cm}
+\textbf{Step 1}: From 1024 to 512
+\begin{equation*}
+    \Bigg[\begin{matrix}
+    F_{1024}  
+    \end{matrix}\Bigg] = \begin{bmatrix}
+    I & D\\ 
+    I & -D 
+    \end{bmatrix} \begin{bmatrix}
+    F_{512} & 0\\ 
+    0 & F_{512} 
+    \end{bmatrix} \Bigg[\begin{matrix}
+        P 
+        \end{matrix}\Bigg],
+\end{equation*}
+where $D$ is a diagonal matrix of $F_{1024}$, but we took only half of it ($512x512$); \\
+$P$ -- permutation matrix: for $P_{1024}$ puts columns 0,2,...,1022 ahead of 1,3,...1023. \\
+\textit{Example: }$P_4=\begin{bmatrix}
+1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 \\ 
+0 & 1  & 0 & 0 \\
+0 & 0  & 0 & 1 
+\end{bmatrix}$ \\ 
+\textbf{Step 2}: From 512 to 256 \\
+\textbf{Step 3...}: From 256 to 128 ... \textbf{Recursion} continues to small N: {$\mathbf{log_2 N}$} steps.
 \end{frame}
 
 \begin{frame}[t]{Task 1}
     \framesubtitle{}
+    \vspace{-0.5cm}
     \begin{figure}[H]
-        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{1.png}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4.png}
         % \caption{caption_name}
-        \label{fig:1.png}
+        \label{fig:4.png}
     \end{figure}
     \uncover<2->{
-        \alert{\Large Answer}
+        \alert{\Large Answer} $D_{3,3}=e^{4\pi i/3}$ is also correct. It depend of $w$ equation (with minus or not).
         \begin{figure}[H]
-            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{1ans.png}
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4ans.png}
             % \caption{caption_name}
-            \label{fig:1ans.png}
+            \label{fig:4ans.png}
         \end{figure}
     }
 \end{frame}
@@ -284,16 +338,16 @@ On a whiteboard
     \framesubtitle{}
     \vspace{-0.5cm}
     \begin{figure}[H]
-        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4.png}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{1.png}
         % \caption{caption_name}
-        \label{fig:4.png}
+        \label{fig:1.png}
     \end{figure}
     \uncover<2->{
         \alert{\Large Answer}
         \begin{figure}[H]
-            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4ans.png}
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{1ans.png}
             % \caption{caption_name}
-            \label{fig:4ans.png}
+            \label{fig:1ans.png}
         \end{figure}
     }
 \end{frame}

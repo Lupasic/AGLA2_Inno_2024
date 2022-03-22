@@ -277,6 +277,7 @@
 		"body": [
 		  "\\begin{frame}[t]{Task ${1:1}}",
 		  "    \\framesubtitle{}",
+		  "    \\vspace{-0.5cm}",
 		  "    \\begin{figure}[H]",
 		  "        \\centering\\includegraphics[height=3cm,width=1\\textwidth,keepaspectratio]{${1:1}.png}",
 		  "        % \\caption{caption_name}",
@@ -311,7 +312,27 @@
 		],
 		"description": "Video frame"
 	  },
-
+	  "Insert pdf doc as slides": {
+		"scope": "latex",
+		"prefix": "\\insertpdf",
+		"body": [
+		  "\\usebackgroundtemplate{}",
+		  "\\setbeamercolor{background canvas}{bg=}",
+		  "\\includepdf[pages=-,fitpaper]{$1.pdf}",
+		  "\\fbckg{fibeamer/figs/common.png}"
+		],
+		"description": "Insert pdf doc as slides"
+	  },
+	  "Make notes for previous slide": {
+		"scope": "latex",
+		"prefix": "\\makenote",
+		"body": [
+		  "\\note{",
+		  "    % Don't forget to add \"notes\" in document class. When you finalize slides — remove it from documentclass",
+		  "}"
+		],
+		"description": "Make notes for previous slide. Add it between frames"
+	  },
 	  "Horizontal gray line": {
 		"scope": "latex",
 		"prefix": "\\hgrayline",
