@@ -418,6 +418,32 @@ Afterwards, we find an ellipse using eigenvalues and eigenvectors
 
 \end{frame}
 
+\begin{frame}[t]{Applications (2.5)}
+\framesubtitle{How to visualize a point cloud as an ellipse}
+\vspace{-0.5cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \textit{\underline{Task}}: We have a matrix with points. I want to make a model, which represent it in easier manner. Also, I want to visualize it. \\
+\underline{\textit{Solution}}: We can find \href{https://www.youtube.com/watch?v=0GzMcUy7ZI0&feature=youtu.be}{covariance matrix} of our point cloud (It's topic from probabilistic and statistic course) and centroid of our point cloud. \\
+The matrix eigenpairs provide all info (minor and major axes length and orientation) \\ 
+\underline{\textit{Application}}: Eigenvectors is a basis, so we can put all our points in this basis and work with it. More info in the next semesters.
+        \end{column}
+        \begin{column}{0.44\textwidth}
+            \vspace{-0.7cm}
+            \begin{figure}[H]
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{ellipse_point_cloud.png}
+                \caption*{\large More details in matlab code below}
+                \label{fig:ellipse_point_cloud.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-,fitpaper]{lab9.pdf}
+\fbckg{fibeamer/figs/common.png}
+
 \begin{frame}[t]{Applications (3)}
     \framesubtitle{Machine learning + optimization}
     \vspace{-0.5cm}
