@@ -11,7 +11,7 @@
 %%
 %% These macros specify information about the presentation
 \title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 9} %% that will be typeset on the
-\subtitle{Eigenvalues and Eigenvectors \\ Diagonalization of a Matrix \\ Difference equation
+\subtitle{Eigenvalues and Eigenvectors \\ Diagonalization of a Matrix \\ \ 
          } %% title page.
 \author{Oleg Bulichev}
 %% These additional packages are used within the document:
@@ -102,11 +102,12 @@
 
 \begin{frame}[t]{Where it can be used}
 \framesubtitle{}
+\Large
     \begin{itemize}
-        \item Machine learning (transform data in more suitable usage)
-        \item Make some calculations easier (matrix$^100$ – piece of cake)
+        \item Machine learning (transform data in more suitable form)
+        \item Make some calculations easier (matrix$^{100}$ – piece of cake)
         \item Predict the behavior of linear systems (physics, biology, etc)
-        \item Design the controller for our system
+        \item Design the controller for a system
         \item Estimate the complexity of calculations
         \item ...
     \end{itemize}
@@ -138,9 +139,10 @@ For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
 
 \begin{frame}[t]{Calculation (1)}
     \framesubtitle{Classical approach (max 3x3)}
-    \vspace{-0.3cm}
+    \vspace{-0.8cm}
     \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.49\textwidth}
+        \begin{column}{0.48\textwidth}
+            \begin{block}{Algorithm}
             There are 2 steps:
             \begin{enumerate}
                 \item Find $\lambda$ (eigenvalue) --- $det(A-\lambda I)=0$
@@ -150,9 +152,10 @@ For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
                 \end{itemize}
                 \item Find $\mathbf{x}$ for each $\lambda$ --- $(A-\lambda_i I)\mathbf{x} = 0 $
             \end{enumerate}
-
+        \end{block}
         \end{column}
         \begin{column}{0.49\textwidth}
+            \begin{example}
             Case study, $2\times 2$ matrix: $A= \begin{bmatrix}
             4 & 3\\ 
             -2 & -3 
@@ -178,14 +181,17 @@ For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
                     \end{bmatrix}$
             \end{enumerate}
         \end{enumerate}
+    \end{example}
         \end{column}
     \end{columns}
 \end{frame}
 
 \begin{frame}[t]{Task 1}
     \framesubtitle{}
-    \vspace{-0.5cm}
-    Find the eigenvalues and eigenvectors:
+    \vspace{-0.3cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            Find the eigenvalues and eigenvectors:
     \begin{enumerate}
         \item $A=\begin{bmatrix}
         2 & 7\\ 
@@ -196,7 +202,9 @@ For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
         1 & 3 
         \end{bmatrix}$
     \end{enumerate}
-    \uncover<2->{
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \uncover<2->{
         \alert{\Large Answer}
         \begin{enumerate}
             \item $\lambda_1 = -5,\ \lambda_2 = 9$ \\ $x_{\lambda=-5} = \begin{bmatrix}
@@ -215,6 +223,10 @@ For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
                     \end{bmatrix}$
         \end{enumerate}
     }
+        \end{column}
+    \end{columns}
+    
+    
 \end{frame}
 
 \begin{frame}[t]{Calculation (2)}
@@ -222,7 +234,7 @@ For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.39\textwidth}
             \large
-Due to the reason that computers appeared recently, eigenpairs weren't used broadwide. 
+Due to the reason that computers appeared recently, eigenpairs weren't used frequently. 
 \bigskip
 
 Nowadays, it can be found easily by iteration method, which implemented in most programming languages.
@@ -240,10 +252,13 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
 
 \begin{frame}[t]{Eigenpair properties and features}
 \framesubtitle{}
+\vspace{-0.3cm}
     \Large
     \begin{itemize}
         \item $\sum \lambda = trace(A)$
-        \item $A_{new}= A_{old} + a\lambda_{old},\ \rightarrow$ eigenvectors won't change, $\lambda_{new} = \lambda_{old} + a$
+        \item $det(A)=\prod_{i=1}^{n}\lambda_i $
+        \item $A_{new}= A_{old} + aI,\ \rightarrow$ eigenvectors won't change, $\lambda_{new} = \lambda_{old} + a$
+        \item The matrix $A$ is invertible if and only if every eigenvalue is nonzero.
         \item If matrix is triangular -- the eigenvalues are on the main diagonal
         \item If matrix is symmetric -- $\lambda$ is \textit{definitely} real
         \item If matrix is not symmetric – $\lambda$ \textit{can} contain imaginary part
@@ -339,7 +354,23 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
     \end{figure}
 \end{frame}
 
-
+\begin{frame}[t]{Applications (1)}
+    \framesubtitle{Fast Calculations}
+            \begin{columns}[T,onlytextwidth]
+                \begin{column}{0.3\textwidth}
+                    \underline{\textit{Task}}: Find 50th Fibonacci value \\
+\textit{\underline{Dummy approach}}: calculate it by iterative summarization. \\
+\underline{\textit{Smart approach}}: use magic and diagonalization \\ 
+                \end{column}
+                \begin{column}{0.69\textwidth}
+                    \begin{figure}[H]
+                        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{fibo.jpg}
+                        \caption*{ \Large \href{https://youtu.be/13r9QY6cmjc?t=2072}{Lecture 22. Diagonalization and Powers of A}}
+                        \label{fig:fibo.jpg}
+                    \end{figure}
+                \end{column}
+            \end{columns}
+\end{frame}
 
 \begin{frame}[t]{Task 5}
     \framesubtitle{}
@@ -350,7 +381,7 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
         \label{fig:5.png}
     \end{figure}
     \uncover<2->{
-        \alert{\Large Answer}
+        \alert{\Large Answer}: \large \href{https://en.wikipedia.org/wiki/Stochastic_matrix}{Markov matrix} is a prob. matrix, where a summary in each column should be 1. It has a property, that $\lambda_{max} = 1$.
         \begin{figure}[H]
             \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{5ans.png}
             % \caption{caption_name}
@@ -359,24 +390,77 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
     }
 \end{frame}
 
-\begin{frame}[t]{Applications (1)}
-\framesubtitle{Computer Vision}
-    
-\end{frame}
-
 \begin{frame}[t]{Applications (2)}
-    \framesubtitle{Machine learning + optimization}
-        
-    \end{frame}
+\framesubtitle{Computer Vision}
+\vspace{-0.3cm}
+\begin{columns}[c,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+        \textit{\underline{Task}}: we want to know the orientation of the object \\
+\textit{\underline{Needed terms}}: \href{https://en.wikipedia.org/wiki/Centroid}{Centroid}, \href{https://www.youtube.com/watch?v=AAbUfZD_09s}{Image moments} \\
+\textit{\underline{Solution}}: use equivalent ellipse method. We consider an ellipse:
+% \vspace{-0.6cm}
+\begin{itemize}
+    \item centred at the object's centroid;
+    \item has same moments of inertia about centroid.
+\end{itemize}
+
+Afterwards, we find an ellipse using eigenvalues and eigenvectors
+    \end{column}
+    \begin{column}{0.58\textwidth}
+        \begin{figure}[H]
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{cv.png}
+            \caption*{\Large\href{https://robotacademy.net.au/masterclass/feature-extraction/?lesson=695}{Feature extraction masterclass video
+            }}
+            \label{fig:cv.png}
+        \end{figure}
+    \end{column}
+\end{columns}
+
+\end{frame}
 
 \begin{frame}[t]{Applications (3)}
-    \framesubtitle{Predict the behavior of linear systems}
-            
-\end{frame}
+    \framesubtitle{Machine learning + optimization}
+    \vspace{-0.5cm}
+        \begin{columns}[T,onlytextwidth]
+            \begin{column}{0.60\textwidth}
+                \underline{\textit{Task}}: we have data, which depicted on figure. We need to \textit{find local minimum} of it. \\
+\underline{\textit{Dummy approach}}: let's use gradient descent w/o preprocessing. \\
+\underline{\textit{Result of dummy approach}}: It can disconvergent, or solved very slow, because of  big difference between step size in x and y direction. \\
+\underline{\textit{Smart approach}}: let's firstly represent it as a \textit{circle} (\textbf{transform all data in eigenbasis}) and make gradient descent on it. In this case we have almost the same step size for x and y direction.
+            \end{column}
+            \begin{column}{0.35\textwidth}
+                \vspace{-0.5cm}
+                    \begin{minipage}{0.58\textwidth}
+                        \centering\includegraphics[width=\textwidth,keepaspectratio]{data_ellipse.jpg}
+                    \end{minipage}\hfill
+                    \begin{minipage}{0.40\textwidth}
+                        Represent data as an ellipse
+                    \end{minipage}
+                    \begin{minipage}{0.58\textwidth}
+                        \centering\includegraphics[width=\textwidth,keepaspectratio]{unnormalized.png}
+                    \end{minipage}\hfill
+                    \begin{minipage}{0.40\textwidth}
+                        Gradient descent Issue
+                    \end{minipage}
+                    \begin{minipage}{0.58\textwidth}
+                        \centering\includegraphics[width=\textwidth,keepaspectratio]{normalized.png}
+                    \end{minipage}\hfill
+                    \begin{minipage}{0.40\textwidth}
+                        Represent data as a circle
+                    \end{minipage}
+            \end{column}
+        \end{columns}
+    \end{frame}
 
 \begin{frame}[t]{Applications (4)}
-    \framesubtitle{Fast Calculations}
-            
+    \framesubtitle{Predict the behavior of linear systems}
+    \Large
+    \underline{\textit{Task}}: I have a system and want to understand, how it will works. Afterwards, I want to control it (design a controller). \\
+    \underline{\textit{Solution}}:
+    \begin{itemize}
+        \item \href{https://youtu.be/h7nJ6ZL4Lf0}{Extimate Stability using Eigenpairs}. Looking on eigenvalues we can predict stability of our linear system;
+        \item \href{https://youtu.be/x_ZkKPtgTeA}{Coupled Oscillators}. Example of Eigenvalues and Eigenvectors in the context of coupled oscillators (masses connected by springs)
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[t]{Task 6}
