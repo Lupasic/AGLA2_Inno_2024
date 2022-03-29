@@ -1,3 +1,4 @@
+% \documentclass[aspectratio=169,notes]{beamer}
 \documentclass[aspectratio=169]{beamer}
 \usetheme[faculty=phil]{fibeamer}
 \usepackage{polyglossia}
@@ -11,7 +12,7 @@
 %%
 %% These macros specify information about the presentation
 \title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 9} %% that will be typeset on the
-\subtitle{Eigenvalues and Eigenvectors \\ Diagonalization of a Matrix \\ \ 
+\subtitle{Eigenvalues and Eigenvectors \\ Diagonalization of a Matrix \\ Fast A$^N$ calculation
          } %% title page.
 \author{Oleg Bulichev}
 %% These additional packages are used within the document:
@@ -126,6 +127,10 @@ $A$ -- \textit{square} matrix. \\
 For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
 \end{frame}
 
+\note{
+    Рассказать про историю появления айгенов. Как думать об их появлении.
+}
+
 \begin{frame}[t]{EigenValues concept}
     \framesubtitle{Video}
     \vspace{-0.6cm}
@@ -138,7 +143,7 @@ For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
 \end{frame}
 
 \begin{frame}[t]{Calculation (1)}
-    \framesubtitle{Classical approach (max 3x3)}
+    \framesubtitle{Classical approach (max 4x4)}
     \vspace{-0.8cm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.48\textwidth}
@@ -186,6 +191,8 @@ For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
     \end{columns}
 \end{frame}
 
+\note{Спросить почему 4 на 4 максимум (ответ -- Абель в 1826 доказал, что невозможно в общем случае найти корни выше)}
+
 \begin{frame}[t]{Task 1}
     \framesubtitle{}
     \vspace{-0.3cm}
@@ -215,11 +222,11 @@ For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
                     0.5
                     \end{bmatrix}$
             \item $\lambda_1 = 3+ 1i,\ \lambda_2 = 3 - 1i$ \\ $x_{\lambda=3+ 1i} = \begin{bmatrix}
-                3+ 1i\\
-                0
+                i\\
+                1
                 \end{bmatrix}$, $x_{\lambda=3 - 1i} = \begin{bmatrix}
-                    0\\
-                    3 - 1i
+                    -i\\
+                    1
                     \end{bmatrix}$
         \end{enumerate}
     }
@@ -266,6 +273,8 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
     \end{itemize}
 \end{frame}
 
+\note{Рассказать с помощью 1ого задания и матрицы поворота на 90 градусов про значение i (он показывает поворот)}
+
 \begin{frame}[t]{Diagonalization}
 \framesubtitle{}
     \begin{figure}[H]
@@ -274,6 +283,8 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
         \label{fig:Diag.png}
     \end{figure}
 \end{frame}
+
+\note{Показать вывод ($\lambda x = x\lambda$) и отсюда уже фигачим}
 
 \begin{frame}[t]{Diagonalization properties}
 \framesubtitle{}
@@ -293,6 +304,7 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
     \end{bmatrix}$
 
     \begin{itemize}
+        \Large
         \item Find eigenpairs;
         \item Write down $A$ in diagonal from;
         \item Draw several vectors: one, which are parallel to an eigenvector, other -- not.
@@ -327,6 +339,8 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
     }
 \end{frame}
 
+\note{ выводятся ответы из формулы диагонализации}
+
 \begin{frame}[t]{Task 4}
     \framesubtitle{}
     \vspace{-0.5cm}
@@ -354,6 +368,8 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
     \end{figure}
 \end{frame}
 
+\note{ Вопрос и ответ выводятся ответы из формулы диагонализации}
+
 \begin{frame}[t]{Applications (1)}
     \framesubtitle{Fast Calculations}
             \begin{columns}[T,onlytextwidth]
@@ -371,6 +387,8 @@ Nowadays, it can be found easily by iteration method, which implemented in most 
                 \end{column}
             \end{columns}
 \end{frame}
+
+\note{Упор на клевое представление формулы в виде матрицы}
 
 \begin{frame}[t]{Task 5}
     \framesubtitle{}
