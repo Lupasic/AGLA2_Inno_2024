@@ -12,7 +12,7 @@
 %%
 %% These macros specify information about the presentation
 \title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 10} %% that will be typeset on the
-\subtitle{Circulant Matrix \\ Systems of linear differential equations \\ \ 
+\subtitle{Circulant Matrix \\ System of linear differential equations \\ \ 
          } %% title page.
 \author{Oleg Bulichev}
 %% These additional packages are used within the document:
@@ -92,7 +92,7 @@
     \begin{figure}[H]
         \begin{subfigure}{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mushoku_tensei.jpg}
-            \caption*{\Large Watched both seasons in 1 day (24 series) of "Mushoku Tensei"}
+            \caption*{\Large Watched both seasons in 1 day \\ (24 series) of "Mushoku Tensei"}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.49\textwidth}
@@ -162,19 +162,16 @@ It has \textbf{\textit{eigenvectors}} in the Fourier Matrix columns $F_4 = \begi
     }
 \end{frame}
 
-\begin{frame}[t]{Systems of linear differential equations}
-\framesubtitle{1st order}
-\vspace{-0.5cm}
-    \begin{figure}[H]       
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{diff_zoom.png}
-        % \caption{caption_name}      
-        \label{fig:diff_zoom.png}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[t]{Systems of linear differential equations}
-\framesubtitle{Example}
-    
+\begin{frame}[t]{1st order system of linear differential equations}
+\framesubtitle{Algorithm}
+\Large
+\begin{enumerate}
+    \item Write equation in $u' = Au$ form;
+    \item Find eigenpairs of $A$
+    \item Subtract $\lambda$ and $x_{\lambda_i}$ to $u(t)=c_1e^{\lambda_1 t}x_1 + ... + c_ne^{\lambda_n t}x_n$
+    \item Find $c_i$ using $u(0)$ -- which is vector. $u(0) = \underbrace{u(t=0)}_{\text{from above}}$. Solve it.
+    \item Put $c_i$ to $u(t)$.  
+\end{enumerate}
 \end{frame}
 
 \usebackgroundtemplate{}
@@ -220,9 +217,21 @@ It has \textbf{\textit{eigenvectors}} in the Fourier Matrix columns $F_4 = \begi
     }
 \end{frame}
 
-\begin{frame}[t]{Higher order}
-\framesubtitle{}
-    
+\begin{frame}[t]{Higher order differential equation}
+\framesubtitle{Idea}
+\Large
+$$ u'' + Bu' + Cu = 0 \text{ is equivalent to } \begin{bmatrix}
+u\\
+u'
+\end{bmatrix}' = \begin{bmatrix}
+0 & 1\\ 
+-C & -B 
+\end{bmatrix} \begin{bmatrix}
+u\\
+u'
+\end{bmatrix}$$
+\\
+Everything else is the same as in first order system.
 \end{frame}
 
 \usebackgroundtemplate{}
@@ -234,14 +243,14 @@ It has \textbf{\textit{eigenvectors}} in the Fourier Matrix columns $F_4 = \begi
     \framesubtitle{}
     \vspace{-0.5cm}
     \begin{figure}[H]
-        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4.png}
+        \centering\includegraphics[height=1cm,width=1\textwidth,keepaspectratio]{4.png}
         % \caption{caption_name}
         \label{fig:4.png}
     \end{figure}
     \uncover<2->{
-        \vspace{-1cm}
-        \alert{\Large Answer}
         \vspace{-0.5cm}
+        \alert{\Large Answer}
+        \vspace{-0.4cm}
         \begin{figure}[H]
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{4ans.png}
             % \caption{caption_name}
@@ -255,7 +264,7 @@ It has \textbf{\textit{eigenvectors}} in the Fourier Matrix columns $F_4 = \begi
     \Large
     \begin{itemize}
         \item \href{https://youtu.be/1pFv7e9xtHo}{Eigenvectors of Circulant Matrices: Fourier Matrix} \label{itm:circulant}
-        \item \href{https://www.youtube.com/watch?v=lXNXrLcoerU&list=PL49CF3715CB9EF31D&index=23}{Lecture 23, Differential Equations and exp(At)}
+        \item \href{https://www.youtube.com/watch?v=IZqwi0wJovM&list=PL49CF3715CB9EF31D&index=23}{Lecture 23, Differential Equations and exp(At)}
         \item \textit{"Linear Algebra and Applications", pdf pages 435--436 }\\ Circulant Matrix 8.3
         \item \textit{"Linear Algebra and Applications", pdf pages 330--348 }\\ Systems of Differential Equations 6.3
     \end{itemize}
