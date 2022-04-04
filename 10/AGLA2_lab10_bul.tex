@@ -12,7 +12,7 @@
 %%
 %% These macros specify information about the presentation
 \title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 10} %% that will be typeset on the
-\subtitle{Systems of linear differential equations \\ \  \\ \ 
+\subtitle{Circulant Matrix \\ Systems of linear differential equations \\ \ 
          } %% title page.
 \author{Oleg Bulichev}
 %% These additional packages are used within the document:
@@ -89,28 +89,90 @@
 
 \begin{frame}[c]{How I spent last weekend}
     \framesubtitle{}
-    % \begin{figure}[H]
-    %     \begin{subfigure}{0.49\textwidth}
-    %         \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{flex_1.JPG}
-    %     \end{subfigure}
-    %     \hfill
-    %     \begin{subfigure}{0.49\textwidth}
-    %         \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{flex_2.JPG}
-    %     \end{subfigure}
-    %     \caption*{\Large RAGE and VEGs clubs collaboration event}
-    % \end{figure}
+    \begin{figure}[H]
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mushoku_tensei.jpg}
+            \caption*{\Large Watched both seasons in 1 day (24 series) of "Mushoku Tensei"}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{rage_vegs.jpg}
+            \caption*{\Large RAGE and VEGs clubs cooking collaboration event}
+        \end{subfigure}
+        
+    \end{figure}
 \end{frame}
+
+\begin{frame}[t]{Circulant Matrix}
+\framesubtitle{}
+\textit{Watch [\ref{itm:circulant}] video, if you want to get how to derive this property and the necessity of it. }
+
+\textbf{Circulant matrix ($N=4$) is:}
+\begin{equation*}
+    C_4 = c_0I+ c_1P + c_2P^2 + C_3P^3 = \begin{bmatrix}
+    c_0 & c_1 & c_2 & c_3\\
+    c_3 & c_0 & c_1 & c_2 \\ 
+    c_2 & c_3  & c_0 & c_1 \\
+    c_1 & c_2  & c_3 & c_0 
+    \end{bmatrix}, \text{ where } P = \begin{bmatrix}
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0 \\ 
+    0 & 0  & 0 & 1 \\
+    1 & 0  & 0 & 0 
+    \end{bmatrix}
+\end{equation*}
+\textbf{Properties:} \\ 
+It has \textbf{\textit{eigenvectors}} in the Fourier Matrix columns $F_4 = \begin{bmatrix}
+1 & 1 & 1 & 1\\
+1 & i & -1 & -i \\ 
+1 & i^2  & 1 & (-i)^2 \\
+1 & i^3  & -1 & (-i)^3 
+\end{bmatrix}$ \\
+
+\textit{\textbf{Eigenvalues}} of C can be found by the Fourier transform $F_4\bar{c} = \bar{\lambda}$
+\end{frame}
+
+\begin{frame}[t]{Circulant Matrix}
+\framesubtitle{Example}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{circ_22.png}
+        % \caption{caption_name}
+        \label{fig:circ_22.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Task 1}
+    \framesubtitle{}
+    \vspace{-0.3cm}
+    \only<1>{
+    \begin{figure}[H]
+        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{1.png}
+        % \caption{caption_name}
+        \label{fig:1.png}
+    \end{figure}
+    }
+    \only<2>{
+        \alert{\Large Answer}
+        \vspace{-1cm}
+        \begin{figure}[H]
+            \centering\includegraphics[height=7cm,width=1\textwidth,keepaspectratio]{1ans.png}
+            % \caption{caption_name}
+            \label{fig:1ans.png}
+        \end{figure}
+    }
+\end{frame}
+
+
 
 
 \begin{frame}[t]{Reference material}
     \framesubtitle{}
     \Large
     \begin{itemize}
-        \item \href{https://www.youtube.com/watch?v=lXNXrLcoerU&list=PL49CF3715CB9EF31D&index=21}{Lecture 21, Eigenvalues and Eigenvectors}
-        \item \href{https://www.youtube.com/watch?v=13r9QY6cmjc&list=PL49CF3715CB9EF31D&index=22}{Lecture 22, Diagonalization and Powers of A}
-        \item \textit{"Linear Algebra and Applications", pdf pages 270--306 }\\ Eigenvalues and Eigenvectors 5.1--5.3
-        \item \textit{"Introduction to Linear Algebra", pdf pages 299--329 }\\ Eigenvalues and Eigenvectors 6.1--6.2
-        \item  \href{https://www.youtube.com/watch?v=29keVZGvqME&list=PLkZjai-2Jcxlg-Z1roB0pUwFU-P58tvOx&index=34}{The eigenvalue problem | Lectures 32 -- 38}\\ Video from Matrix Algebra for Engineers course
+        \item \href{https://youtu.be/1pFv7e9xtHo}{Eigenvectors of Circulant Matrices: Fourier Matrix} \label{itm:circulant}
+        \item \href{https://www.youtube.com/watch?v=lXNXrLcoerU&list=PL49CF3715CB9EF31D&index=23}{Lecture 23, Differential Equations and exp(At)}
+        \item \textit{"Linear Algebra and Applications", pdf pages 435--436 }\\ Circulant Matrix 8.3
+        \item \textit{"Linear Algebra and Applications", pdf pages 330--348 }\\ Systems of Differential Equations 6.3
     \end{itemize}
 \end{frame}
 
