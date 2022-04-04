@@ -259,6 +259,42 @@ Everything else is the same as in first order system.
     }
 \end{frame}
 
+\begin{frame}[t]{Task 5}
+    \framesubtitle{}
+    \vspace{-0.3cm}
+    \large
+    \only<1>{
+    Find solution in general form ($c_1e^{\lambda_1 t}x_1 + ... + c_ne^{\lambda_n t}x_n$):}
+    \only<2>{\vspace{-0.8cm}}
+    $$ u''' + 2u'' - u' - 2u = 0,\ u(0) = \begin{bmatrix}
+    3\\
+    2\\ 
+    6
+    \end{bmatrix}$$
+    \only<2->{
+        \alert{\Large Answer}
+        \vspace{-0.5cm}
+        \begin{enumerate}
+            \item Equation: $\begin{bmatrix}
+            y\\
+            y'\\ 
+            y''
+            \end{bmatrix}' = \begin{bmatrix}
+            0 & 1 & 0 \\
+            0 & 0 & 1 \\ 
+            2 & 1  & -2 
+            \end{bmatrix}\begin{bmatrix}
+                y\\
+                y'\\ 
+                y''
+                \end{bmatrix}$;
+            \item \vspace{-0.5cm} Eigenpairs: $\lambda_1 =-2,\ \lambda_2 =-1,\ \lambda_3 =1$; $x_1 = \begin{bmatrix} 1\\ -2\\ 4\end{bmatrix},\ x_2 = \begin{bmatrix} 1\\ -1\\ 1\end{bmatrix},\ x_3 = \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}$;
+            \item \vspace{-0.5cm} $c_1 = 1,\ c_2 = -1,\ c_3= 3$;
+            \item General form: $u(t) = 1e^{-2 t}\begin{bmatrix} 1\\ -2\\ 4\end{bmatrix} + (-1)e^{-1 t}\begin{bmatrix} 1\\ -1\\ 1\end{bmatrix} + 3e^{1 t}\begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}$.
+        \end{enumerate}
+    }
+\end{frame}
+
 \begin{frame}[t]{Reference material}
     \framesubtitle{}
     \Large
