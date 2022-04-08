@@ -89,6 +89,7 @@
 
 \begin{frame}[c]{How I spent last weekend}
     \framesubtitle{}
+    \vspace{-0.3cm}
     \begin{figure}[H]
         \begin{subfigure}{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mushoku_tensei.jpg}
@@ -141,6 +142,16 @@ It has \textbf{\textit{eigenvectors}} in the Fourier Matrix columns $F_4 = \begi
     \end{figure}
 \end{frame}
 
+\note{Эта тема на тестах у них была все время. Поэтому она тут.
+
+Сделать упор, на то, что если они хотят понять смысл -- посмотреть видео Стренга.
+
+Я на доске расписывал прям что на доске написано. Объяснял как записывать матрицу самому (каждая новая строка имеет последний элемент предыдущей и потом остальные в том же порядке что и наверху.)
+
+Потом решали руками 2 на 2 и проверяли через классику(решение через собственные числа, а потом что получится при применении свойства.)
+
+Разбирали, что если не понял тему фурье, то надо в читшит записать себе $F_{1-4}$, так как выше не будет 90 процентов}
+
 \begin{frame}[t]{Task 1}
     \framesubtitle{}
     \vspace{-0.3cm}
@@ -162,17 +173,23 @@ It has \textbf{\textit{eigenvectors}} in the Fourier Matrix columns $F_4 = \begi
     }
 \end{frame}
 
+\note{Задачка простая, по факту делаем теперь 3 на 3. Но написано сложно. Поэтому и была добавлена, чтобы научились читать страшые текста.}
+
 \begin{frame}[t]{1st order system of linear differential equations}
 \framesubtitle{Algorithm}
 \Large
 \begin{enumerate}
     \item Write equation in $u' = Au$ form;
     \item Find eigenpairs of $A$
-    \item Subtract $\lambda$ and $x_{\lambda_i}$ to $u(t)=c_1e^{\lambda_1 t}x_1 + ... + c_ne^{\lambda_n t}x_n$
-    \item Find $c_i$ using $u(0)$ -- which is vector. $u(0) = \underbrace{u(t=0)}_{\text{from above}}$. Solve it.
+    \item Substitute  $\lambda$ and $x_{\lambda_i}$ to $u(t)=c_1e^{\lambda_1 t}x_1 + ... + c_ne^{\lambda_n t}x_n$
+    \item Find all $c_i$ using $u(0)$ -- which is vector. $u(0) = \underbrace{u(t=0)}_{\text{from above}}$. Solve it.
     \item Put $c_i$ to $u(t)$.  
 \end{enumerate}
 \end{frame}
+
+\note{Алгоритм объясняется на примере системы уравнений с лекции Стренга.
+
+Делаю упор, что курс у вас будет потом, но сейчас важно понять только алгоритм. Стренг дал эту тему для того, чтобы вы поняли применение айгенов и все.}
 
 \usebackgroundtemplate{}
 \setbeamercolor{background canvas}{bg=}
@@ -217,6 +234,10 @@ It has \textbf{\textit{eigenvectors}} in the Fourier Matrix columns $F_4 = \begi
     }
 \end{frame}
 
+\note{Хорошая задача, чтобы вспомнить матрицу проекций. А так же расписать вместе с ними на доске, как надо читать задачу (какие таски надо сделать, не потерять минус итп.)
+
+Последнее -- на пределе сделать уточнение.}
+
 \begin{frame}[t]{Higher order differential equation}
 \framesubtitle{Idea}
 \Large
@@ -233,6 +254,8 @@ u'
 \\
 Everything else is the same as in first order system.
 \end{frame}
+
+\note{Сделать упор на создание этой матрицы и про получение тривиального уравнения. Я сделал параллель с прошлой темой и поиском Фиббоначи. Студентам зашло.}
 
 \usebackgroundtemplate{}
 \setbeamercolor{background canvas}{bg=}
@@ -294,6 +317,8 @@ Everything else is the same as in first order system.
         \end{enumerate}
     }
 \end{frame}
+
+\note{Ее стоит порешать или хотя бы составить матрицу, так как не совсем тривиально это работает.}
 
 \begin{frame}[t]{Reference material}
     \framesubtitle{}
