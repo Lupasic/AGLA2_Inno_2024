@@ -92,17 +92,14 @@
     \begin{figure}[H]
         \begin{subfigure}{0.29\textwidth}
             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{death_door.jpg}
-            % \caption*{\Large Watched both seasons in 1 day \\ (24 series) of "Mushoku Tensei"}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.29\textwidth}
             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{yarik.jpg}
-            % \caption*{\Large RAGE and VEGs clubs cooking collaboration event}
         \end{subfigure}        
         \hfill
         \begin{subfigure}{0.29\textwidth}
             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{tunic_game.jpeg}
-            % \caption*{\Large RAGE and VEGs clubs cooking collaboration event}
         \end{subfigure}
     \end{figure}
 \end{frame}
@@ -181,7 +178,10 @@
 
 \begin{frame}[t]{Positive Definite Matrices}
 \framesubtitle{}
-    
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{pos_def_def.png}
+        \label{fig:pos_def_def.png}
+    \end{figure}
 \end{frame}
 
 
@@ -189,7 +189,7 @@
     \framesubtitle{Applications from ML}
     \Large
     \begin{itemize}
-        \item \href{https://en.wikipedia.org/wiki/Cholesky_decomposition}{Cholesky decomposition} -- $A=LL^H$ (A special case of $A=LU$)
+        \item \href{https://en.wikipedia.org/wiki/Cholesky_decomposition}{Cholesky decomposition} -- $A=LDL^H$ (A special case of $A=LU$)
         \item Least squares computation reduction
         \item \href{https://en.wikipedia.org/wiki/Support-vector_machine}{Support Vector Machine (SVM)}, \textit{kernel} -- \href{https://en.wikipedia.org/wiki/Positive-definite_kernel}{Positive-definite kernel}
         \item \href{https://analyticsindiamag.com/what-is-representer-theorem-in-machine-learning/}{Representer Theorem} 
@@ -200,18 +200,106 @@
 \framesubtitle{Five tests}
     \begin{figure}[H]
         \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{positive_definite_tests.png}
-        % \caption{caption_name}
         \label{fig:positive_definite_tests.png}
     \end{figure}
 \end{frame}
 
+\note{Тест 4 может зваться еще методом Сильвестра или похожим на метод окаймляющих миноров. В общем нужно искать детерминант вначале для ранга 1, потом 2 и так пока все не проверил. Но смотрим только верхне-левый}
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-]{03_LagrangianDynamics_1.pdf}
+\fbckg{fibeamer/figs/common.png}
+
 \begin{frame}[t]{Positive Definite Matrices}
-\framesubtitle{Applications from Robotics}
-    \begin{itemize}
-        \item \href{http://www.diag.uniroma1.it/~deluca/rob2_en/03_LagrangianDynamics_1.pdf}{Matrix form of Lagrange}
-    \end{itemize}
+\framesubtitle{Example}
+\begin{figure}[H]
+    \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{pos_def_ex1.png}
+    % \caption{caption_name}
+    \label{fig:pos_def_ex1.png}
+\end{figure}
 \end{frame}
 
+\begin{frame}[t]{Positive Definite Matrices}
+    \framesubtitle{Solution: Test 1, 3, 4}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{pos_def_ex1_ans1.png}
+        % \caption{caption_name}
+        \label{fig:pos_def_ex1_ans1.png}
+    \end{figure}
+    \end{frame}
+
+    \begin{frame}[t]{Positive Definite Matrices}
+        \framesubtitle{Solution: Test 5}
+        \begin{figure}[H]
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{pos_def_ex1_ans2.png}
+            % \caption{caption_name}
+            \label{fig:pos_def_ex1_ans2.png}
+        \end{figure}
+        \end{frame}
+
+        \begin{frame}[t]{Positive Definite Matrices}
+            \framesubtitle{Solution: Test 2}
+            \begin{figure}[H]
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{pos_def_ex1_ans3.png}
+                % \caption{caption_name}
+                \label{fig:pos_def_ex1_ans3.png}
+            \end{figure}
+            \end{frame}
+
+\begin{frame}[t]{Task 4}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4.png}
+        % \caption{caption_name}
+        \label{fig:4.png}
+    \end{figure}
+    \uncover<2->{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4ans.png}
+            % \caption{caption_name}
+            \label{fig:4ans.png}
+        \end{figure}
+    }
+\end{frame}
+
+\begin{frame}[t]{Task 5}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{5.png}
+        % \caption{caption_name}
+        \label{fig:5.png}
+    \end{figure}
+    \uncover<2->{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{5ans.png}
+            % \caption{caption_name}
+            \label{fig:5ans.png}
+        \end{figure}
+    }
+\end{frame}
+
+\begin{frame}[t]{Task 6}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{6.png}
+        % \caption{caption_name}
+        \label{fig:6.png}
+    \end{figure}
+    \uncover<2->{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{6ans.png}
+            % \caption{caption_name}
+            \label{fig:6ans.png}
+        \end{figure}
+    }
+\end{frame}
 
 \begin{frame}[t]{Positive Definite Matrices}
     \framesubtitle{Important Application: Test for a Minimum}
@@ -223,11 +311,32 @@
         \end{figure}
     \end{frame}
 
+\begin{frame}[t]{Task 7}
+    \framesubtitle{}
+    % \vspace{-0.5cm}
+    \only<1>{
+    \begin{figure}[H]
+        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{7.png}
+        % \caption{caption_name}
+        \label{fig:7.png}
+    \end{figure}
+    }
+    \only<2->{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{7ans.png}
+            % \caption{caption_name}
+            \label{fig:7ans.png}
+        \end{figure}
+    }
+\end{frame}
+
 \begin{frame}[t]{Reference material}
     \framesubtitle{}
     \Large
     \begin{itemize}
         \item \href{https://www.youtube.com/watch?v=vF7eyJ2g3kU&list=PL49CF3715CB9EF31D&index=28}{Lecture 28, Positive Definite Matrices and Minima}
+        \item \href{https://www.youtube.com/watch?v=xsP-S7yKaRA&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k&index=7}{5. Positive Definite and Semidefinite Matrices}
         \item \textit{"Introduction to Linear Algebra", pdf pages 349--374 }\\  6.4 -- Symmetric, 6.5 -- Positive Definite matrices
         \item \textit{"Linear Algebra and Applications", pdf pages 355--376 }\\ Positive Definite Matrices 6.1, 6.2
     \end{itemize}
