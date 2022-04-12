@@ -11,7 +11,7 @@
 %%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
 %%
 %% These macros specify information about the presentation
-\title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 10} %% that will be typeset on the
+\title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 11} %% that will be typeset on the
 \subtitle{Symmetric matrices \\ Positive definite matrices and minima \\ \ 
          } %% title page.
 \author{Oleg Bulichev}
@@ -122,6 +122,10 @@
         \end{figure}
     \end{frame}
 
+    \note{Делаем упор на поворот и стретч. Откуда они появились (смотрим на ротейшн матрицу). Она тоже ортонормальная, если что.
+    
+    Так же смотрим, что поворот не всегда содержит i (матрица на 180 градусов поворот).}
+
 \begin{frame}[t]{Task 1}
     \framesubtitle{}
     \vspace{-0.5cm}
@@ -140,6 +144,8 @@
     }
 \end{frame}
 
+\note{Задачка по приколу. Интересное свойство получается. Об этом сказать}
+
 \begin{frame}[t]{Task 2}
     \framesubtitle{}
     \vspace{-0.5cm}
@@ -157,6 +163,8 @@
         \end{figure}
     }
 \end{frame}
+
+\note{Тут в ответе матрица симметрична. Но показать, что если айгенвектор сделать на -1, то может получиться и антисимметричная матрица. На этом сделать акцент. Поможет при объяснении следующей задачи.}
 
 \begin{frame}[t]{Task 3}
     \framesubtitle{}
@@ -196,6 +204,10 @@
     \end{itemize}
 \end{frame}
 
+\note{Холесский и Лист скварез узнал от парня из ШАДа. На собесе тема с позитив дефинит досталась при поступлении в яндекс (Макс Коломиец.).
+
+Остальные две штуки дал парень из RnD Nvidia (Саня Лаптев). Показать немного SVM, но не тратить время сильно.}
+
 \begin{frame}[t]{Positive Definite Matrices}
 \framesubtitle{Five tests}
     \begin{figure}[H]
@@ -204,7 +216,11 @@
     \end{figure}
 \end{frame}
 
-\note{Тест 4 может зваться еще методом Сильвестра или похожим на метод окаймляющих миноров. В общем нужно искать детерминант вначале для ранга 1, потом 2 и так пока все не проверил. Но смотрим только верхне-левый}
+\note{Тест 4 может зваться еще методом Сильвестра или похожим на метод окаймляющих миноров. В общем нужно искать детерминант вначале для ранга 1, потом 2 и так пока все не проверил. Но смотрим только верхне-левый.
+
+5ый тест так же странный (больше понятно будет на примере), так как для его типичного решения, требуется решить 3ий или 1ый тест (разложения).
+
+Откуда формула энергии такая взялась объясняется через роботикс ниже.}
 
 \usebackgroundtemplate{}
 \setbeamercolor{background canvas}{bg=}
@@ -301,6 +317,24 @@
     }
 \end{frame}
 
+\begin{frame}[t]{Task 7}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{7.png}
+        % \caption{caption_name}
+        \label{fig:7.png}
+    \end{figure}
+    \uncover<2->{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{7ans.png}
+            % \caption{caption_name}
+            \label{fig:7ans.png}
+        \end{figure}
+    }
+\end{frame}
+
 \begin{frame}[t]{Positive Definite Matrices}
     \framesubtitle{Important Application: Test for a Minimum}
     \vspace{-0.5cm}
@@ -311,22 +345,30 @@
         \end{figure}
     \end{frame}
 
-\begin{frame}[t]{Task 7}
+\begin{frame}[t]{Task 8}
     \framesubtitle{}
     % \vspace{-0.5cm}
     \only<1>{
     \begin{figure}[H]
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{7.png}
+        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{8.png}
         % \caption{caption_name}
-        \label{fig:7.png}
+        \label{fig:8.png}
     \end{figure}
     }
-    \only<2->{
-        \alert{\Large Answer}
+    \only<2>{
+        \alert{\Large Answer: Subtask 1}
         \begin{figure}[H]
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{7ans.png}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{8ans.png}
             % \caption{caption_name}
-            \label{fig:7ans.png}
+            \label{fig:8ans.png}
+        \end{figure}
+    }
+    \only<3>{
+        \alert{\Large Answer: Subtask 2}
+        \begin{figure}[H]
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{8ans1.png}
+            % \caption{caption_name}
+            \label{fig:8ans1.png}
         \end{figure}
     }
 \end{frame}
