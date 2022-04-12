@@ -1,0 +1,275 @@
+% \documentclass[aspectratio=169,notes]{beamer}
+\documentclass[aspectratio=169]{beamer}
+\usetheme[faculty=phil]{fibeamer}
+\usepackage{polyglossia}
+\setmainlanguage{english} %% main locale instead of `english`, you
+%% can typeset the presentation in either Czech or Slovak,
+%% respectively.
+\setotherlanguages{russian} %% The additional keys allow
+%%
+%%   \begin{otherlanguage}{czech}   ... \end{otherlanguage}
+%%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
+%%
+%% These macros specify information about the presentation
+\title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 12} %% that will be typeset on the
+\subtitle{Similar matrices \\ Singular value decomposition - SVD \\ Left and right inverses. Pseudoinverse
+         } %% title page.
+\author{Oleg Bulichev}
+%% These additional packages are used within the document:
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+% \usepackage{subfigure}
+\usepackage{floatrow}
+\usepackage{subcaption}
+\usepackage{mathtools}
+\usepackage{todonotes}
+\usepackage{fontspec}
+\usepackage{multicol}
+\usepackage{pdfpages}
+\usepackage{wrapfig}
+\usepackage{animate}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\graphicspath{{resources/}}
+\frenchspacing
+
+\setbeamertemplate{caption}[numbered]
+\usetikzlibrary{graphs}
+
+% \usepackage[backend=biber,style=ieee,autocite=footnote]{biblatex}
+% \addbibresource{biblio.bib}
+% \DefineBibliographyStrings{english}{%
+%   bibliography = {References},}
+
+\newcommand{\oleg}[2][] {\todo[color=red, #1] {OLEG:\\ #2}}
+\newcommand{\fbckg}[1]{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{#1}}}%frame background
+
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\dbox}[1]{
+\begin{mdframed}[roundcorner=3pt, backgroundcolor=yellow, linewidth=0]
+\vspace{1mm}
+{#1}
+\vspace{1mm}
+\end{mdframed}
+}
+
+\begin{document}
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
+\fbckg{fibeamer/figs/title_page.png}
+\frame[c]{\setcounter{framenumber}{0}
+    \usebeamerfont{title}%
+    \usebeamercolor[fg]{title}%
+    \begin{minipage}[b][6.5\baselineskip][b]{\textwidth}%
+        \textcolor{black}{\raggedright\inserttitle}
+    \end{minipage}
+    % \vskip-1.5\baselineskip
+
+    \usebeamerfont{subtitle}%
+    \usebeamercolor[fg]{framesubtitle}%
+    \begin{minipage}[b][3\baselineskip][b]{\textwidth}
+        \raggedright%
+        \insertsubtitle%
+    \end{minipage}
+    \vskip.25\baselineskip
+}
+%   \frame[c]{\maketitle}
+
+\fbckg{fibeamer/figs/common.png}
+
+% \begin{frame}[c]{How I spent last weekend}
+%     \framesubtitle{}
+%     \begin{figure}[H]
+%         \begin{subfigure}{0.29\textwidth}
+%             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{death_door.jpg}
+%         \end{subfigure}
+%         \hfill
+%         \begin{subfigure}{0.29\textwidth}
+%             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{yarik.jpg}
+%         \end{subfigure}        
+%         \hfill
+%         \begin{subfigure}{0.29\textwidth}
+%             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{tunic_game.jpeg}
+%         \end{subfigure}
+%     \end{figure}
+% \end{frame}
+
+\begin{frame}[t]{Similar Matrices}
+\framesubtitle{}
+    
+\end{frame}
+
+\begin{frame}[c]{The primary goal of SVD}
+\framesubtitle{}
+\centering\LARGE
+To “X-RAY” matrix
+
+(To understand the structure of matrix)
+\end{frame}
+
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{3 ways of explanation}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.69\textwidth}
+            \begin{enumerate}
+                \item Linear transformation – \href{https://youtu.be/EokL7E6o1AE}{Kutz video}
+                \item Algebraic – \href{https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/lecture-29-singular-value-decomposition/}{MIT video (Strang)}, \href{https://youtu.be/EfZsEFhHcNM}{Aaron Greiner video}
+                \item As a tool for DS  – \href{https://youtu.be/P5mlg91as1c}{Stanford video}, \href{https://youtu.be/yA66KsFqUAE}{Brunton video}
+            \end{enumerate}
+
+            According to Kholodov words, SVD was created for \textit{finding an inverse for any matrices}. It is needed in linear transformation related operations. Other properties were found afterwards. 
+        \end{column}
+        \begin{column}{0.29\textwidth}
+            \vspace{-1cm}
+            \begin{figure}[H]
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{two_buttons.jpg}
+                % \caption{caption_name}
+                \label{fig:two_buttons.jpg}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{How to calculate it (2 possible ways)}
+    \begin{block}{First approach}
+        \begin{enumerate}
+            \item Find eigenpairs for $A^TA$. Result is $\Sigma$ and $V$. ($A^TA=V\Sigma^{2}V^T$)
+            \item Find $U$, using $\Sigma$ and $V$ ($AV\Sigma^+ = U$)
+        \end{enumerate}
+    \end{block}
+    \begin{block}{Second approach}
+        \begin{enumerate}
+            \item Find eigenpairs for $A^TA$ and $AA^T$. ($A^TA=V\Sigma^{2}V^T$) ($AA^T=U\Sigma^{2}U^T$)
+            \item Put signs correctly
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{Obtain SVD for $A= \begin{bmatrix}
+    3 & 2 & 2 \\
+    2 & 3 & -2 
+    \end{bmatrix}$, using second approach (\href{https://jonathan-hui.medium.com/machine-learning-singular-value-decomposition-svd-principal-component-analysis-pca-1d45e885e491}{task was taken})}
+\vspace{-0.8cm}
+    \begin{enumerate}
+        \item Eigenpairs of $AA^T$.
+
+        $AA^T=\begin{bmatrix}
+        17 & 8\\ 
+        8 & 17 
+        \end{bmatrix}$. $\lambda_1 = 25$, $\lambda_2 = 9$. $x_{\lambda_1} = \begin{bmatrix}
+        \frac{1}{\sqrt{2}}\\
+        \frac{1}{\sqrt{2}}
+        \end{bmatrix}$, $x_{\lambda_2} = \begin{bmatrix}
+            \frac{1}{\sqrt{2}}\\
+            -\frac{1}{\sqrt{2}}
+            \end{bmatrix}$. $U = \begin{bmatrix}
+                \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\ 
+                \frac{1}{\sqrt{2}} &  -\frac{1}{\sqrt{2}}
+            \end{bmatrix}$
+        \item Eigenpairs of $A^TA$.
+        
+        $A^TA= \begin{bmatrix}
+        13 & 12 & 2 \\
+        12 & 13 & -2 \\ 
+        2 & -2  & 8 
+        \end{bmatrix}$. $\lambda_1 = 25$, $\lambda_2 = 9$, $\lambda_3 = 0$. $V = \begin{bmatrix}
+            \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{18}} & \frac{2}{3} \\
+            \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{18}} & -\frac{2}{3}\\ 
+            0 & \frac{4}{\sqrt{18}} & -\frac{1}{3}  
+        \end{bmatrix}$
+    \item Result. $A\Sigma V^T=\begin{bmatrix}
+        \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\ 
+        \frac{1}{\sqrt{2}} &  -\frac{1}{\sqrt{2}}
+    \end{bmatrix}\begin{bmatrix}
+    5 & 0 & 0 \\
+    0 & 3 & 2 
+    \end{bmatrix}\begin{bmatrix}
+        \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\
+        \frac{1}{\sqrt{18}} & -\frac{1}{\sqrt{18}} & \frac{4}{\sqrt{18}}\\ 
+        \frac{2}{3} & -\frac{2}{3} & -\frac{1}{3}  
+    \end{bmatrix}$
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{It had to be $U$}  
+    \framesubtitle{Video}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        \href{https://youtu.be/JEYLfIVvR9I}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{svd_song.jpg}}
+        % \caption{Click on a picture for a video}
+        \label{fig:file_name}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{Properties}
+    TODO
+\end{frame}
+
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{Where it can be used}
+\Large
+    \begin{itemize}
+        \item Image compression (slides)
+        \item Pseudo-inverse (slides)
+        \item Dimensionality reduction (\href{https://yadi.sk/i/kYK7E8whUsW1rA}{code + comments in pdf})
+        \item Least square (\href{https://yadi.sk/i/DKxQ2F7AlN0zww}{code + comments in pdf})
+        \item Principal Component Analysis (PCA) (\href{https://youtu.be/a9jdQGybYmE}{video})
+        \item Eigenfaces algorithms (\href{https://youtu.be/_lY74pXWlS8}{video})
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{SVD Applications}
+\framesubtitle{Image compression}
+\begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+        \textit{\underline{Task:}} We want to compress our image for reducing the size.
+
+\textit{\underline{Solution:}} We can represent our picture as a matrix. 
+
+Next step is using SVD for reducing matrix rank. 
+
+    \end{column}
+    \begin{column}{0.59\textwidth}
+        
+    \end{column}
+\end{columns}
+    
+\end{frame}
+
+\begin{frame}[t]{Pseudo-Inverse}
+\framesubtitle{}
+    
+\end{frame}
+
+\begin{frame}[t]{Reference material}
+    \framesubtitle{}
+    \large
+    \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=TSdXJw83kyA}{Lecture 28: Similar Matrices and Jordan Form.}
+        \item \href{https://www.youtube.com/watch?v=Nx0lRBaXoz4&list=PL49CF3715CB9EF31D&index=30}{Lecture 29: Singular Value Decomposition}
+        \item \href{https://www.youtube.com/watch?v=Go2aLo7ZOlU&list=PL49CF3715CB9EF31D&index=34}{Lecture 33: Left and Right Inverses; Pseudoinverse}
+        \item \href{https://www.youtube.com/watch?v=rYz83XPxiZo&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k&index=8}{6. Singular Value Decomposition (SVD)}
+        \item \textit{"Introduction to Linear Algebra", pdf pages 375--411 }\\  7 Singular Value Decomposition (SVD)
+        \item \textit{"Linear Algebra and Applications", pdf pages 335--345 }\\ 5.6 Similarity Transformations
+        \item \textit{"Linear Algebra and Applications", pdf pages 377--386 }\\ 6.3 Singular Value Decomposition
+    \end{itemize}
+\end{frame}
+
+\fbckg{fibeamer/figs/last_page.png}
+\frame[plain]{}
+
+\end{document}
