@@ -295,6 +295,47 @@
 		],
 		"description": "Task frame"
 	  },
+	  "Task only frame": {
+		"scope": "latex",
+		"prefix": "\\ntaskonlyframe",
+		"body": [
+		  "\\begin{frame}[t]{Task ${1:1}}",
+		  "    \\framesubtitle{}",
+		  "    \\only<1>{",
+		  "    \\vspace{-0.5cm}",
+		  "    \\begin{figure}[H]",
+		  "        \\centering\\includegraphics[height=3cm,width=1\\textwidth,keepaspectratio]{${1:1}.png}",
+		  "        % \\caption{caption_name}",
+		  "        \\label{fig:${1:1}.png}",
+		  "    \\end{figure} }",
+		  "    \\only<2>{",
+		  "        \\alert{\\Large Answer}",
+		  "        \\begin{figure}[H]",
+		  "            \\centering\\includegraphics[height=5.5cm,width=1\\textwidth,keepaspectratio]{${1:1}ans.png}",
+		  "            % \\caption{caption_name}",
+		  "            \\label{fig:${1:1}ans.png}",
+		  "        \\end{figure}",
+		  "    }",
+		  "\\end{frame}"
+		],
+		"description": "Task frame"
+	  },
+	  "Handwriting frame": {
+		"scope": "latex",
+		"prefix": "\\nhandwritingframe",
+		"body": [
+		  "\\begin{frame}[t]{$1}",
+		  "% \\framesubtitle{}",
+		  "    \\vspace{-0.5cm}",
+		  "    \\begin{figure}[H]",
+		  "        \\centering\\includegraphics[height=6.5cm,width=1\\textwidth,keepaspectratio]{${2:file_name}}",
+		  "        \\label{fig:${2:file_name}}",
+		  "    \\end{figure}",
+		  "\\end{frame}"
+		],
+		"description": "Handwriting frame"
+	  },
+
 	  "Video frame": {
 		"scope": "latex",
 		"prefix": "\\nvideoframe",

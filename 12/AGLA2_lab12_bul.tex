@@ -106,7 +106,45 @@
 
 \begin{frame}[t]{Similar Matrices}
 \framesubtitle{}
-    
+    \LARGE
+    \centering
+    All the matrices $A=BCB^{-1}$ are "similar". They all share the eigenvalues of $C$. \\
+    \begin{example}
+        \Large
+        $A = \begin{bmatrix}
+        2 & 1\\ 
+        1 & 2 
+        \end{bmatrix} \rightarrow \lambda =3,\ 1;$  $S^{-1}AS=\Lambda_{A} = \begin{bmatrix}
+        3 & 0\\ 
+        0 & 1 
+        \end{bmatrix}$, $S$ -- eigenvectors \\ 
+        \vspace{-0.4cm}
+        Let's find other similar matrix: $M^{-1}AM=T$, $M=\begin{bmatrix}
+        1 & 4\\ 
+        0 & 1 
+        \end{bmatrix}$, $M$ is \\ 
+        \vspace{-0.4cm}
+        random matrix. $T = \begin{bmatrix}
+        -2 & -15\\ 
+        1 & 6 
+        \end{bmatrix}$, which $\lambda$ are also $3,\ 1$.
+    \end{example}
+\end{frame}
+
+\begin{frame}[t]{Similar Matrices}
+\framesubtitle{Properties}
+Because matrices are similar if and only if they represent the \textit{same linear operator with respect to (possibly) different bases}, similar matrices share all properties of their shared underlying operator:
+\begin{itemize}
+    \item Rank
+    \item Characteristic polynomial, and attributes that can be derived from it: \begin{itemize}
+        \item Eigenvalues
+        \item Determinant
+        \item Trace
+    \end{itemize}
+\end{itemize}
+
+\href{https://en.wikipedia.org/wiki/Matrix_similarity}{More info} can be found here. This topic was used for checking understanding LA by the students (\href{https://www.tandfonline.com/doi/full/10.1080/07380569.2018.1491774}{paper}).
+
 \end{frame}
 
 \begin{frame}[c]{The primary goal of SVD}
@@ -123,7 +161,7 @@ To “X-RAY” matrix
         \begin{column}{0.69\textwidth}
             \begin{enumerate}
                 \item Linear transformation – \href{https://youtu.be/EokL7E6o1AE}{Kutz video}
-                \item Algebraic – \href{https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/lecture-29-singular-value-decomposition/}{MIT video (Strang)}, \href{https://youtu.be/EfZsEFhHcNM}{Aaron Greiner video}
+                \item Algebraic – \href{https://www.youtube.com/watch?v=rYz83XPxiZo&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k&index=8}{MIT video (Strang)}, \href{https://youtu.be/EfZsEFhHcNM}{Aaron Greiner video}
                 \item As a tool for DS  – \href{https://youtu.be/P5mlg91as1c}{Stanford video}, \href{https://youtu.be/yA66KsFqUAE}{Brunton video}
             \end{enumerate}
 
@@ -140,18 +178,56 @@ To “X-RAY” matrix
     \end{columns}
 \end{frame}
 
+\note{
+    В чем крутость СВД:
+    \begin{itemize}
+        \item Он создан для работы с большими данными
+        \item Революция. По мнению Брунтона, это второе по крутости изобретения после FFT
+        \item Применяется в DS , к примеру в вытаскивании фич, whuch pages direct First
+        \item approximation measurements
+    \end{itemize}
+
+    U -- corelation among columns of X.
+
+    Из Стренга я понял, вывод. Он основан на similar matrix и свойстве positive definite $XX^T$.
+
+    Псевдоинверсия интересна тем, как там происходит исправление центрального компонента. Это неплохо объясненно у де луки.
+
+    Про доминантность надо сделать упор. Что там сортировка идет по крутости компонента. И первая колонка самая важная. Можно показать на Городецком.
+
+    Про PCA рассказать. Что это U -- meauserments in rows. и наши данные надо предварительно обработать $[X] - mean(X)/variance(X)$
+}
+
+\begin{frame}[t]{Singular Value Decomposition}
+% \framesubtitle{Ho}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6.5cm,width=1\textwidth,keepaspectratio]{svd_derive.png}
+        % \caption{caption_name}
+        \label{fig:svd_derive.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Singular Value Decomposition}
+\framesubtitle{Geometrical explanation}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{svd_geometry.png}
+        \label{fig:svd_geometry.png}
+    \end{figure}
+\end{frame}
+
 \begin{frame}[t]{Singular Value Decomposition (SVD)}
-\framesubtitle{How to calculate it (2 possible ways)}
+\framesubtitle{How to calculate it (2 common ways)}
     \begin{block}{First approach}
         \begin{enumerate}
-            \item Find eigenpairs for $A^TA$. Result is $\Sigma$ and $V$. ($A^TA=V\Sigma^{2}V^T$)
-            \item Find $U$, using $\Sigma$ and $V$ ($AV\Sigma^+ = U$)
+            \item Find eigenpairs for $A^TA$. Result is $\Sigma$ and $V$. ($A^TA=V\Sigma^{2}V^H$)
+            \item Find $U$, using $\Sigma$ and $V$ ($AV\Sigma^{-1} = U$)
         \end{enumerate}
     \end{block}
     \begin{block}{Second approach}
         \begin{enumerate}
-            \item Find eigenpairs for $A^TA$ and $AA^T$. ($A^TA=V\Sigma^{2}V^T$) ($AA^T=U\Sigma^{2}U^T$)
-            \item Put signs correctly
+            \item Find eigenpairs for $A^TA$ and $AA^T$. ($A^TA=V\Sigma^{2}V^H$) ($AA^T=U\Sigma^{2}U^H$)
         \end{enumerate}
     \end{block}
 \end{frame}
@@ -189,7 +265,7 @@ To “X-RAY” matrix
             \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{18}} & -\frac{2}{3}\\ 
             0 & \frac{4}{\sqrt{18}} & -\frac{1}{3}  
         \end{bmatrix}$
-    \item Result. $A\Sigma V^T=\begin{bmatrix}
+    \item Result. $A=U\Sigma V^T=\begin{bmatrix}
         \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\ 
         \frac{1}{\sqrt{2}} &  -\frac{1}{\sqrt{2}}
     \end{bmatrix}\begin{bmatrix}
@@ -201,6 +277,24 @@ To “X-RAY” matrix
         \frac{2}{3} & -\frac{2}{3} & -\frac{1}{3}  
     \end{bmatrix}$
     \end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{Task 1}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{1.png}
+        % \caption{caption_name}
+        \label{fig:1.png}
+    \end{figure}
+    \uncover<2->{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{1ans.png}
+            % \caption{caption_name}
+            \label{fig:1ans.png}
+        \end{figure}
+    }
 \end{frame}
 
 \begin{frame}[t]{It had to be $U$}  
@@ -216,23 +310,128 @@ To “X-RAY” matrix
 
 \begin{frame}[t]{Singular Value Decomposition (SVD)}
 \framesubtitle{Properties}
-    TODO
+    \LARGE 
+    \begin{itemize}
+        \item It is always possible to decompose a real matrix $A$ into SVD
+        \item $U,\ \Sigma,\ V$ are unique
+        \item $U,\ V$ -- column orthonormal
+        \item By convention $\Sigma$ contains singular values in sorted order $\sigma_1 \geq \sigma_2 ...$ 
+    \end{itemize}
 \end{frame}
+
+\begin{frame}[t]{Task 2}
+    \framesubtitle{}    
+    \only<1>{
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{2.png}
+        % \caption{caption_name}
+        \label{fig:2.png}
+    \end{figure}
+    }
+    \only<2>{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{2ans.png}
+            % \caption{caption_name}
+            \label{fig:2ans.png}
+        \end{figure}
+    }
+\end{frame}
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-,fitpaper]{lab12_dimension_reduction.pdf}
+\fbckg{fibeamer/figs/common.png}
+
+\begin{frame}[t]{Task 3}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{3.png}
+        % \caption{caption_name}
+        \label{fig:3.png}
+    \end{figure}
+    \uncover<2->{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{3ans.png}
+            % \caption{caption_name}
+            \label{fig:3ans.png}
+        \end{figure}
+    }
+\end{frame}
+
 
 \begin{frame}[t]{Singular Value Decomposition (SVD)}
 \framesubtitle{Where it can be used}
 \Large
     \begin{itemize}
-        \item Image compression (slides)
-        \item Pseudo-inverse (slides)
-        \item Dimensionality reduction (\href{https://yadi.sk/i/kYK7E8whUsW1rA}{code + comments in pdf})
-        \item Least square (\href{https://yadi.sk/i/DKxQ2F7AlN0zww}{code + comments in pdf})
+        \item For working with big datasets
+        \item Image compression (on page \ref{image_compression})
+        \item Pseudo-inverse (next slide)
+        \item Least square (on page \ref{pdf_line_fitting})
         \item Principal Component Analysis (PCA) (\href{https://youtu.be/a9jdQGybYmE}{video})
         \item Eigenfaces algorithms (\href{https://youtu.be/_lY74pXWlS8}{video})
     \end{itemize}
 \end{frame}
 
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-]{pseudoinverse.pdf}
+\fbckg{fibeamer/figs/common.png}
+
+\note{Сказать, что псевдоинверсия может обозначаться как решетка, так и плюсик ($J^+ = J^{\#}=J^{\dagger}$)}
+
+\begin{frame}[t]{Task 4}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4.png}
+        % \caption{caption_name}
+        \label{fig:4.png}
+    \end{figure}
+    \uncover<2->{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4ans.png}
+            % \caption{caption_name}
+            \label{fig:4ans.png}
+        \end{figure}
+    }
+\end{frame}
+
 \begin{frame}[t]{SVD Applications}
+    \framesubtitle{Video: Users-to-Movies}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        \href{https://youtu.be/P5mlg91as1c?t=466}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{svd_example_stanford.jpg}}
+        % \caption{Click on a picture for a video}
+        \label{fig:svd_example_stanford.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Task 5}
+    \framesubtitle{}
+    \only<1>{
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{5.png}
+        % \caption{caption_name}
+        \label{fig:5.png}
+    \end{figure} }
+    \only<2>{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{5ans.png}
+            % \caption{caption_name}
+            \label{fig:5ans.png}
+        \end{figure}
+    }
+\end{frame}
+
+\begin{frame}[t, label=image_compression]{SVD Applications}
 \framesubtitle{Image compression}
 \begin{columns}[T,onlytextwidth]
     \begin{column}{0.39\textwidth}
@@ -240,19 +439,39 @@ To “X-RAY” matrix
 
 \textit{\underline{Solution:}} We can represent our picture as a matrix. 
 
-Next step is using SVD for reducing matrix rank. 
+Next step is using SVD for reducing matrix rank.
+
+Code on page \ref{pdf_image_compressing}
 
     \end{column}
     \begin{column}{0.59\textwidth}
-        
+        \vspace{-1cm}
+        \begin{figure}[H]
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{image_proc.png}
+            \label{fig:image_proc.png}
+        \end{figure}
     \end{column}
 \end{columns}
     
 \end{frame}
 
-\begin{frame}[t]{Pseudo-Inverse}
-\framesubtitle{}
-    
+\begin{frame}[t]{Task 6}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{6.png}
+        % \caption{caption_name}
+        \label{fig:6.png}
+    \end{figure}
+    \uncover<2->{
+        \vspace{-0.5cm}
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{6ans.png}
+            % \caption{caption_name}
+            \label{fig:6ans.png}
+        \end{figure}
+    }
 \end{frame}
 
 \begin{frame}[t]{Reference material}
@@ -271,5 +490,29 @@ Next step is using SVD for reducing matrix rank.
 
 \fbckg{fibeamer/figs/last_page.png}
 \frame[plain]{}
+\fbckg{fibeamer/figs/common.png}
+
+\begin{frame}[label=pdf_line_fitting]{Appendix: Line fitting pdf}
+    \LARGE
+    \centering
+    Next Slide
+\end{frame}
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-,fitpaper]{lab12_fit_line.pdf}
+\fbckg{fibeamer/figs/common.png}
+
+\begin{frame}[label=pdf_image_compressing]{Appendix: Image compressing pdf}
+\framesubtitle{}
+\LARGE
+\centering
+Next Slide
+\end{frame}
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-,fitpaper]{lab12_image_compressing.pdf}
+\fbckg{fibeamer/figs/common.png}
 
 \end{document}
