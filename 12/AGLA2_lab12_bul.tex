@@ -106,7 +106,7 @@
 \framesubtitle{}
     \LARGE
     \centering
-    All the matrices $A=BCB^{-1}$ are "similar". They all share the eigenvalues of $C$. \\
+    All the matrices $A=B^{-1}CB$ are "similar". They all share the eigenvalues of $C$. \\
     \begin{example}
         \Large
         $A = \begin{bmatrix}
@@ -268,7 +268,7 @@ To “X-RAY” matrix
         \frac{1}{\sqrt{2}} &  -\frac{1}{\sqrt{2}}
     \end{bmatrix}\begin{bmatrix}
     5 & 0 & 0 \\
-    0 & 3 & 2 
+    0 & 3 & 0 
     \end{bmatrix}\begin{bmatrix}
         \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\
         \frac{1}{\sqrt{18}} & -\frac{1}{\sqrt{18}} & \frac{4}{\sqrt{18}}\\ 
@@ -391,6 +391,7 @@ To “X-RAY” matrix
     \end{figure}
     \uncover<2->{
         \alert{\Large Answer}
+        \vspace{-1cm}
         \begin{figure}[H]
             \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4ans.png}
             % \caption{caption_name}
