@@ -1,5 +1,5 @@
-\documentclass[aspectratio=169,notes]{beamer}
-% \documentclass[aspectratio=169]{beamer}
+% \documentclass[aspectratio=169,notes]{beamer}
+\documentclass[aspectratio=169]{beamer}
 \usetheme[faculty=phil]{fibeamer}
 \usepackage{polyglossia}
 \setmainlanguage{english} %% main locale instead of `english`, you
@@ -146,6 +146,23 @@
 \end{frame}
 
 \begin{frame}[t]{A=LU factorization}
+\framesubtitle{How to convert LU to LDV}
+    \begin{align*}
+        \text{Split $U$ into } \begin{bmatrix}
+        d_1 &  &  & \\
+         & d_2 &  &  \\ 
+         &   & \ddots  &  \\
+         &   &  & d_n 
+        \end{bmatrix} \begin{bmatrix}
+        1 & u_{12}/d_1 & u_{13}/d_1 & \cdot \\
+         & 1 & u_{23}/d_2 & \cdot \\ 
+         &   & \ddots & \vdots \\  
+         &   &  & 1
+        \end{bmatrix}
+    \end{align*}
+\end{frame}
+
+\begin{frame}[t]{A=LU factorization}
     \framesubtitle{Formal Idea}
     \vspace{-0.5cm}
     \begin{align*}
@@ -268,6 +285,7 @@
     }
 \end{frame}
 
+
 \begin{frame}[t]{Task 3}
     \framesubtitle{}
     \begin{figure}[H]
@@ -291,9 +309,23 @@
     \begin{itemize}
         \item \href{https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/lecture-4-factorization-into-a-lu/}{Lecture 4 MIT course}
         \item \textit{"Linear Algebra and Applications", pdf pages 46--86 }
-        \item \textit{"Introduction to Linear Algebra", pdf pages 349--374 }\\  2.2 -- The Idea of Elimination, 2.6 -- Elimination = Factorization: $A=LU$
+        \item \textit{"Introduction to Linear Algebra", pdf pages 42--134 }\\  2.2 -- The Idea of Elimination, 2.6 -- Elimination = Factorization: $A=LU$
         \item \href{https://youtu.be/OJPX6wINxBU}{This lab video, 2022 year}
     \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Preparation material for the next class}
+\framesubtitle{}
+    \vspace{-0.35cm}
+    \small
+    \begin{enumerate}
+        \item \href{https://youtu.be/8o5Cmfpeo6g}{Lecture 6, Gilbert Strang} \\ \textbf{Goal} is to understand the basics of spaces and how Null Space appeared.
+        \item \href{https://www.youtube.com/watch?v=_uTAdf_AsfQ}{Khan Academy: Null space} \\ It contains a good case study how to calculate Null space.
+        \item \href{https://www.youtube.com/watch?v=C8zOd07U3l8}{Matrix Algebra for Engineers: Null Space} \\ Another nice example how to find $N(A)$.
+        \item \textit{"Linear Algebra and Applications", pdf pages 96--106 } \\ What does partial and full solutions means
+        \item \href{https://www.youtube.com/watch?v=ggWYkes-n6E}{The Big Picture of Linear Algebra} \\ \textit{Extra for now} If you want to get the global view of four subspaces
+        \item Understand the application from next few slides and make HW tasks!
+    \end{enumerate}
 \end{frame}
 
 \fbckg{fibeamer/figs/last_page.png}
