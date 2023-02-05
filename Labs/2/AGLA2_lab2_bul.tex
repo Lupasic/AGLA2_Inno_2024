@@ -80,6 +80,9 @@
 % \section{Introduction}
 % \begin{frame}[t]{\insertsectionhead}
 
+\note{Глянь видео начала \href{https://youtu.be/OJPX6wINxBU}{This lab video, 2022 year} и вспомнишь, как объяснять.
+
+(Если что, при Гауссе, мы записываем все коэффициенты при которых мы получаем ноль под пивотом в другую матрицу и это будет наша L)}
 
 \begin{frame}[t]{Gaussian elimination}
     \framesubtitle{Algorithm}
@@ -95,22 +98,6 @@
                     0 & -8 & -2 \\
                     0 & 0  & 1
                 \end{bmatrix}}}
-    \end{equation*}
-\end{frame}
-
-\begin{frame}[t]{Gaussian elimination}
-    \framesubtitle{Training task}
-    \begin{equation*}
-        \left\{\begin{matrix*}[l]
-            2x_1+3x_2-x_3=9\\
-            x_1-2x_2+x_3=3\\
-            x_1+2x_3=2
-        \end{matrix*}\right.
-        \uncover<2->{\alert{\text{Ans: } \left\{\begin{matrix*}[l]
-                    x_1=4\\
-                    x_2=0\\
-                    x_3=-1
-                \end{matrix*}\right.}}
     \end{equation*}
 \end{frame}
 
@@ -251,7 +238,44 @@
             \end{equation*}}}
 \end{frame}
 
+\begin{frame}[t]{Task 0}
+    % \framesubtitle{Training task}
+    \begin{enumerate}
+        \item Solve the system
+        \item Make $A=LU$ factorization of the matrix
+        \item Solve the system, using $LU$.
+    \end{enumerate}
+    \vspace{-1cm}
 
+    \begin{align*}
+        \left\{\begin{matrix*}[l]
+            2x_1+3x_2-x_3=9\\
+            x_1-2x_2+x_3=3\\
+            x_1+2x_3=2
+        \end{matrix*}\right.
+    \end{align*}
+    \vspace{-0.5cm}
+    \uncover<2->{
+    \begin{align*}
+        \alert{\text{Ans: } A = \begin{bmatrix}
+            2 & 3 & -1 \\
+            1 & -2 & 1 \\ 
+            1 & 0  & 2 
+            \end{bmatrix} = \underbrace{\begin{bmatrix}
+                1 & 0 & 0 \\
+                \frac{1}{2} & 1 & 0 \\ 
+                \frac{1}{2} & \frac{3}{7}  &1  
+                \end{bmatrix}}_{L} \underbrace{\begin{bmatrix}
+                2 & 3 & -1 \\
+                0 & \frac{-7}{2} & \frac{3}{2} \\ 
+                0 & 0  & \frac{13}{7} 
+                \end{bmatrix}}_{U};\ X= \left\{\begin{matrix*}[l]
+                    x_1=4\\
+                    x_2=0\\
+                    x_3=-1
+                \end{matrix*}\right.}
+    \end{align*}}
+\end{frame}
 
 \begin{frame}[t]{Task 1}
     \framesubtitle{}
