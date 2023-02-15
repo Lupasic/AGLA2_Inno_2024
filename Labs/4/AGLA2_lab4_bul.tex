@@ -1,3 +1,4 @@
+% \documentclass[aspectratio=169, notes]{beamer}
 \documentclass[aspectratio=169]{beamer}
 \usetheme[faculty=phil]{fibeamer}
 \usepackage{polyglossia}
@@ -76,25 +77,10 @@
 
 \fbckg{fibeamer/figs/common.png}
 
-% \begin{frame}[t]{I am on Robotics Sirius conference}
-% \framesubtitle{}
-%     \vspace{-0.4cm}
-%     \begin{figure}[H]
-%         \begin{subfigure}{0.59\textwidth}
-%             \centering\includegraphics[height=6cm,width=0.8\textwidth,keepaspectratio]{2022-01-30 21-16-53.JPG}
-%             \caption*{\Large I am calling to Kholodov to make an agreement about A grade for my students}
-%             \label{fig:2022-01-30 21-16-53.JPG}
-%         \end{subfigure}
-%         \begin{subfigure}{0.39\textwidth}
-%             \centering\includegraphics[height=5.7cm,width=1\textwidth,keepaspectratio]{2022-02-08 08-40-37.JPG}
-%             \caption*{\Large Second place}
-%             \label{fig:2022-02-08 08-40-37.JPG}
-%         \end{subfigure}
-    
-%     % \caption{capture_main}
-%     \label{fig:meow}
-%     \end{figure}
-% \end{frame}
+\note{
+Ошибка в 2ой проблеме из вражеской пдф. Там макс независимых 3 вектора
+
+}
 
 \begin{frame}[t]{Quiz}
     \framesubtitle{}
@@ -169,10 +155,10 @@
 \end{equation}
 \begin{equation}
     P=\begin{bmatrix}
-    0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 \\
     0 & 0 & 0 & 1\\ 
     0 & 0  & 1 & 0 \\
-    1 & 0 & 0 & 0 
+    0 & 1 & 0 & 0 
     \end{bmatrix}\ A=\begin{bmatrix}
         1 & 4  & 0 & 0 \\
         3 & 12 & 1 & 5 \\
@@ -181,12 +167,12 @@
     \end{bmatrix}\ L=\begin{bmatrix}
     1 & 0 & 0 & 0 \\
     0 & 1 & 0 & 0\\ 
-    \frac{2}{3} & 0  & 1 & 0 \\ 
-    \frac{1}{3} & 0 & -1 & 1 
+    2 & 0  & 1 & 0 \\ 
+    3 & 0 & 1 & 1 
     \end{bmatrix}\ U=\begin{bmatrix}
-    3 & 12 & 1 & 5\\
+    1 & 4 & 0 & 0\\
     0 & 2 & 2 & 3\\ 
-    0 & 0  & \frac{1}{3} & \frac{5}{3}\\
+    0 & 0 & 1 & 5\\
     0 & 0 & 0 & 0 
     \end{bmatrix}
 \end{equation}
@@ -219,7 +205,16 @@
         \item \href{https://www.youtube.com/watch?v=yjBerM5jWsc&list=PL49CF3715CB9EF31D&index=9}{Lecture 9 and 10}
         \item \textit{"Linear Algebra and Applications", pdf pages 139--149 }\\ The application of four fundamental subspaces in CS
         \item \href{https://youtu.be/yfj8uMwAgrI}{Matrix Transpose and the Four Fundamental Subspaces}\\ Video is about how $A$ transpose appeared
-        \item \href{https://matworld.ru/calculator/matrix-calculator-1.php}{Matrix online calculator}(russian)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Preparation for the next class}
+    \framesubtitle{}
+    \Large
+    \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=Y_Ac6KiQ1t0&list=PL49CF3715CB9EF31D&index=15}{Lecture 15 and 16}
+        \item \textit{"Linear Algebra and Applications", pdf pages 181--204 }\\ Projections onto lines and Least squares
+        \item \href{https://www.coursera.org/lecture/matrix-algebra-engineers/the-least-squares-problem-I56Qy}{The Least-Squares Problem}\\ Video from Matrix Algebra for Engineers course
     \end{itemize}
 \end{frame}
 
