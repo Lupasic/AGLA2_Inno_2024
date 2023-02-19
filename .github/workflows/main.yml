@@ -31,7 +31,7 @@ jobs:
         with:
           root_file: ${{ env.PREFIX}}${{ env.LAB1}}_bul.tex
           latexmk_use_lualatex: true
-          working_directory: labs/${{ env.LAB1}}/
+          working_directory: Labs/${{ env.LAB1}}/
 
       - name: Save ${{ env.PREFIX}}${{ env.LAB1}} artifact
         uses: actions/upload-artifact@v3
@@ -44,7 +44,7 @@ jobs:
         with:
           root_file: ${{ env.PREFIX}}${{ env.LAB2}}_bul.tex
           latexmk_use_lualatex: true
-          working_directory: labs/${{ env.LAB2}}/
+          working_directory: Labs/${{ env.LAB2}}/
 
       - name: Save ${{ env.PREFIX}}${{ env.LAB2}} artifact
         uses: actions/upload-artifact@v3
@@ -57,7 +57,7 @@ jobs:
         with:
           root_file: ${{ env.PREFIX}}${{ env.LAB3}}_bul.tex
           latexmk_use_lualatex: true
-          working_directory: labs/${{ env.LAB3}}/
+          working_directory: Labs/${{ env.LAB3}}/
     
       - name: Save ${{ env.PREFIX}}${{ env.LAB3}} artifact
         uses: actions/upload-artifact@v3
@@ -70,7 +70,7 @@ jobs:
         with:
           root_file: ${{ env.PREFIX}}${{ env.LAB4}}_bul.tex
           latexmk_use_lualatex: true
-          working_directory: labs/${{ env.LAB4}}/
+          working_directory: Labs/${{ env.LAB4}}/
     
       - name: Save ${{ env.PREFIX}}${{ env.LAB4}} artifact
         uses: actions/upload-artifact@v3
