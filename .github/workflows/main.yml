@@ -1,0 +1,91 @@
+name: Build LaTeX document
+
+on: 
+  workflow_dispatch:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    env:
+        PREFIX: 'AGLA2_lab'
+        LAB1: '1'
+        LAB2: '2'
+        LAB3: '3'
+        LAB4: '4'
+        
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+         
+
+# LABs
+      - name: Compile LaTeX document ${{ env.PREFIX}}${{ env.LAB1}}
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: ${{ env.PREFIX}}${{ env.LAB1}}_bul.tex
+          latexmk_use_lualatex: true
+          working_directory: labs/${{ env.LAB1}}/
+
+      - name: Save ${{ env.PREFIX}}${{ env.LAB1}} artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lab_slides
+          path: Labs/${{ env.LAB1}}/${{ env.PREFIX}}${{ env.LAB1}}_bul.pdf
+
+      - name: Compile LaTeX document ${{ env.PREFIX}}${{ env.LAB2}}
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: ${{ env.PREFIX}}${{ env.LAB2}}_bul.tex
+          latexmk_use_lualatex: true
+          working_directory: labs/${{ env.LAB2}}/
+
+      - name: Save ${{ env.PREFIX}}${{ env.LAB2}} artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lab_slides
+          path: Labs/${{ env.LAB2}}/${{ env.PREFIX}}${{ env.LAB2}}_bul.pdf
+    
+      - name: Compile LaTeX document ${{ env.PREFIX}}${{ env.LAB3}}
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: ${{ env.PREFIX}}${{ env.LAB3}}_bul.tex
+          latexmk_use_lualatex: true
+          working_directory: labs/${{ env.LAB3}}/
+    
+      - name: Save ${{ env.PREFIX}}${{ env.LAB3}} artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lab_slides
+          path: Labs/${{ env.LAB3}}/${{ env.PREFIX}}${{ env.LAB3}}_bul.pdf
+
+      - name: Compile LaTeX document ${{ env.PREFIX}}${{ env.LAB4}}
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: ${{ env.PREFIX}}${{ env.LAB4}}_bul.tex
+          latexmk_use_lualatex: true
+          working_directory: labs/${{ env.LAB4}}/
+    
+      - name: Save ${{ env.PREFIX}}${{ env.LAB4}} artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lab_slides
+          path: Labs/${{ env.LAB4}}/${{ env.PREFIX}}${{ env.LAB4}}_bul.pdf
+          
+
+          
+      - name: Update compiled PDFs in git repository
+        if: github.event.pull_request.merged == true || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config --global user.name 'CI PDF compiler'
+          git config --global user.email '<>'
+          git add HWs/*/*.pdf
+
+          git commit -m "Update compiled PDFs"
+          git push
