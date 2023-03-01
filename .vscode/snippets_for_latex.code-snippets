@@ -16,6 +16,25 @@
 	// 	"description": "Log output to console"
 	// }
 
+"Generate CI block for building latex": {
+  "prefix": "CI_gen",
+  "body": [
+    "      - name: Compile LaTeX document \\${{ env.PREFIX}}\\${{ env.LAB$1}}",
+    "        uses: xu-cheng/latex-action@master",
+    "        with:",
+    "          root_file: \\${{ env.PREFIX}}\\${{ env.LAB$1}}_bul.tex",
+    "          latexmk_use_lualatex: true",
+    "          working_directory: Labs/\\${{ env.LAB$1}}/",
+    "",
+    "      - name: Save \\${{ env.PREFIX}}${{ env.LAB$1}} artifact",
+    "        uses: actions/upload-artifact@v3",
+    "        with:",
+    "          name: Lab_slides",
+    "          path: Labs/\\${{ env.LAB$1}}/\\${{ env.PREFIX}}${{ env.LAB$1}}_bul.pdf"
+  ],
+  "description": "Generate CI block for building latex"
+}
+
 	"Make common figure": {
 		"scope": "latex",
 		"prefix": "\\figc",
