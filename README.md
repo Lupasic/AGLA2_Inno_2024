@@ -11,6 +11,7 @@ This repository contains regularly updated course materials. You can use lab sli
 * [Lab 2 (Gaussian elimination recap, A=LU, A=LDV, PA=LU factorization)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/2/AGLA2_lab2_bul.pdf) 
 * [Lab 3 (Null space)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/3/AGLA2_lab3_bul.pdf)
 * [Lab 4 (Quiz, Four Fundamental Subspaces)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/4/AGLA2_lab4_bul.pdf)
+* [Lab 5 (Projection, Application (Least Squares))](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/5/AGLA2_lab5_bul.pdf)
 
 # For contributors
 
