@@ -20,6 +20,7 @@ jobs:
         LAB3: '3'
         LAB4: '4'
         LAB5: '5'
+        LAB5: '6'
         
     steps:
       - name: Set up Git repository
@@ -91,6 +92,19 @@ jobs:
         with:
           name: Lab_slides
           path: Labs/${{ env.LAB5}}/${{ env.PREFIX}}${{ env.LAB5}}_bul.pdf
+
+      - name: Compile LaTeX document ${{ env.PREFIX}}${{ env.LAB6}}
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: ${{ env.PREFIX}}${{ env.LAB6}}_bul.tex
+          latexmk_use_lualatex: true
+          working_directory: Labs/${{ env.LAB6}}/
+    
+      - name: Save ${{ env.PREFIX}}${{ env.LAB6}} artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lab_slides
+          path: Labs/${{ env.LAB6}}/${{ env.PREFIX}}${{ env.LAB6}}_bul.pdf
           
       - name: Update compiled PDFs in git repository
         if: github.event.pull_request.merged == true || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
