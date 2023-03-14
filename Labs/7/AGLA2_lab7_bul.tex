@@ -1,6 +1,9 @@
+% \documentclass[aspectratio=169,notes]{beamer}
 \documentclass[aspectratio=169]{beamer}
 \usetheme[faculty=phil]{fibeamer}
 \usepackage{polyglossia}
+\DeclareRobustCommand\transp{^{\mathrm{T}}}\usepackage{bm}
+
 \setmainlanguage{english} %% main locale instead of `english`, you
 %% can typeset the presentation in either Czech or Slovak,
 %% respectively.
@@ -11,7 +14,7 @@
 %%
 %% These macros specify information about the presentation
 \title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 7} %% that will be typeset on the
-\subtitle{Complex numbers \\ Complex matrices \\ Hermitian and Unitary Matrices 
+\subtitle{Eigenvalues and Eigenvectors \\ Diagonalization of a Matrix (Спектральное разложение) \\ Fast A$^N$ calculation
          } %% title page.
 \author{Oleg Bulichev}
 %% These additional packages are used within the document:
@@ -33,6 +36,8 @@
 \usepackage{pdfpages}
 \usepackage{wrapfig}
 \usepackage{animate}
+\usepackage{booktabs}
+\usepackage{multirow}
 
 \graphicspath{{resources/}}
 \frenchspacing
@@ -84,235 +89,249 @@
 
 \fbckg{fibeamer/figs/common.png}
 
-\begin{frame}[t]{Complex numbers}
+
+\begin{frame}[t]{Where it can be used}
+\framesubtitle{}
+\Large
+    \begin{itemize}
+        \item Machine learning (transform data in more suitable form)
+        \item Make some calculations easier (matrix$^{100}$ – piece of cake)
+        \item Predict the behavior of linear systems (physics, biology, etc)
+        \item Design the controller for a system
+        \item Estimate the complexity of calculations
+        \item ...
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Definition}
+\framesubtitle{}
+\Large 
+In linear algebra, an \textbf{eigenvector or characteristic vector }of a linear transformation is a non-zero \textit{vector that changes by only a scalar factor when that linear transformation is applied to it}. \beamerbutton{\href{https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors}{Wiki}}
+\bigskip
+
+$ A\mathbf{x}=\lambda\mathbf{x}$, where \\ 
+$x$ -- eigenvector (should be non-zero), \\ 
+$\lambda$ -- eigenvalue, \\ 
+$A$ -- \textit{square} matrix. \\ 
+For $n \times n$ matrix -- max amount of $\lambda$ is a number of $n$ .
+\end{frame}
+
+\note{
+    Рассказать про историю появления айгенов. Как думать об их появлении.
+}
+
+\begin{frame}[t]{EigenValues concept}
     \framesubtitle{Video}
     \vspace{-0.6cm}
     \begin{figure}[H]
-        \href{https://youtu.be/T647CGsuOVU}{
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{im_video.jpg}}
+        \href{https://youtu.be/PFDu9oVAE-g}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{eigenvideo_brown.jpg}}
         % \caption{Click on a picture for a video}
-        \label{fig:im_video.jpg}
+        \label{fig:eigenvideo_brown.jpg}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Complex numbers}
-    \framesubtitle{Forms}
-    \vspace{-0.5cm}
+\begin{frame}[t]{Calculation (1)}
+    \framesubtitle{Classical approach (max 4x4)}
+    \vspace{-0.8cm}
     \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.55\textwidth}
-            \textbf{Rectangular form:} $z=x+iy,\ i^2=-1 $\\
-            $Re(z)=x$ -- real part, $Im(z)=y$ -- imaginary part \\
-            \textit{Example:} $z=5 + i6$ \\
-            \textbf{Polar form:} $z=r\ cos(\phi) + i\ r\ sin(\phi) $, where \\
-            $\phi = atan2(Im(z),Re(z))$; \\
-            $r = |z|=\sqrt{x^2+y^2}$ -- magnitude \\
-            \textit{Example:} $z=8\ cos(24)+i\ sin(24))$ \\
-            \textbf{Exponential form:} $z=re^{i \phi}$ \\
-            \textit{Example:} $z=6e^{i 2.5}$ \\
-            \textbf{Euler formula:} \textit{transformation from exp. to polar} \\
-            $e^{i\phi} = cos(\phi) + i\ sin(\phi)$
+        \begin{column}{0.48\textwidth}
+            \begin{block}{Algorithm}
+            There are 2 steps:
+            \begin{enumerate}
+                \item Find $\lambda$ (eigenvalue) --- $det(A-\lambda I)=0$
+                \begin{itemize}
+                    \item $2\times2$ matrix: $det(A-\lambda I) = \lambda^2 - trace(A)\lambda + det(A) = 0$, where $trace(A)$ -- sum of diag values of $A$;
+                    \item $3\times3$ matrix: $det(A-\lambda I) = \lambda^3 - trace(A)\lambda^2 - \frac{1}{2}(trace(A^2)-trace(A)^2)\lambda - det(A) = 0$ 
+                \end{itemize}
+                \item Find $\mathbf{x}$ for each $\lambda$ --- $(A-\lambda_i I)\mathbf{x} = 0 $
+            \end{enumerate}
+        \end{block}
         \end{column}
-        \begin{column}{0.44\textwidth}
-            \vspace{-0.8cm}
-            \begin{minipage}{0.58\textwidth}
-                \centering\includegraphics[width=\textwidth,keepaspectratio]{rectangular_form.png}
-            \end{minipage}\hfill
-            \begin{minipage}{0.40\textwidth}
-                Rectangular form
-                \label{fig:rectangular_form.png}
-            \end{minipage}
-            \vspace{-0.5cm}
-            \begin{minipage}{0.58\textwidth}
-                \centering\includegraphics[height=4cm,width=\textwidth,keepaspectratio]{polar_form.png}
-            \end{minipage}\hfill
-            \begin{minipage}{0.40\textwidth}
-                Polar or \\ Exponential form
-                \label{fig:polar_form.png}
-            \end{minipage}
+        \begin{column}{0.49\textwidth}
+            \begin{example}
+            Case study, $2\times 2$ matrix: $A= \begin{bmatrix}
+            4 & 3\\ 
+            -2 & -3 
+            \end{bmatrix}$
+        \begin{enumerate}
+            \item $trace(A)= 4 + (-3)=1$, $det(A) = 4(-3) - 3(-2)=-6$, hence \\
+            $\lambda^2 - \lambda - 6 = (\lambda-3)(\lambda+2),\ \rightarrow$ \\ $\rightarrow \lambda_1 = 3,\ \lambda_2=-2$
+            \item 
+            \begin{enumerate}
+                \item $A-3I=\begin{bmatrix}
+                1 & 3\\ 
+                -2 & -6 
+                \end{bmatrix};\  x_{\lambda=3} = \begin{bmatrix}
+                3\\
+                -1
+                \end{bmatrix}$
+                \item  $A+2I=\begin{bmatrix}
+                    6 & 3\\ 
+                    -2 & -1 
+                    \end{bmatrix};\  x_{\lambda=2} = \begin{bmatrix}
+                    1\\
+                    -2
+                    \end{bmatrix}$
+            \end{enumerate}
+        \end{enumerate}
+    \end{example}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Complex numbers}
-    \framesubtitle{Operations}
-    \textbf{General Idea}: you should work with $Im$ and $Re$ part separately (you cannot sum or multiply them) \\
-    \begin{itemize}
-        \item \textit{Summarization and Subtraction} -- $(x_1 \pm iy_1) + (x_2 \pm iy_2) = (x_1 \pm x_2) + i(y_1\pm y_2)$
-        \item \textit{Multiplication} -- $(x_1 + iy_1)(x_2 + iy_2) = (x_1x_2 - y_1y_2) + i(x_1y_2 + y_1x_2)$
-        \item \textit{Division} -- $\dfrac{(x_2 + iy_2)}{(x_1 + iy_1)} = \dfrac{(x_1x_2 + y_1y_2)}{x_2^2 + y_2^2} + i\dfrac{(y_1x_2 - x_1y_2)}{x_2^2 + y_2^2} $
-    \end{itemize}
-\end{frame}
+\note{Спросить почему 4 на 4 максимум (ответ -- Абель в 1826 доказал, что невозможно в общем случае найти корни выше)}
 
-\begin{frame}[t]{Complex numbers}
-    \framesubtitle{Complex conjugate}
+\begin{frame}[t]{Task 1}
+    \framesubtitle{}
     \vspace{-0.3cm}
     \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.7\textwidth}
-            \textit{Complex conjugate} of complex number $z = x+ iy$ -- ${\bar  z}=x-iy$. Geometrically it's reflection of z about $Re$ axis.
+        \begin{column}{0.49\textwidth}
+            Find the eigenvalues and eigenvectors:
+    \begin{enumerate}
+        \item $A=\begin{bmatrix}
+        2 & 7\\ 
+        7 & 2 
+        \end{bmatrix}$
+        \item $A = \begin{bmatrix}
+        3 & -1\\ 
+        1 & 3 
+        \end{bmatrix}$
+    \end{enumerate}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \uncover<2->{
+        \alert{\Large Answer}
+        \begin{enumerate}
+            \item $\lambda_1 = -5,\ \lambda_2 = 9$ \\ $x_{\lambda=-5} = \begin{bmatrix}
+                -0.5\\
+                0.5
+                \end{bmatrix}$, $x_{\lambda=9} = \begin{bmatrix}
+                    0.5\\
+                    0.5
+                    \end{bmatrix}$
+            \item $\lambda_1 = 3+ 1i,\ \lambda_2 = 3 - 1i$ \\ $x_{\lambda=3+ 1i} = \begin{bmatrix}
+                i\\
+                1
+                \end{bmatrix}$, $x_{\lambda=3 - 1i} = \begin{bmatrix}
+                    -i\\
+                    1
+                    \end{bmatrix}$
+        \end{enumerate}
+    }
+        \end{column}
+    \end{columns}
+    
+    
+\end{frame}
 
-            \textbf{Properties:}\\
-            $Re(\bar{z}) = Re(z))$ and $|\bar{z}| = |z|$; \\
-            $Im(\bar{z}) = -Im(z)$ and $arg\ \bar{z}\equiv -arg\ z (mod\ 2\pi)$ \\
-            $z\bar{z} = x^2 + y^2 = |z|^2$ -- absolute square \\
-            \textbf{Operations}
-            \begin{itemize}
-                \item  \textit{Summarization and Subtraction} -- ${\overline {z\pm w}}={\bar {z}}\pm {\bar {w}}$
-                \item \textit{Multiplication} -- ${\overline {z\cdot w}}={\bar {z}}\cdot {\bar {w}}$
-                \item \textit{Division} -- ${\overline {z/w}}={\bar {z}}/{\bar {w}}$
-            \end{itemize}
+\begin{frame}[t]{Calculation (2)}
+\framesubtitle{Real life approach (Iterative algorithms)}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.39\textwidth}
+            \large
+Due to the reason that computers appeared recently, eigenpairs weren't used frequently. 
+\bigskip
+
+Nowadays, it can be found easily by iteration method, which implemented in most programming languages.
 
         \end{column}
-        \begin{column}{0.29\textwidth}
-            \vspace{-0.5cm}
+        \begin{column}{0.59\textwidth}
             \begin{figure}[H]
-                \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{conjugate.png}
-                \caption*{Complex Conjugate}
-                \label{fig:conjugate.png}
+                \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{iterative.png}
+                \caption*{Eigenvector and eigenvalue iterative algorithms \beamerbutton{\href{https://en.wikipedia.org/wiki/Eigenvalue_algorithm}{Wiki}}}
+                \label{fig:iterative.png}
             \end{figure}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Complex numbers}
-\framesubtitle{Applications (1)}
-\vspace{-0.4cm}
-\large
-\begin{block}{Typical reason}
-    Most of the time for simplicity your calculations, except Quantum computing and some other topics.
-\end{block}
-    \begin{enumerate}
-        \item \textit{Electromagnetism}: electric and magnetic fields as complex vector fields to describe electromagnetic waves. However, this is just a computational trick.
-        \item \textit{Aerodynamics}: calculating wing shapes using Joukowsky transform.
-        \item \textit{Geodesy}: Google Maps (from Geoid to 2d map).
-        \item \textit{Quantum Computing}
-    \end{enumerate}
-\end{frame}
-
-\begin{frame}[t]{Complex numbers}
-    \framesubtitle{Applications (2): Video}
-    \vspace{-0.6cm}
-    \begin{figure}[H]
-        \href{https://www.youtube.com/watch?v=JA_VZ8Frrvw}{
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{com_video.jpg}}
-        % \caption{Click on a picture for a video}
-        \label{fig:com_video.jpg}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[t]{Complex numbers}
-\framesubtitle{Applications(3): more about Quantum Computing (Links)}
-\Large
-\begin{itemize}
-    \item \href{https://qiskit.org/textbook/ch-states/representing-qubit-states.html}{Representing Qubit States as complex numbers}
-    \item \href{https://www.nature.com/articles/s41586-021-04160-4}{Why do we have to use complex numbers in Quantum computing (Nature paper)}
-    \item \href{https://en.wikipedia.org/wiki/Bloch_sphere}{Bloch sphere is a geometrical representation of the pure state space of a two-level quantum mechanical system (qubit)}
-\end{itemize}
-\textit{If you are interested in the topic, you can ask \textbf{Stas Protasov}}.
-    
-\end{frame}
-
-\begin{frame}[t]{Task 1}
-    \framesubtitle{}
-    \vspace{-0.6cm}
-    \setbeamertemplate{itemize/enumerate body begin}{\large}
-    \setbeamertemplate{itemize/enumerate subbody begin}{\large}
-    \begin{multicols}{2}
-        \begin{enumerate}
-            \only<1,2>{ \item[1] For $z=\dfrac{1+i}{\sqrt{2}}$:\begin{itemize}
-                    \item Compute $z^2$
-                    \item Find $r$
-                    \item Find $\phi$
-                    \item Find $z$ in exponential form
-                \end{itemize}}
-                \only<1,3>{\item[2] \begin{itemize}
-                    \item Find the 8 solutions to the equation $z^8 = 1$
-                    \item Plot those 8 solutions in the complex plane
-                \end{itemize}}
-                \only<1,4>{\item[3] For $z = -1 + i\frac{1}{2}$ \begin{itemize}
-                    \item Find complex conjugate ($\bar{z}$)
-                    \item Find $z\bar{z}$
-                    \item Find $z+\bar{z}$
-                    \item Plot each result in the complex plane
-                \end{itemize}}
-                \only<1,5>{\item[4] Find: \begin{itemize}
-                    \item $e^{i\frac{\pi}{2}}$
-                    \item $e^{i\pi}$
-                    \item $i^i$
-                    \item Show each result in the complex plane
-                \end{itemize}}
-        \end{enumerate}
-    \end{multicols}
-    \only<2-5>{\alert{\Large Answer}\\}
-    \only<2>{\begin{itemize}
-        \item $z^2=i$
-        \item $r=1$
-        \item $\phi=45^\circ$
-        \item $z=1e^{i \frac{\pi}{4}}$
-    \end{itemize}}
-    \only<3>{\href{https://www.kontrolnaya-rabota.ru/s/equal-one/any-uravnenie/expr/d2ceda2e3e26d3d04083ac82a3b37db3/}{Solution (rus)}:
-    $\pm1;\ \pm i;\ \frac{\sqrt{2}}{2}\pm i \frac{\sqrt{2}}{2};\ -\frac{\sqrt{2}}{2}\pm i \frac{\sqrt{2}}{2};$}
-    \only<4>{\begin{itemize}
-        \item $\bar{z}=-1-i\frac{1}{2}$
-        \item $z\bar{z}=1.25$
-        \item $z+\bar{z}=-2$
-    \end{itemize}}
-    \only<5>{\begin{itemize}
-        \item $e^{i\frac{\pi}{2}}=i$
-        \item $e^{i\pi}=-1$
-        \item $i^i=e^{ln(i^i)}=e^{i\ ln(i)};\ \left\{\begin{matrix*}[l]
-            i=e^{i\frac{\pi}{2}} \text{-- \small \textit{from 1-st bullet}}\\ln(i)=ln(e^{i\frac{\pi}{2})}
-        \end{matrix*}\right. \rightarrow i\frac{\pi}{2}=ln(i);\ e^{i\ ln(i)}=e^{-\frac{\pi}{2}}=0.208$ 
-    \end{itemize}}
-
-    \setbeamertemplate{itemize/enumerate body begin}{\normalsize}
-    \setbeamertemplate{itemize/enumerate subbody begin}{\normalsize}
-\end{frame}
-
-\begin{frame}[t]{Complex Matrices}
-\framesubtitle{Common and Special}
+\begin{frame}[t]{Eigenpair properties and features}
+\framesubtitle{}
 \vspace{-0.3cm}
-    \large \textit{Many concepts have a new name, but old meaning}:
-    \vspace{-0.25cm}
+    \Large
     \begin{itemize}
-        \item $A^T \rightarrow A^H$; $A^H = \bar{A}^T$, $H$ -- conjugate $T$; \textit{Exp:} {\scriptsize $\begin{bmatrix}
-        1 & -2-i & 5 \\
-        1+i & i & 4-2i 
-        \end{bmatrix} \rightarrow \begin{bmatrix}
-        1 & 1-i \\
-        -2+i & -i \\ 
-        5 & 4+2i 
-        \end{bmatrix}$}
-        \vspace{-0.3cm}
-        \item $Q \rightarrow U$; $U=Q$, where $U$ -- Unitary matrix
+        \item $\sum \lambda = trace(A)$
+        \item $det(A)=\prod_{i=1}^{n}\lambda_i $
+        \item $A_{new}= A_{old} + aI,\ \rightarrow$ eigenvectors won't change, $\lambda_{new} = \lambda_{old} + a$
+        \item The matrix $A$ is invertible if and only if every eigenvalue is nonzero.
+        \item If matrix is triangular -- the eigenvalues are on the main diagonal
+        \item If matrix is symmetric -- $\lambda$ is \textit{definitely} real
+        \item If matrix is not symmetric – $\lambda$ \textit{can} contain imaginary part
+        \item $Ax = \lambda x \rightarrow A^2x = Aλx \text{\ (\textit{left mult})} \rightarrow A^2x = λAx \text{($\lambda$ \textit{is const})}  = \lambda^2x$ 
     \end{itemize}
-    \vspace{-0.38cm}
+\end{frame}
+
+\note{Рассказать с помощью 1ого задания и матрицы поворота на 90 градусов про значение i (он показывает поворот)}
+
+\begin{frame}[t]{Diagonalization}
+\framesubtitle{}
     \begin{figure}[H]
-        \centering\includegraphics[height=4.2cm,width=1\textwidth,keepaspectratio]{complex_matrices.png}
+        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{Diag.png}
         % \caption{caption_name}
-        \label{fig:complex_matrices.png}
+        \label{fig:Diag.png}
     \end{figure}
+\end{frame}
+
+\note{Показать вывод ($\lambda x = x\lambda$) и отсюда уже фигачим}
+
+\begin{frame}[t]{Diagonalization properties}
+\framesubtitle{}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{Diag_properties.png}
+        % \caption{caption_name}
+        \label{fig:Diag_properties.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Diagonalization of Symmetric matrices $S = Q \Lambda Q\transp$}
+\framesubtitle{}
+All symmetric matrices $S$ must have \textbf{real eigenvalues} and \textbf{orthogonal eigenvectors}.
+The eigenvalues are the diagonal elements of $\Lambda$ and the eigenvectors are in $Q$. 
+  
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{sqlqtr.png}
+  \end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{pattern4.png}
+  \end{figure}
+
+  \vspace{-0.4cm}
+  \centering A matrix is broken down to a sum of rank 1 matrices.
+
 \end{frame}
 
 \begin{frame}[t]{Task 2}
     \framesubtitle{}
-    \begin{figure}[H]
-        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{2.png}
-        % \caption{caption_name}
-        \label{fig:2.png}
-    \end{figure}
-    \uncover<2->{
-        \vspace{-0.3cm}
+\only<1>{
+    $A = \begin{bmatrix}
+    2 & -1\\ 
+    -1 & 2 
+    \end{bmatrix}$
+
+    \begin{itemize}
+        \Large
+        \item Find eigenpairs;
+        \item Write down $A$ in diagonal from;
+        \item Draw several vectors: one, which are parallel to an eigenvector, other -- not.
+        \item Multiply chosen vectors on $A$, draw the new ones.
+    \end{itemize}
+}
+    \only<2>{
         \alert{\Large Answer}
         \begin{figure}[H]
-            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{2ans.png}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{2ans.jpg}
             % \caption{caption_name}
-            \label{fig:2ans.png}
+            \label{fig:2ans.jpg}
         \end{figure}
-    }
+        }
 \end{frame}
 
 \begin{frame}[t]{Task 3}
     \framesubtitle{}
+    \vspace{-0.5cm}
     \begin{figure}[H]
         \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{3.png}
         % \caption{caption_name}
@@ -328,8 +347,11 @@
     }
 \end{frame}
 
+\note{ выводятся ответы из формулы диагонализации}
+
 \begin{frame}[t]{Task 4}
     \framesubtitle{}
+    \vspace{-0.5cm}
     \begin{figure}[H]
         \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4.png}
         % \caption{caption_name}
@@ -345,15 +367,182 @@
     }
 \end{frame}
 
+\begin{frame}[t]{$A^k$}
+\framesubtitle{}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{Power.png}
+        % \caption{caption_name}
+        \label{fig:Power.png}
+    \end{figure}
+\end{frame}
+
+\note{ Вопрос и ответ выводятся ответы из формулы диагонализации}
+
+\begin{frame}[t]{Applications (1)}
+    \framesubtitle{Fast Calculations}
+            \begin{columns}[T,onlytextwidth]
+                \begin{column}{0.3\textwidth}
+                    \underline{\textit{Task}}: Find 50th Fibonacci value \\
+\textit{\underline{Dummy approach}}: calculate it by iterative summarization. \\
+\underline{\textit{Smart approach}}: use magic and diagonalization \\ 
+                \end{column}
+                \begin{column}{0.69\textwidth}
+                    \begin{figure}[H]
+                        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{fibo.jpg}
+                        \caption*{ \Large \href{https://youtu.be/13r9QY6cmjc?t=2072}{Lecture 22. Diagonalization and Powers of A}}
+                        \label{fig:fibo.jpg}
+                    \end{figure}
+                \end{column}
+            \end{columns}
+\end{frame}
+
+\note{Упор на клевое представление формулы в виде матрицы}
+
+\begin{frame}[t]{Task 5}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{5.png}
+        % \caption{caption_name}
+        \label{fig:5.png}
+    \end{figure}
+    \uncover<2->{
+        \alert{\Large Answer}: \large \href{https://en.wikipedia.org/wiki/Stochastic_matrix}{Markov matrix} is a prob. matrix, where a summary in each column should be 1. It has a property, that $\lambda_{max} = 1$.
+        \begin{figure}[H]
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{5ans.png}
+            % \caption{caption_name}
+            \label{fig:5ans.png}
+        \end{figure}
+    }
+\end{frame}
+
+\begin{frame}[t]{Applications (2)}
+\framesubtitle{Computer Vision}
+\vspace{-0.3cm}
+\begin{columns}[c,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+        \textit{\underline{Task}}: we want to know the orientation of the object \\
+\textit{\underline{Needed terms}}: \href{https://en.wikipedia.org/wiki/Centroid}{Centroid}, \href{https://www.youtube.com/watch?v=AAbUfZD_09s}{Image moments} \\
+\textit{\underline{Solution}}: use equivalent ellipse method. We consider an ellipse:
+% \vspace{-0.6cm}
+\begin{itemize}
+    \item centred at the object's centroid;
+    \item has same moments of inertia about centroid.
+\end{itemize}
+
+Afterwards, we find an ellipse using eigenvalues and eigenvectors
+    \end{column}
+    \begin{column}{0.58\textwidth}
+        \begin{figure}[H]
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{cv.png}
+            \caption*{\Large\href{https://robotacademy.net.au/masterclass/feature-extraction/?lesson=695}{Feature extraction masterclass video
+            }}
+            \label{fig:cv.png}
+        \end{figure}
+    \end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Applications (2.5)}
+\framesubtitle{How to visualize a point cloud as an ellipse}
+\vspace{-0.5cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \textit{\underline{Task}}: We have a matrix with points. I want to make a model, which represent it in easier manner. Also, I want to visualize it. \\
+\underline{\textit{Solution}}: We can find \href{https://www.youtube.com/watch?v=0GzMcUy7ZI0&feature=youtu.be}{covariance matrix} of our point cloud (It's topic from probabilistic and statistic course) and centroid of our point cloud. \\
+The matrix eigenpairs provide all info (minor and major axes length and orientation) \\ 
+\underline{\textit{Application}}: Eigenvectors is a basis, so we can put all our points in this basis and work with it. More info in the next semesters.
+        \end{column}
+        \begin{column}{0.44\textwidth}
+            \vspace{-0.7cm}
+            \begin{figure}[H]
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{ellipse_point_cloud.png}
+                \caption*{\large More details in matlab code below}
+                \label{fig:ellipse_point_cloud.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-,fitpaper]{lab7.pdf}
+\fbckg{fibeamer/figs/common.png}
+
+\begin{frame}[t]{Applications (3)}
+    \framesubtitle{Machine learning + optimization}
+    \vspace{-0.5cm}
+        \begin{columns}[T,onlytextwidth]
+            \begin{column}{0.60\textwidth}
+                \underline{\textit{Task}}: we have data, which depicted on figure. We need to \textit{find local minimum} of it. \\
+\underline{\textit{Dummy approach}}: let's use gradient descent w/o preprocessing. \\
+\underline{\textit{Result of dummy approach}}: It can disconvergent, or solved very slow, because of  big difference between step size in x and y direction. \\
+\underline{\textit{Smart approach}}: let's firstly represent it as a \textit{circle} (\textbf{transform all data in eigenbasis}) and make gradient descent on it. In this case we have almost the same step size for x and y direction.
+            \end{column}
+            \begin{column}{0.35\textwidth}
+                \vspace{-0.5cm}
+                    \begin{minipage}{0.58\textwidth}
+                        \centering\includegraphics[width=\textwidth,keepaspectratio]{data_ellipse.jpg}
+                    \end{minipage}\hfill
+                    \begin{minipage}{0.40\textwidth}
+                        Represent data as an ellipse
+                    \end{minipage}
+                    \begin{minipage}{0.58\textwidth}
+                        \centering\includegraphics[width=\textwidth,keepaspectratio]{unnormalized.png}
+                    \end{minipage}\hfill
+                    \begin{minipage}{0.40\textwidth}
+                        Gradient descent Issue
+                    \end{minipage}
+                    \begin{minipage}{0.58\textwidth}
+                        \centering\includegraphics[width=\textwidth,keepaspectratio]{normalized.png}
+                    \end{minipage}\hfill
+                    \begin{minipage}{0.40\textwidth}
+                        Represent data as a circle
+                    \end{minipage}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+\begin{frame}[t]{Applications (4)}
+    \framesubtitle{Predict the behavior of linear systems}
+    \Large
+    \underline{\textit{Task}}: I have a system and want to understand, how it will works. Afterwards, I want to control it (design a controller). \\
+    \underline{\textit{Solution}}:
+    \begin{itemize}
+        \item \href{https://youtu.be/h7nJ6ZL4Lf0}{Extimate Stability using Eigenpairs}. Looking on eigenvalues we can predict stability of our linear system;
+        \item \href{https://youtu.be/x_ZkKPtgTeA}{Coupled Oscillators}. Example of Eigenvalues and Eigenvectors in the context of coupled oscillators (masses connected by springs)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Task 6}
+    \framesubtitle{}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{6.png}
+        % \caption{caption_name}
+        \label{fig:6.png}
+    \end{figure}
+    \uncover<2->{
+        \alert{\Large Answer}
+        \begin{figure}[H]
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{6ans.png}
+            % \caption{caption_name}
+            \label{fig:6ans.png}
+        \end{figure}
+    }
+\end{frame}
+
 \begin{frame}[t]{Reference material}
     \framesubtitle{}
     \Large
+    \vspace{-0.5cm}
     \begin{itemize}
-        \item \href{https://www.youtube.com/watch?v=M0Sa8fLOajA&list=PL49CF3715CB9EF31D&index=27}{Lecture 26}
-        \item \href{https://youtu.be/Jkv-55ndVYY}{Complex Numbers Part Imaginary, but Really Simple}
-        \item \textit{"Linear Algebra and Applications", pdf pages 322--335 }\\ Complex numbers and matrices
-        \item \textit{"Introduction to Linear Algebra", pdf pages 504--519 }\\ Complex numbers and matrices
-        \item \href{https://programforyou.ru/calculators/complex-calculator}{Complex Numbers calculator}
+        \item \href{https://www.youtube.com/watch?v=lXNXrLcoerU&list=PL49CF3715CB9EF31D&index=21}{Lecture 21, Eigenvalues and Eigenvectors}
+        \item \href{https://www.youtube.com/watch?v=13r9QY6cmjc&list=PL49CF3715CB9EF31D&index=22}{Lecture 22, Diagonalization and Powers of A}
+        \item \textit{"Linear Algebra and Applications", pdf pages 270--306 }\\ Eigenvalues and Eigenvectors 5.1--5.3
+        \item \textit{"Introduction to Linear Algebra", pdf pages 299--329 }\\ Eigenvalues and Eigenvectors 6.1--6.2
+        \item  \href{https://www.youtube.com/watch?v=29keVZGvqME&list=PLkZjai-2Jcxlg-Z1roB0pUwFU-P58tvOx&index=34}{The eigenvalue problem | Lectures 32 -- 38}\\ Video from Matrix Algebra for Engineers course
     \end{itemize}
 \end{frame}
 
