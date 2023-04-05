@@ -14,8 +14,8 @@ This repository contains regularly updated course materials. You can use lab sli
 * [Lab 5 (Projection, Application (Least Squares))](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/5/AGLA2_lab5_bul.pdf)
 * [Lab 6 (Orthogonality + OrthoNormality + SO(3); Gram-Schmidt; Quiz)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/6/AGLA2_lab6_bul.pdf)
 * [Lab 7 (Eigenvalues and Eigenvectors; Diagonalization of a Matrix (Спектральное разложение); Fast A$^N$ calculation)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/7/AGLA2_lab7_bul.pdf)
-* [Lab 8 (Complex numbers; Complex matrices; Hermitian and Unitary matrices](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/8/AGLA2_lab8_bul.pdf)
-
+* [Lab 8 (Complex numbers; Complex matrices; Hermitian and Unitary matrices)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/8/AGLA2_lab8_bul.pdf)
+* [Lab 9 (System of linear diff erential equations)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/9/AGLA2_lab9_bul.pdf)
 # For contributors
 
 Pull requests with suggestions and improvements, however small or big, are welcome!
