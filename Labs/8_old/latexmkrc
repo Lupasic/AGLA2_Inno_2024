@@ -1,1 +1,0 @@
-$ENV{'TZ'}='Europe/Prague';
