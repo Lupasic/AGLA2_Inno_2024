@@ -12,7 +12,7 @@
 %%
 %% These macros specify information about the presentation
 \title[AGLA2]{Analytical Geometry and Linear Algebra II, Lab 11} %% that will be typeset on the
-\subtitle{Symmetric matrices \\ Positive definite matrices and minima \\ \ 
+\subtitle{Similar matrices \\ Singular value decomposition - SVD \\ Left and right inverses. Pseudoinverse
          } %% title page.
 \author{Oleg Bulichev}
 %% These additional packages are used within the document:
@@ -87,44 +87,195 @@
 
 \fbckg{fibeamer/figs/common.png}
 
-\begin{frame}[c]{How I spent last weekend}
-    \framesubtitle{}
-    \begin{figure}[H]
-        \begin{subfigure}{0.29\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{death_door.jpg}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.29\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{yarik.jpg}
-        \end{subfigure}        
-        \hfill
-        \begin{subfigure}{0.29\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{tunic_game.jpeg}
-        \end{subfigure}
-    \end{figure}
-\end{frame}
+% \begin{frame}[c]{How I spent last weekend}
+%     \framesubtitle{}
+%     \begin{figure}[H]
+%         \begin{subfigure}[b]{0.64\textwidth}
+%             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{jobless_reincarnation.jpg}
+%             \caption*{Jobless Reincarnation ranobe: $4342/6859$ pages. Tome 19th}
+%         \end{subfigure}     
+%         \hfill
+%         \begin{subfigure}[b]{0.34\textwidth}
+%             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{catamaran.jpg}
+%             \caption*{Catamaran sailing training with KFU}
+%         \end{subfigure}
+%     \end{figure}
+% \end{frame}
 
-\begin{frame}[t]{Symmetric Matrices (1)}
+\begin{frame}[t]{Similar Matrices}
 \framesubtitle{}
+    \LARGE
+    \centering
+    All the matrices $A=B^{-1}CB$ are "similar". They all share the eigenvalues of $C$. \\
+    \begin{example}
+        \Large
+        $A = \begin{bmatrix}
+        2 & 1\\ 
+        1 & 2 
+        \end{bmatrix} \rightarrow \lambda =3,\ 1;$  $S^{-1}AS=\Lambda_{A} = \begin{bmatrix}
+        3 & 0\\ 
+        0 & 1 
+        \end{bmatrix}$, $S$ -- eigenvectors \\ 
+        \vspace{-0.4cm}
+        Let's find other similar matrix: $M^{-1}AM=T$, $M=\begin{bmatrix}
+        1 & 4\\ 
+        0 & 1 
+        \end{bmatrix}$, $M$ is \\ 
+        \vspace{-0.4cm}
+        random matrix. $T = \begin{bmatrix}
+        -2 & -15\\ 
+        1 & 6 
+        \end{bmatrix}$, which $\lambda$ are also $3,\ 1$.
+    \end{example}
+\end{frame}
+
+\begin{frame}[t]{Similar Matrices}
+\framesubtitle{Properties}
+Because matrices are similar if and only if they represent the \textit{same linear operator with respect to (possibly) different bases}, similar matrices share all properties of their shared underlying operator:
+\begin{itemize}
+    \item Rank
+    \item Characteristic polynomial, and attributes that can be derived from it: \begin{itemize}
+        \item Eigenvalues
+        \item Determinant
+        \item Trace
+    \end{itemize}
+\end{itemize}
+
+\href{https://en.wikipedia.org/wiki/Matrix_similarity}{More info} can be found here. This topic was used for checking understanding LA by the students (\href{https://www.tandfonline.com/doi/full/10.1080/07380569.2018.1491774}{paper}).
+
+\end{frame}
+
+\begin{frame}[c]{The primary goal of SVD}
+\framesubtitle{}
+\centering\LARGE
+To “X-RAY” matrix
+
+(To understand the structure of matrix)
+\end{frame}
+
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{3 ways of explanation}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.69\textwidth}
+            \begin{enumerate}
+                \item Linear transformation – \href{https://youtu.be/EokL7E6o1AE}{Kutz video}
+                \item Algebraic – \href{https://www.youtube.com/watch?v=rYz83XPxiZo&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k&index=8}{MIT video (Strang)}, \href{https://youtu.be/EfZsEFhHcNM}{Aaron Greiner video}
+                \item As a tool for DS  – \href{https://youtu.be/P5mlg91as1c}{Stanford video}, \href{https://youtu.be/yA66KsFqUAE}{Brunton video}
+            \end{enumerate}
+
+            According to Kholodov words, SVD was created for \textit{finding an inverse for any matrices}. It is needed in linear transformation related operations. Other properties were found afterwards. 
+        \end{column}
+        \begin{column}{0.29\textwidth}
+            \vspace{-1cm}
+            \begin{figure}[H]
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{two_buttons.jpg}
+                % \caption{caption_name}
+                \label{fig:two_buttons.jpg}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\note{
+    В чем крутость СВД:
+    \begin{itemize}
+        \item Он создан для работы с большими данными
+        \item Революция. По мнению Брунтона, это второе по крутости изобретения после FFT
+        \item Применяется в DS , к примеру в вытаскивании фич, whuch pages direct First
+        \item approximation measurements
+    \end{itemize}
+
+    U -- corelation among columns of X.
+
+    Из Стренга я понял, вывод. Он основан на similar matrix и свойстве positive definite $XX^T$.
+
+    Псевдоинверсия интересна тем, как там происходит исправление центрального компонента. Это неплохо объясненно у де луки.
+
+    Про доминантность надо сделать упор. Что там сортировка идет по крутости компонента. И первая колонка самая важная. Можно показать на Городецком.
+
+    Про PCA рассказать. Что это U -- meauserments in rows. и наши данные надо предварительно обработать $[X] - mean(X)/variance(X)$
+}
+
+\begin{frame}[t]{Singular Value Decomposition}
+% \framesubtitle{Ho}
+    \vspace{-0.5cm}
     \begin{figure}[H]
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{symmetric.png}
+        \centering\includegraphics[height=6.5cm,width=1\textwidth,keepaspectratio]{svd_derive.png}
         % \caption{caption_name}
-        \label{fig:symmetric.png}
+        \label{fig:svd_derive.png}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Symmetric Matrices (2)}
-    \framesubtitle{}
-        \begin{figure}[H]
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{symmetric_2.png}
-            % \caption{caption_name}
-            \label{fig:symmetric_2.png}
-        \end{figure}
-    \end{frame}
+\begin{frame}[t]{Singular Value Decomposition}
+\framesubtitle{Geometrical explanation}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{svd_geometry.png}
+        \label{fig:svd_geometry.png}
+    \end{figure}
+\end{frame}
 
-    \note{Делаем упор на поворот и стретч. Откуда они появились (смотрим на ротейшн матрицу). Она тоже ортонормальная, если что.
-    
-    Так же смотрим, что поворот не всегда содержит i (матрица на 180 градусов поворот).}
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{How to calculate it (2 common ways)}
+    \begin{block}{First approach}
+        \begin{enumerate}
+            \item Find eigenpairs for $A^TA$. Result is $\Sigma$ and $V$. ($A^TA=V\Sigma^{2}V^H$)
+            \item Find $U$, using $\Sigma$ and $V$ ($AV\Sigma^{-1} = U$)
+        \end{enumerate}
+    \end{block}
+    \begin{block}{Second approach}
+        \begin{enumerate}
+            \item Find eigenpairs for $A^TA$ and $AA^T$. ($A^TA=V\Sigma^{2}V^H$) ($AA^T=U\Sigma^{2}U^H$)
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{Obtain SVD for $A= \begin{bmatrix}
+    3 & 2 & 2 \\
+    2 & 3 & -2 
+    \end{bmatrix}$, using second approach (\href{https://jonathan-hui.medium.com/machine-learning-singular-value-decomposition-svd-principal-component-analysis-pca-1d45e885e491}{task was taken})}
+\vspace{-0.8cm}
+    \begin{enumerate}
+        \item Eigenpairs of $AA^T$.
+
+        $AA^T=\begin{bmatrix}
+        17 & 8\\ 
+        8 & 17 
+        \end{bmatrix}$. $\lambda_1 = 25$, $\lambda_2 = 9$. $x_{\lambda_1} = \begin{bmatrix}
+        \frac{1}{\sqrt{2}}\\
+        \frac{1}{\sqrt{2}}
+        \end{bmatrix}$, $x_{\lambda_2} = \begin{bmatrix}
+            \frac{1}{\sqrt{2}}\\
+            -\frac{1}{\sqrt{2}}
+            \end{bmatrix}$. $U = \begin{bmatrix}
+                \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\ 
+                \frac{1}{\sqrt{2}} &  -\frac{1}{\sqrt{2}}
+            \end{bmatrix}$
+        \item Eigenpairs of $A^TA$.
+        
+        $A^TA= \begin{bmatrix}
+        13 & 12 & 2 \\
+        12 & 13 & -2 \\ 
+        2 & -2  & 8 
+        \end{bmatrix}$. $\lambda_1 = 25$, $\lambda_2 = 9$, $\lambda_3 = 0$. $V = \begin{bmatrix}
+            \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{18}} & \frac{2}{3} \\
+            \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{18}} & -\frac{2}{3}\\ 
+            0 & \frac{4}{\sqrt{18}} & -\frac{1}{3}  
+        \end{bmatrix}$
+    \item Result. $A=U\Sigma V^T=\begin{bmatrix}
+        \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\ 
+        \frac{1}{\sqrt{2}} &  -\frac{1}{\sqrt{2}}
+    \end{bmatrix}\begin{bmatrix}
+    5 & 0 & 0 \\
+    0 & 3 & 0 
+    \end{bmatrix}\begin{bmatrix}
+        \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\
+        \frac{1}{\sqrt{18}} & -\frac{1}{\sqrt{18}} & \frac{4}{\sqrt{18}}\\ 
+        \frac{2}{3} & -\frac{2}{3} & -\frac{1}{3}  
+    \end{bmatrix}$
+    \end{enumerate}
+\end{frame}
 
 \begin{frame}[t]{Task 1}
     \framesubtitle{}
@@ -137,34 +288,59 @@
     \uncover<2->{
         \alert{\Large Answer}
         \begin{figure}[H]
-            \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{1ans.png}
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{1ans.png}
             % \caption{caption_name}
             \label{fig:1ans.png}
         \end{figure}
     }
 \end{frame}
 
-\note{Задачка по приколу. Интересное свойство получается. Об этом сказать}
+\begin{frame}[t]{It had to be $U$}  
+    \framesubtitle{Video}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        \href{https://youtu.be/JEYLfIVvR9I}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{svd_song.jpg}}
+        % \caption{Click on a picture for a video}
+        \label{fig:file_name}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{Properties}
+    \LARGE 
+    \begin{itemize}
+        \item It is always possible to decompose a real matrix $A$ into SVD
+        \item $U,\ \Sigma,\ V$ are unique
+        \item $U,\ V$ -- column orthonormal
+        \item By convention $\Sigma$ contains singular values in sorted order $\sigma_1 \geq \sigma_2 ...$ 
+    \end{itemize}
+\end{frame}
 
 \begin{frame}[t]{Task 2}
-    \framesubtitle{}
+    \framesubtitle{}    
+    \only<1>{
     \vspace{-0.5cm}
     \begin{figure}[H]
         \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{2.png}
         % \caption{caption_name}
         \label{fig:2.png}
     \end{figure}
-    \uncover<2->{
+    }
+    \only<2>{
         \alert{\Large Answer}
         \begin{figure}[H]
-            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{2ans.png}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{2ans.png}
             % \caption{caption_name}
             \label{fig:2ans.png}
         \end{figure}
     }
 \end{frame}
 
-\note{Тут в ответе матрица симметрична. Но показать, что если айгенвектор сделать на -1, то может получиться и антисимметричная матрица. На этом сделать акцент. Поможет при объяснении следующей задачи.}
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-,fitpaper]{lab12_dimension_reduction.pdf}
+\fbckg{fibeamer/figs/common.png}
 
 \begin{frame}[t]{Task 3}
     \framesubtitle{}
@@ -184,86 +360,26 @@
     }
 \end{frame}
 
-\begin{frame}[t]{Positive Definite Matrices}
-\framesubtitle{}
-    \begin{figure}[H]
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{pos_def_def.png}
-        \label{fig:pos_def_def.png}
-    \end{figure}
-\end{frame}
 
-
-\begin{frame}[t]{Positive Definite Matrices}
-    \framesubtitle{Applications from ML}
-    \Large
+\begin{frame}[t]{Singular Value Decomposition (SVD)}
+\framesubtitle{Where it can be used}
+\Large
     \begin{itemize}
-        \item \href{https://en.wikipedia.org/wiki/Cholesky_decomposition}{Cholesky decomposition} -- $A=LDL^H$ (A special case of $A=LU$)
-        \item Least squares computation reduction
-        \item \href{https://en.wikipedia.org/wiki/Support-vector_machine}{Support Vector Machine (SVM)}, \textit{kernel} -- \href{https://en.wikipedia.org/wiki/Positive-definite_kernel}{Positive-definite kernel}
-        \item \href{https://analyticsindiamag.com/what-is-representer-theorem-in-machine-learning/}{Representer Theorem} 
+        \item For working with big datasets
+        \item Image compression (on page \ref{image_compression})
+        \item Pseudo-inverse (next slide)
+        \item Least square (on page \ref{pdf_line_fitting})
+        \item Principal Component Analysis (PCA) (\href{https://youtu.be/a9jdQGybYmE}{video})
+        \item Eigenfaces algorithms (\href{https://youtu.be/_lY74pXWlS8}{video})
     \end{itemize}
 \end{frame}
 
-\note{Холесский и Лист скварез узнал от парня из ШАДа. На собесе тема с позитив дефинит досталась при поступлении в яндекс (Макс Коломиец.).
-
-Остальные две штуки дал парень из RnD Nvidia (Саня Лаптев). Показать немного SVM, но не тратить время сильно.}
-
-\begin{frame}[t]{Positive Definite Matrices}
-\framesubtitle{Five tests}
-    \begin{figure}[H]
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{positive_definite_tests.png}
-        \label{fig:positive_definite_tests.png}
-    \end{figure}
-\end{frame}
-
-\note{Тест 4 может зваться еще методом Сильвестра или похожим на метод окаймляющих миноров. В общем нужно искать детерминант вначале для ранга 1, потом 2 и так пока все не проверил. Но смотрим только верхне-левый.
-
-5ый тест так же странный (больше понятно будет на примере), так как для его типичного решения, требуется решить 3ий или 1ый тест (разложения).
-
-Благодаря видео \href{https://www.youtube.com/watch?v=TSdXJw83kyA}{Strang video} можно понять, что это появилось из least square проблем. В начале видео он выводит это свойство.
-
-Откуда формула энергии такая взялась объясняется через роботикс ниже.}
-
 \usebackgroundtemplate{}
 \setbeamercolor{background canvas}{bg=}
-\includepdf[pages=-]{03_LagrangianDynamics_1.pdf}
+\includepdf[pages=-]{pseudoinverse.pdf}
 \fbckg{fibeamer/figs/common.png}
 
-\begin{frame}[t]{Positive Definite Matrices}
-\framesubtitle{Example}
-\begin{figure}[H]
-    \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{pos_def_ex1.png}
-    % \caption{caption_name}
-    \label{fig:pos_def_ex1.png}
-\end{figure}
-\end{frame}
-
-\begin{frame}[t]{Positive Definite Matrices}
-    \framesubtitle{Solution: Test 1, 3, 4}
-    \begin{figure}[H]
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{pos_def_ex1_ans1.png}
-        % \caption{caption_name}
-        \label{fig:pos_def_ex1_ans1.png}
-    \end{figure}
-    \end{frame}
-
-    \begin{frame}[t]{Positive Definite Matrices}
-        \framesubtitle{Solution: Test 5}
-        \begin{figure}[H]
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{pos_def_ex1_ans2.png}
-            % \caption{caption_name}
-            \label{fig:pos_def_ex1_ans2.png}
-        \end{figure}
-        \end{frame}
-
-        \begin{frame}[t]{Positive Definite Matrices}
-            \framesubtitle{Solution: Test 2}
-            \begin{figure}[H]
-                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{pos_def_ex1_ans3.png}
-                % \caption{caption_name}
-                \label{fig:pos_def_ex1_ans3.png}
-            \end{figure}
-            \end{frame}
+\note{Сказать, что псевдоинверсия может обозначаться как решетка, так и плюсик ($J^+ = J^{\#}=J^{\dagger}$)}
 
 \begin{frame}[t]{Task 4}
     \framesubtitle{}
@@ -275,6 +391,7 @@
     \end{figure}
     \uncover<2->{
         \alert{\Large Answer}
+        \vspace{-1cm}
         \begin{figure}[H]
             \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{4ans.png}
             % \caption{caption_name}
@@ -283,22 +400,58 @@
     }
 \end{frame}
 
+\begin{frame}[t]{SVD Applications}
+    \framesubtitle{Video: Users-to-Movies}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        \href{https://youtu.be/P5mlg91as1c?t=466}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{svd_example_stanford.jpg}}
+        % \caption{Click on a picture for a video}
+        \label{fig:svd_example_stanford.jpg}
+    \end{figure}
+\end{frame}
+
 \begin{frame}[t]{Task 5}
     \framesubtitle{}
+    \only<1>{
     \vspace{-0.5cm}
     \begin{figure}[H]
         \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{5.png}
         % \caption{caption_name}
         \label{fig:5.png}
-    \end{figure}
-    \uncover<2->{
+    \end{figure} }
+    \only<2>{
         \alert{\Large Answer}
         \begin{figure}[H]
-            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{5ans.png}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{5ans.png}
             % \caption{caption_name}
             \label{fig:5ans.png}
         \end{figure}
     }
+\end{frame}
+
+\begin{frame}[t, label=image_compression]{SVD Applications}
+\framesubtitle{Image compression}
+\begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+        \textit{\underline{Task:}} We want to compress our image for reducing the size.
+
+\textit{\underline{Solution:}} We can represent our picture as a matrix. 
+
+Next step is using SVD for reducing matrix rank.
+
+Code on page \ref{pdf_image_compressing}
+
+    \end{column}
+    \begin{column}{0.59\textwidth}
+        \vspace{-1cm}
+        \begin{figure}[H]
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{image_proc.png}
+            \label{fig:image_proc.png}
+        \end{figure}
+    \end{column}
+\end{columns}
+    
 \end{frame}
 
 \begin{frame}[t]{Task 6}
@@ -310,88 +463,55 @@
         \label{fig:6.png}
     \end{figure}
     \uncover<2->{
+        \vspace{-0.5cm}
         \alert{\Large Answer}
         \begin{figure}[H]
-            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{6ans.png}
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{6ans.png}
             % \caption{caption_name}
             \label{fig:6ans.png}
         \end{figure}
     }
 \end{frame}
 
-\begin{frame}[t]{Task 7}
-    \framesubtitle{}
-    \vspace{-0.5cm}
-    \begin{figure}[H]
-        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{7.png}
-        % \caption{caption_name}
-        \label{fig:7.png}
-    \end{figure}
-    \uncover<2->{
-        \alert{\Large Answer}
-        \begin{figure}[H]
-            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{7ans.png}
-            % \caption{caption_name}
-            \label{fig:7ans.png}
-        \end{figure}
-    }
-\end{frame}
-
-\begin{frame}[t]{Positive Definite Matrices}
-    \framesubtitle{Important Application: Test for a Minimum}
-    \vspace{-0.5cm}
-        \begin{figure}[H]
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{test_for_minimum.png}
-            % \caption{caption_name}
-            \label{fig:test_for_minimum.png}
-        \end{figure}
-    \end{frame}
-
-\begin{frame}[t]{Task 8}
-    \framesubtitle{}
-    % \vspace{-0.5cm}
-    \only<1>{
-    \begin{figure}[H]
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{8.png}
-        % \caption{caption_name}
-        \label{fig:8.png}
-    \end{figure}
-    }
-    \only<2>{
-        \alert{\Large Answer: Subtask 1}
-        \begin{figure}[H]
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{8ans.png}
-            % \caption{caption_name}
-            \label{fig:8ans.png}
-        \end{figure}
-    }
-    \only<3>{
-        \alert{\Large Answer: Subtask 2}
-        \begin{figure}[H]
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{8ans1.png}
-            % \caption{caption_name}
-            \label{fig:8ans1.png}
-        \end{figure}
-    }
-\end{frame}
-
-\note{\href{http://www.mathprofi.ru/chastnye_proizvodnye_primery.html}{Как брать смешанные производные}
-
-Важно эту задачу разобрать. Я ее решение достал из \href{https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/pages/assignments/}{assigments, problem set 9}}
-
-
 \begin{frame}[t]{Reference material}
     \framesubtitle{}
-    \Large
+    \large
     \begin{itemize}
-        \item \href{https://www.youtube.com/watch?v=vF7eyJ2g3kU&list=PL49CF3715CB9EF31D&index=28}{Lecture 28, Positive Definite Matrices and Minima}
-        \item \href{https://www.youtube.com/watch?v=xsP-S7yKaRA&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k&index=7}{5. Positive Definite and Semidefinite Matrices}
-        \item \textit{"Introduction to Linear Algebra", pdf pages 349--374 }\\  6.4 -- Symmetric, 6.5 -- Positive Definite matrices
-        \item \textit{"Linear Algebra and Applications", pdf pages 355--376 }\\ Positive Definite Matrices 6.1, 6.2
+        \item \href{https://www.youtube.com/watch?v=TSdXJw83kyA}{Lecture 28: Similar Matrices and Jordan Form.}
+        \item \href{https://www.youtube.com/watch?v=Nx0lRBaXoz4&list=PL49CF3715CB9EF31D&index=30}{Lecture 29: Singular Value Decomposition}
+        \item \href{https://www.youtube.com/watch?v=Go2aLo7ZOlU&list=PL49CF3715CB9EF31D&index=34}{Lecture 33: Left and Right Inverses; Pseudoinverse}
+        \item \href{https://www.youtube.com/watch?v=rYz83XPxiZo&list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k&index=8}{6. Singular Value Decomposition (SVD)}
+        \item \textit{"Introduction to Linear Algebra", pdf pages 375--411 }\\  7 Singular Value Decomposition (SVD)
+        \item \textit{"Linear Algebra and Applications", pdf pages 335--345 }\\ 5.6 Similarity Transformations
+        \item \textit{"Linear Algebra and Applications", pdf pages 377--386 }\\ 6.3 Singular Value Decomposition
     \end{itemize}
 \end{frame}
 
 \fbckg{fibeamer/figs/last_page.png}
 \frame[plain]{}
+\fbckg{fibeamer/figs/common.png}
+
+\begin{frame}[label=pdf_line_fitting]{Appendix: Line fitting pdf}
+    \LARGE
+    \centering
+    Next Slide
+\end{frame}
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-,fitpaper]{lab12_fit_line.pdf}
+\fbckg{fibeamer/figs/common.png}
+
+\begin{frame}[label=pdf_image_compressing]{Appendix: Image compressing pdf}
+\framesubtitle{}
+\LARGE
+\centering
+Next Slide
+\end{frame}
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=-,fitpaper]{lab12_image_compressing.pdf}
+\fbckg{fibeamer/figs/common.png}
 
 \end{document}
