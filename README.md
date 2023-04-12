@@ -16,7 +16,9 @@ This repository contains regularly updated course materials. You can use lab sli
 * [Lab 7 (Eigenvalues and Eigenvectors; Diagonalization of a Matrix (Спектральное разложение); Fast A$^N$ calculation)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/7/AGLA2_lab7_bul.pdf)
 * [Lab 8 (Complex numbers; Complex matrices; Hermitian and Unitary matrices)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/8/AGLA2_lab8_bul.pdf)
 * [Lab 9 (System of linear differential equations)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/9/AGLA2_lab9_bul.pdf)
-* [Lab 10 (Fast Fourier Transform (FFT); Discrete Fourier Transform (DFT); Circulant Matrix)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/10/AGLA2_lab10_bul.pdf)
+* [Lab 10 (Symmetric matrices; Positive definite matrices and minima)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/10/AGLA2_lab10_bul.pdf)
+* [Lab 11 (Similar matrices; Singular value decomposition - SVD; Left and right inverses. Pseudoinverse)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/11/AGLA2_lab11_bul.pdf)
+* [Lab 12 (Fast Fourier Transform (FFT); Discrete Fourier Transform (DFT); Circulant Matrix)](https://github.com/Lupasic/AGLA2_Inno_2023/blob/main/Labs/12/AGLA2_lab12_bul.pdf)
 
 # For contributors
 

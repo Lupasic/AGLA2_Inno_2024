@@ -25,6 +25,8 @@ jobs:
         LAB8: '8'
         LAB9: '9'
         LAB10: '10'
+        LAB11: '11'
+        LAB12: '12'
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
@@ -160,6 +162,32 @@ jobs:
         with:
           name: Lab_slides
           path: Labs/${{ env.LAB10}}/${{ env.PREFIX}}${{ env.LAB10}}_bul.pdf
+
+      - name: Compile LaTeX document ${{ env.PREFIX}}${{ env.LAB11}}
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: ${{ env.PREFIX}}${{ env.LAB11}}_bul.tex
+          latexmk_use_lualatex: true
+          working_directory: Labs/${{ env.LAB11}}/
+    
+      - name: Save ${{ env.PREFIX}}${{ env.LAB11}} artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lab_slides
+          path: Labs/${{ env.LAB11}}/${{ env.PREFIX}}${{ env.LAB11}}_bul.pdf
+
+      - name: Compile LaTeX document ${{ env.PREFIX}}${{ env.LAB12}}
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: ${{ env.PREFIX}}${{ env.LAB12}}_bul.tex
+          latexmk_use_lualatex: true
+          working_directory: Labs/${{ env.LAB12}}/
+    
+      - name: Save ${{ env.PREFIX}}${{ env.LAB12}} artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lab_slides
+          path: Labs/${{ env.LAB12}}/${{ env.PREFIX}}${{ env.LAB12}}_bul.pdf
 
       - name: Update compiled PDFs in git repository
         if: github.event.pull_request.merged == true || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
